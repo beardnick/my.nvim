@@ -104,6 +104,16 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
+" 终端开启真彩色
+if has("termguicolors")
+    " fix bug for vim
+    set t_8f=^[[38;2;%lu;%lu;%lum
+    set t_8b=^[[48;2;%lu;%lu;%lum
+
+    " enable true color
+    set termguicolors
+endif
+
 
 " fzf使用悬浮窗
 " 让输入上方，搜索列表在下方
@@ -139,3 +149,141 @@ command! IMaps call fzf#vim#maps("i", <bang>0)
 
 " 自动命令
 autocmd FileType python call autocomplete#UseKite()
+
+
+
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+ "Use tab for trigger completion with characters ahead and navigate.
+ "Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-N>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+
+function! s:check_back_space() abort
+  let s:col = col('.') - 1
+  " 判断光标下和前面的一个字符是否为空白字符
+  return !s:col || getline('.')[s:col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+"inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-Y>" : "\<C-g>u\<CR>"
+"inoremap <expr> <CR> EnterComplete() ? "\<C-Y>" : "\<C-g>u\<CR>"
+"<C-o>a直接让提示框消失，什么也不做
+"inoremap <expr> <CR> complete_info()["selected"] != "-1" ?( EnterComplete() ? "\<C-Y>" : "\<C-o>a") :"\<C-g>u\<CR>"
+inoremap <expr> <CR> EnterComplete()
+
+" 这里是要解决Java补全的时候会有多余字符出现在末尾的问题
+function! EnterComplete() abort
+    " 选择了java的LS补全enter什么都不做，让提示框隐藏
+    " 选择了除java LS外的补全
+    " 没有选择补全项直接enter
+    let s:com_info = complete_info()
+    "echom "com_info: " .  string(s:com_info)
+    if s:com_info["selected"] != "-1"
+        "echom "selected:" . string(s:com_info["items"][s:com_info["selected"]])
+        let s:selected_item = s:com_info["items"][s:com_info["selected"]]
+        if ! has_key(s:selected_item,"user_data")
+            return "\<C-Y>"
+        endif
+        let s:user_data = json_decode(s:selected_item["user_data"])
+        "echom "source:" s:user_data["source"]
+        return s:user_data["source"] == "java" ? "\<C-o>a" : "\<C-Y>"
+    else
+        return "\<C-g>u\<CR>"
+    endif
+endfunction
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}\ >\ 
+
+" complete的原理
+inoremap <C-L> <C-R>=ListMonths()<CR>
+
+func! ListMonths()
+  call complete(col('.') - 3, ['January', 'February', 'March',
+    \ 'April', 'May', 'June', 'July', 'August', 'September',
+    \ 'October', 'November', 'December'])
+  return ''
+endfunc
+
+
+" 测试补全
+" <C-X><C-U>
+"fun! CompleteMonths(findstart, base)
+"  if a:findstart
+"    " locate the start of the word
+"    let line = getline('.')
+"    let start = col('.') - 1
+"    while start > 0 && line[start - 1] =~ '\a'
+"      let start -= 1
+"    endwhile
+"    return start
+"  else
+"    let res = [{'word': 'if', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":998}', 'info': '', 'kind': 'k', 'abbr': 'if'}, {'word': 'if ', 'menu': '26% [TN]', 'user_data': '{"cid":1572196672,"source":"tabnine","index":0}', 'info': '', 'kind': 'S', 'abbr': 'if (pic)~'}, {'word': 'io.netty.buffer', 'menu': '[LS]', 'user_da ta': '{"cid":1572196672,"source":"java","index":911}', 'info': '', 'kind': 'M', 'abbr': 'io.netty.buffer'}, {'word': 'io.netty.handler.flow', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java "","index":951}', 'info': '', 'kind': 'M', 'abbr': 'io.netty.handler.flow'}, {'word': 'io.netty.handler.flush', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":971}', 'info': '', 'k ind': 'M', 'abbr': 'io.netty.handler.flush'}, {'word': 'io.swagger.models.refs', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":916}', 'info': '', 'kind': 'M', 'abbr': 'io.swagger .models.refs'}, {'word': 'io.netty.handler.traffic', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":923}', 'info': '', 'kind': 'M', 'abbr': 'io.netty.handler.traffic'}, {'word': ' io.netty.handler.ipfilter', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":993}', 'info': '', 'kind': 'M', 'abbr': 'io.netty.handler.ipfilter'}, {'word': 'io.netty.handler.codec.p rotobuf', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":913}', 'info': '', 'kind': 'M', 'abbr': 'io.netty.handler.codec.protobuf'}, {'word': 'IfFunc', 'menu': '[LS]', 'user_data' : '{"cid":1572196672,"source":"java","index":747}', 'info': '', 'kind': 'C', 'abbr': 'IfFunc - org.apache.poi.ss.formula.functions'}, {'word': 'IfAction', 'menu': '[LS]', 'user_data': '{"cid":1572196672," source":"java","index":303}', 'info': '', 'kind': 'C', 'abbr': 'IfAction - ch.qos.logback.core.joran.conditional'}, {'word': 'IfSqlNode', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","i ndex":581}', 'info': '', 'kind': 'C', 'abbr': 'IfSqlNode - org.apache.ibatis.scripting.xmltags'}, {'word': 'IfClosure', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":603}', 'info ': '', 'kind': 'C', 'abbr': 'IfClosure - org.apache.commons.collections.functors'}, {'word': 'IfClosure', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":753}', 'info': '', 'kind': 'C', 'abbr': 'IfClosure - org.apache.commons.collections4.functors'}, {'word': 'IfTransformer', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":766}', 'info': '', 'kind': 'C', 'ab br': 'IfTransformer - org.apache.commons.collections4.functors'}, {'word': 'IfElseExpression', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":743}', 'info': '', 'kind': 'C', 'abbr ': 'IfElseExpression - org.apache.poi.sl.draw.geom'} ]    
+"    call complete(col('.') + 1, res)
+"  endif
+"  return ""
+"endfun
+"
+"set completefunc=CompleteMonths
