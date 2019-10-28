@@ -19,7 +19,8 @@ if g:dein_load_state
     call dein#add('Shougo/unite.vim')
     call dein#add('Shougo/vimfiler.vim', {'depends':'Shougo/unite.vim'})
     call dein#add('Shougo/denite.nvim')
-    call dein#add('wsdjeg/FlyGrep.vim')
+    " 完全可以使用fzf来代替FlyGrep
+    ""call dein#add('wsdjeg/FlyGrep.vim')
 
     call dein#add('majutsushi/tagbar')
     call dein#add('mhinz/vim-startify')
@@ -36,9 +37,9 @@ if g:dein_load_state
     call dein#add('godlygeek/tabular')
 
     " 三个插件加起来有最好的文件搜索体验
-    call dein#add('tweekmonster/fzf-filemru', {'depends':['junegunn/fzf.vim', '/usr/local/opt/fzf']})
-    call dein#add('junegunn/fzf.vim')
+    call dein#add('tweekmonster/fzf-filemru')
     call dein#add('/usr/local/opt/fzf')
+    call dein#add('junegunn/fzf.vim')
 
     call dein#add('Yggdroot/indentLine')
     " 修改树
@@ -146,6 +147,8 @@ command! SourceCurrentFile exe "source %"
 command! CleanPackages call commands#UninstallPackages()
 command! VMaps call fzf#vim#maps("v", <bang>0) 
 command! IMaps call fzf#vim#maps("i", <bang>0) 
+command! ReloadConfig  exe "source ~/my.nvim/init.vim"
+command! EditConfig exe "vsplit ~/my.nvim/init.vim" 
 
 " 自动命令
 autocmd FileType python call autocomplete#UseKite()
@@ -199,8 +202,10 @@ function! EnterComplete() abort
     " 选择了除java LS外的补全
     " 没有选择补全项直接enter
     let s:com_info = complete_info()
-    "echom "com_info: " .  string(s:com_info)
-    if s:com_info["selected"] != "-1"
+    echom "com_info: " .  string(s:com_info)
+    if s:com_info["selected"] <= 0 
+        return "\<C-g>u\<CR>"
+    endif
         "echom "selected:" . string(s:com_info["items"][s:com_info["selected"]])
         let s:selected_item = s:com_info["items"][s:com_info["selected"]]
         if ! has_key(s:selected_item,"user_data")
@@ -209,10 +214,8 @@ function! EnterComplete() abort
         let s:user_data = json_decode(s:selected_item["user_data"])
         "echom "source:" s:user_data["source"]
         return s:user_data["source"] == "java" ? "\<C-o>a" : "\<C-Y>"
-    else
-        return "\<C-g>u\<CR>"
-    endif
 endfunction
+
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -287,3 +290,65 @@ endfunc
 "endfun
 "
 "set completefunc=CompleteMonths
+
+
+" denite option
+let s:denite_options = {
+      \ 'default' : {
+      \ 'winheight' : 15,
+      \ 'mode' : 'insert',
+      \ 'quit' : 'true',
+      \ 'highlight_matched_char' : 'MoreMsg',
+      \ 'highlight_matched_range' : 'MoreMsg',
+      \ 'direction': 'rightbelow',
+      \ 'statusline' : has('patch-7.4.1154') ? v:false : 0,
+      \ 'prompt' : '➭',
+      \ }}
+
+function! s:profile(opts) abort
+  for fname in keys(a:opts)
+    for dopt in keys(a:opts[fname])
+      call denite#custom#option(fname, dopt, a:opts[fname][dopt])
+    endfor
+  endfor
+endfunction
+
+
+call s:profile(s:denite_options)
+
+noremap <C-P> :<C-U>Denite file/rec<CR>
+
+" KEY MAPPINGS
+let s:insert_mode_mappings = [
+      \  ['jk', '<denite:enter_mode:normal>', 'noremap'],
+      \ ['<Tab>', '<denite:move_to_next_line>', 'noremap'],
+      \ ['<S-tab>', '<denite:move_to_previous_line>', 'noremap'],
+      \  ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
+      \  ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
+      \  ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
+      \  ['<Up>', '<denite:assign_previous_text>', 'noremap'],
+      \  ['<Down>', '<denite:assign_next_text>', 'noremap'],
+      \  ['<C-Y>', '<denite:redraw>', 'noremap'],
+      \ ]
+
+let s:normal_mode_mappings = [
+      \   ["'", '<denite:toggle_select_down>', 'noremap'],
+      \   ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
+      \   ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
+      \   ['gg', '<denite:move_to_first_line>', 'noremap'],
+      \   ['st', '<denite:do_action:tabopen>', 'noremap'],
+      \   ['sg', '<denite:do_action:vsplit>', 'noremap'],
+      \   ['sv', '<denite:do_action:split>', 'noremap'],
+      \   ['q', '<denite:quit>', 'noremap'],
+      \   ['r', '<denite:redraw>', 'noremap'],
+      \ ]
+
+for s:m in s:insert_mode_mappings
+  call denite#custom#map('insert', s:m[0], s:m[1], s:m[2])
+endfor
+for s:m in s:normal_mode_mappings
+  call denite#custom#map('normal', s:m[0], s:m[1], s:m[2])
+endfor
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:UltiSnipsEditSplit="vertical"

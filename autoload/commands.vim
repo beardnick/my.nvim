@@ -31,7 +31,8 @@ function! commands#CodeRuner() abort
     let s:runner = {
     \ 'python':'python',
     \ 'java':'java',
-    \ 'go':'go run'
+    \ 'go':'go run',
+    \ 'sh':'bash'
     \}
     exe "VimuxRunCommand \'" . s:runner[s:file_type] . " " . s:file " \' "
 endfunction
