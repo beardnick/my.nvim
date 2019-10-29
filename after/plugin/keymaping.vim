@@ -55,6 +55,8 @@ nmap gs <Plug>Sneak_S
 " 编辑
 vmap <LEADER>s <Plug>VSurround
 nmap <LEADER>s <Plug>Ysurround
+nnoremap <C-J> :<C-U>Snippets<CR>
+
  "快速注释
 nnoremap <LEADER>; :<C-U>call NERDComment("n", "Toggle")<CR>
 vnoremap <LEADER>; :call NERDComment("n", "Toggle")<CR>gv

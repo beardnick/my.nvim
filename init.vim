@@ -26,7 +26,9 @@ if g:dein_load_state
     call dein#add('mhinz/vim-startify')
     call dein#add('scrooloose/nerdcommenter')
     call dein#add('fatih/vim-go')
+    " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     call dein#add('SirVer/ultisnips')
+    call dein#add('honza/vim-snippets')
     call dein#add('plasticboy/vim-markdown')
     call dein#add('gcmt/wildfire.vim')
     call dein#add('tpope/vim-fugitive')
@@ -58,17 +60,18 @@ if g:dein_load_state
     " 自动切换输入法的工具
     call dein#add('xcodebuild/fcitx-vim-osx')
     call dein#add('xcodebuild/fcitx-remote-for-osx')
+    "call dein#add('mivok/vimtodo')
 
    call dein#end()
     call dein#save_state()
 endif
 
-if dein#check_install()
-    let g:spacevim_plugin_manager = 'dein'
-    let g:spacevim_plugin_manager_processes = 10 
-    " 自动安装未安装的插件
-    call SpaceVim#commands#install_plugin()
-endif
+"if dein#check_install()
+    "let g:spacevim_plugin_manager = 'dein'
+    "let g:spacevim_plugin_manager_processes = 10 
+    "" 自动安装未安装的插件
+    "call SpaceVim#commands#install_plugin()
+"endif
 
 colorscheme gruvbox
 
@@ -115,6 +118,9 @@ if has("termguicolors")
     set termguicolors
 endif
 
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:UltiSnipsEditSplit="vertical"
 
 " fzf使用悬浮窗
 " 让输入上方，搜索列表在下方
@@ -140,6 +146,7 @@ let g:tagbar_left = 1
 
 
 " 自定义指令
+command! PluginInstall call <SID>PluginInstall()
 command! RunCode call commands#CodeRuner()
 command! -bang Registers call commands#Registers('<bang>' ==# '!')
 command! HomePage call startify#insane_in_the_membrane(0)
@@ -203,7 +210,7 @@ function! EnterComplete() abort
     " 没有选择补全项直接enter
     let s:com_info = complete_info()
     echom "com_info: " .  string(s:com_info)
-    if s:com_info["selected"] <= 0 
+    if s:com_info["selected"] < 0 
         return "\<C-g>u\<CR>"
     endif
         "echom "selected:" . string(s:com_info["items"][s:com_info["selected"]])
@@ -271,84 +278,20 @@ func! ListMonths()
 endfunc
 
 
-" 测试补全
-" <C-X><C-U>
-"fun! CompleteMonths(findstart, base)
-"  if a:findstart
-"    " locate the start of the word
-"    let line = getline('.')
-"    let start = col('.') - 1
-"    while start > 0 && line[start - 1] =~ '\a'
-"      let start -= 1
-"    endwhile
-"    return start
-"  else
-"    let res = [{'word': 'if', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":998}', 'info': '', 'kind': 'k', 'abbr': 'if'}, {'word': 'if ', 'menu': '26% [TN]', 'user_data': '{"cid":1572196672,"source":"tabnine","index":0}', 'info': '', 'kind': 'S', 'abbr': 'if (pic)~'}, {'word': 'io.netty.buffer', 'menu': '[LS]', 'user_da ta': '{"cid":1572196672,"source":"java","index":911}', 'info': '', 'kind': 'M', 'abbr': 'io.netty.buffer'}, {'word': 'io.netty.handler.flow', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java "","index":951}', 'info': '', 'kind': 'M', 'abbr': 'io.netty.handler.flow'}, {'word': 'io.netty.handler.flush', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":971}', 'info': '', 'k ind': 'M', 'abbr': 'io.netty.handler.flush'}, {'word': 'io.swagger.models.refs', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":916}', 'info': '', 'kind': 'M', 'abbr': 'io.swagger .models.refs'}, {'word': 'io.netty.handler.traffic', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":923}', 'info': '', 'kind': 'M', 'abbr': 'io.netty.handler.traffic'}, {'word': ' io.netty.handler.ipfilter', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":993}', 'info': '', 'kind': 'M', 'abbr': 'io.netty.handler.ipfilter'}, {'word': 'io.netty.handler.codec.p rotobuf', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":913}', 'info': '', 'kind': 'M', 'abbr': 'io.netty.handler.codec.protobuf'}, {'word': 'IfFunc', 'menu': '[LS]', 'user_data' : '{"cid":1572196672,"source":"java","index":747}', 'info': '', 'kind': 'C', 'abbr': 'IfFunc - org.apache.poi.ss.formula.functions'}, {'word': 'IfAction', 'menu': '[LS]', 'user_data': '{"cid":1572196672," source":"java","index":303}', 'info': '', 'kind': 'C', 'abbr': 'IfAction - ch.qos.logback.core.joran.conditional'}, {'word': 'IfSqlNode', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","i ndex":581}', 'info': '', 'kind': 'C', 'abbr': 'IfSqlNode - org.apache.ibatis.scripting.xmltags'}, {'word': 'IfClosure', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":603}', 'info ': '', 'kind': 'C', 'abbr': 'IfClosure - org.apache.commons.collections.functors'}, {'word': 'IfClosure', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":753}', 'info': '', 'kind': 'C', 'abbr': 'IfClosure - org.apache.commons.collections4.functors'}, {'word': 'IfTransformer', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":766}', 'info': '', 'kind': 'C', 'ab br': 'IfTransformer - org.apache.commons.collections4.functors'}, {'word': 'IfElseExpression', 'menu': '[LS]', 'user_data': '{"cid":1572196672,"source":"java","index":743}', 'info': '', 'kind': 'C', 'abbr ': 'IfElseExpression - org.apache.poi.sl.draw.geom'} ]    
-"    call complete(col('.') + 1, res)
-"  endif
-"  return ""
-"endfun
-"
-"set completefunc=CompleteMonths
+fun! s:PluginInstall() abort
+    if dein#check_install()
+        let g:spacevim_plugin_manager = 'dein'
+        let g:spacevim_plugin_manager_processes = 10 
+        " 自动安装未安装的插件
+        call SpaceVim#commands#install_plugin()
+    endif
+endf
 
-
-" denite option
-let s:denite_options = {
-      \ 'default' : {
-      \ 'winheight' : 15,
-      \ 'mode' : 'insert',
-      \ 'quit' : 'true',
-      \ 'highlight_matched_char' : 'MoreMsg',
-      \ 'highlight_matched_range' : 'MoreMsg',
-      \ 'direction': 'rightbelow',
-      \ 'statusline' : has('patch-7.4.1154') ? v:false : 0,
-      \ 'prompt' : '➭',
-      \ }}
-
-function! s:profile(opts) abort
-  for fname in keys(a:opts)
-    for dopt in keys(a:opts[fname])
-      call denite#custom#option(fname, dopt, a:opts[fname][dopt])
-    endfor
-  endfor
-endfunction
-
-
-call s:profile(s:denite_options)
-
-noremap <C-P> :<C-U>Denite file/rec<CR>
-
-" KEY MAPPINGS
-let s:insert_mode_mappings = [
-      \  ['jk', '<denite:enter_mode:normal>', 'noremap'],
-      \ ['<Tab>', '<denite:move_to_next_line>', 'noremap'],
-      \ ['<S-tab>', '<denite:move_to_previous_line>', 'noremap'],
-      \  ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
-      \  ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
-      \  ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
-      \  ['<Up>', '<denite:assign_previous_text>', 'noremap'],
-      \  ['<Down>', '<denite:assign_next_text>', 'noremap'],
-      \  ['<C-Y>', '<denite:redraw>', 'noremap'],
-      \ ]
-
-let s:normal_mode_mappings = [
-      \   ["'", '<denite:toggle_select_down>', 'noremap'],
-      \   ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
-      \   ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
-      \   ['gg', '<denite:move_to_first_line>', 'noremap'],
-      \   ['st', '<denite:do_action:tabopen>', 'noremap'],
-      \   ['sg', '<denite:do_action:vsplit>', 'noremap'],
-      \   ['sv', '<denite:do_action:split>', 'noremap'],
-      \   ['q', '<denite:quit>', 'noremap'],
-      \   ['r', '<denite:redraw>', 'noremap'],
-      \ ]
-
-for s:m in s:insert_mode_mappings
-  call denite#custom#map('insert', s:m[0], s:m[1], s:m[2])
-endfor
-for s:m in s:normal_mode_mappings
-  call denite#custom#map('normal', s:m[0], s:m[1], s:m[2])
-endfor
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:UltiSnipsEditSplit="vertical"
+" 在使用O换行时不自动添加注释行
+augroup Format-Options  
+    autocmd!  
+    autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o  
+  
+    " This can be done as well instead of the previous line, for setting formatoptions as you choose:  
+    autocmd BufEnter * setlocal formatoptions=crqn2l1j  
+augroup END
