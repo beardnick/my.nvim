@@ -29,7 +29,13 @@ if g:dein_load_state
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
-    call dein#add('plasticboy/vim-markdown')
+     "这个markdown有点烦人，总是自作主张地改变样式
+    "call dein#add('plasticboy/vim-markdown')
+    call dein#add('iamcco/markdown-preview.nvim')
+    call dein#add('lvht/tagbar-markdown')
+    call dein#add('SpaceVim/vim-markdown')
+    call dein#add('mzlogin/vim-markdown-toc')
+    call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('gcmt/wildfire.vim')
     call dein#add('tpope/vim-fugitive')
     call dein#add('tpope/vim-surround')
@@ -62,6 +68,7 @@ if g:dein_load_state
     call dein#add('xcodebuild/fcitx-remote-for-osx')
     "call dein#add('mivok/vimtodo')
     call dein#add('junegunn/goyo.vim')
+    call dein#add('freitass/todo.txt-vim')
 
    call dein#end()
     call dein#save_state()
@@ -89,6 +96,9 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 set list lcs=tab:\|\ 
 " 下面的只能使通过空格对齐的文件显示对齐线
 let g:indentLine_enabled = 1
+
+let g:instant_markdown_autostart = 0
+
 " 设置leader为空格
 let mapleader = " "
 " 状态栏为文件全路径和文件类型
@@ -119,9 +129,15 @@ if has("termguicolors")
     set termguicolors
 endif
 
+" 为了markdown插件而设置的
+"set conceallevel=2
+" 只在 normal模式下隐藏符号
+set concealcursor=n
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:UltiSnipsEditSplit="vertical"
+let g:table_mode_always_active = 1
+
 
 " fzf使用悬浮窗
 " 让输入上方，搜索列表在下方
@@ -147,6 +163,7 @@ let g:tagbar_left = 1
 
 
 " 自定义指令
+command! ChangeTree exe "GundoToggle"
 command! Scratch call CreateScratch()
 command! Todo exe "Ag todo"
 command! PluginInstall call <SID>PluginInstall()
@@ -290,6 +307,8 @@ fun! s:PluginInstall() abort
     endif
 endf
 
+
+autocmd BufEnter * Rooter
 " 在使用O换行时不自动添加注释行
 augroup Format-Options  
     autocmd!  
@@ -314,3 +333,5 @@ fun! CreateScratch() abort
     let &filetype = s:current_filetype
     setlocal autowriteall
 endf
+
+autocmd User StartifyBufferOpened nested :Rooter
