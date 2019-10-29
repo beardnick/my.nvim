@@ -12,17 +12,17 @@
 " 搜索
 "nnoremap <C-F> :<C-U> call SpaceVim#plugins#flygrep#open({ 'input' : expand('<cword>'), 'cmd' : cmd, 'opt' : opt, 'ropt' : ropt, 'ignore_case' : ignore, 'smart_case' : smart, 'expr_opt' : expr })<CR>
 
-nnoremap <expr> <LEADER>/ ":<C-U>Lines " . expand("<cword>") . "<CR>"
-nnoremap <expr> <C-F> ":<C-U>Rg " . expand("<cword>") . "<CR>"
+nnoremap <silent><expr> <LEADER>/ ":<C-U>Lines " . expand("<cword>") . "<CR>"
+nnoremap <silent><expr> <C-F> ":<C-U>Rg " . expand("<cword>") . "<CR>"
 "nnoremap  <C-F> :<C-U>Rg<CR>
-nnoremap <C-H> :<C-U>Helptags<CR>
-nnoremap <LEADER><LEADER> :<C-U>Commands<CR><C-P>
-nnoremap <LEADER>rl:<C-U>Registers<CR>
+nnoremap <silent><C-H> :<C-U>Helptags<CR>
+nnoremap <silent><LEADER><LEADER> :<C-U>Commands<CR><C-P>
+nnoremap <silent><LEADER>rl:<C-U>Registers<CR>
 " 使用fzfmru来模拟如vscode go to file 那样的文件模糊查找行为
-nnoremap <C-P> :<C-U>FilesMru --tiebreak=index<CR>
+nnoremap <silent><C-P> :<C-U>FilesMru --tiebreak=index<CR>
 
 " 语法
-nnoremap K  :<C-U>call autocomplete#ShowDocumentation()<CR>
+nnoremap <silent>K  :<C-U>call autocomplete#ShowDocumentation()<CR>
 " Remap keys for gotos
 " 先禁用vim-go的跳转定义插件
 let g:go_def_mapping_enabled = 0
@@ -32,14 +32,14 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " 界面
-nnoremap <C-L> :<C-U>nohlsearch<CR>
+nnoremap <silent><C-L> :<C-U>nohlsearch<CR>
 noremap <expr> <M-b> ":<C-U>call ui#WindLineLeft(" .screencol() . ")\n"
 noremap <expr> <M-f> ":<C-U>call ui#WindLineRight(" .screencol() . ")\n"
 noremap <expr> <M-UP> ":<C-U>call ui#WindLineUp(" .screenrow() . ")\n"
 noremap <expr> <M-Down> ":<C-U>call ui#WindLineDown(" .screenrow() . ")\n"
-nnoremap <LEADER>t :<C-U>call ui#TagbarInit()<CR>
+nnoremap <silent><LEADER>t :<C-U>call ui#TagbarInit()<CR>
 " 简单的文件浏览器使用
-nnoremap <LEADER>ft :<C-U>call ui#VimfilerInit()<CR>
+nnoremap <silent><LEADER>ft :<C-U>call ui#VimfilerInit()<CR>
 
 " 跳转
 noremap <SPACE>w <C-W>
@@ -55,11 +55,12 @@ nmap gs <Plug>Sneak_S
 " 编辑
 vmap <LEADER>s <Plug>VSurround
 nmap <LEADER>s <Plug>Ysurround
-nnoremap <C-J> :<C-U>Snippets<CR>
+nnoremap <silent><C-J> :<C-U>Snippets<CR>
+nnoremap <silent><C-S> :<C-U>Scratch<CR>
 
  "快速注释
-nnoremap <LEADER>; :<C-U>call NERDComment("n", "Toggle")<CR>
-vnoremap <LEADER>; :call NERDComment("n", "Toggle")<CR>gv
+nnoremap <silent><LEADER>; :<C-U>call NERDComment("n", "Toggle")<CR>
+vnoremap <silent><LEADER>; :call NERDComment("n", "Toggle")<CR>gv
 " 复制粘贴
 nnoremap <Leader>yy viw"+y
 nnoremap <Leader>ya viw"ay
@@ -90,8 +91,8 @@ nnoremap <Leader>rr viw"+p
 nnoremap <Leader>ra viw"ap
 nnoremap <Leader>rb viw"bp
 nnoremap <Leader>rc viw"cp
-nnoremap ]] :<C-U>call NextUncommentedBlock(1)<CR>
-nnoremap [[ :<C-U>call NextUncommentedBlock(-1)<CR>
+nnoremap <silent>]] :<C-U>call NextUncommentedBlock(1)<CR>
+nnoremap <silent>[[ :<C-U>call NextUncommentedBlock(-1)<CR>
 
 "FZF Command History
 "function! s:mycommand_sink(cmd)

@@ -61,6 +61,7 @@ if g:dein_load_state
     call dein#add('xcodebuild/fcitx-vim-osx')
     call dein#add('xcodebuild/fcitx-remote-for-osx')
     "call dein#add('mivok/vimtodo')
+    call dein#add('junegunn/goyo.vim')
 
    call dein#end()
     call dein#save_state()
@@ -146,6 +147,8 @@ let g:tagbar_left = 1
 
 
 " 自定义指令
+command! Scratch call CreateScratch()
+command! Todo exe "Ag todo"
 command! PluginInstall call <SID>PluginInstall()
 command! RunCode call commands#CodeRuner()
 command! -bang Registers call commands#Registers('<bang>' ==# '!')
@@ -295,3 +298,19 @@ augroup Format-Options
     " This can be done as well instead of the previous line, for setting formatoptions as you choose:  
     autocmd BufEnter * setlocal formatoptions=crqn2l1j  
 augroup END
+
+fun! CreateScratch() abort
+    let s:current_filetype = &filetype
+    let s:current_directory = getcwd()
+    "echom s:current_filetype
+    "echom s:current_directory
+    let s:scratch_file_name = substitute(s:current_directory, "/", "%", 'g') . "." . s:current_filetype
+    "echom s:scratch_file_name
+    call ui#OpenFloatingWin()
+    setlocal buftype =
+    let s:scratch_file_name = "~/.cache/scratch/" . shellescape(fnameescape(s:scratch_file_name))
+    "echom s:scratch_file_name
+    execute "edit " . s:scratch_file_name
+    let &filetype = s:current_filetype
+    setlocal autowriteall
+endf
