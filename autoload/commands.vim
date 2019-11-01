@@ -4,22 +4,22 @@ function! commands#UninstallPackages() abort
 endfunction
 
 
-function! commands#GetRegisters() abort
-  redir => l:regs
-  silent registers
-  redir END
+"function! commands#GetRegisters() abort
+  "redir => l:regs
+  "silent registers
+  "redir END
 
-  return split(l:regs, '\n')[1:]
-endfunction
+  "return split(l:regs, '\n')[1:]
+"endfunction
 
-function! commands#Registers(...) abort
-  let l:opts = {
-        \ 'source': commands#GetRegisters(),
-        \ 'sink': {x -> feedkeys(matchstr(x, '\v^\S+\ze.*') . (a:1 ? 'P' : 'p'), 'x')},
-        \ 'options': '--prompt="Reg> "'
-        \ }
-  call fzf#run(fzf#wrap(l:opts))
-endfunction
+"function! commands#Registers(...) abort
+  "let l:opts = {
+        "\ 'source': commands#GetRegisters(),
+        "\ 'sink': {x -> feedkeys(matchstr(x, '\v^\S+\ze.*') . (a:1 ? 'P' : 'p'), 'x')},
+        "\ 'options': '--prompt="Reg> "'
+        "\ }
+  "call fzf#run(fzf#wrap(l:opts))
+"endfunction
 
 
 

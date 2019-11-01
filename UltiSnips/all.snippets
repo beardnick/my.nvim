@@ -107,4 +107,11 @@ snippet uuid "Random UUID" w
 `!p if not snip.c: import uuid; snip.rv = uuid.uuid4()`
 endsnippet
 
+
+snippet /sh>(.*)/ "expand shell commands directly" br
+`!p import subprocess
+snip.rv = str(subprocess.check_output(match.group(1),shell=True),encoding="utf-8").strip()
+`
+endsnippet
+
 # vim:ft=snippets:

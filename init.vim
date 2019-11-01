@@ -18,7 +18,7 @@ if g:dein_load_state
     call dein#add('neoclide/coc.nvim',{'build':'./install.sh'})
     call dein#add('Shougo/unite.vim')
     call dein#add('Shougo/vimfiler.vim', {'depends':'Shougo/unite.vim'})
-    call dein#add('Shougo/denite.nvim')
+    "call dein#add('Shougo/denite.nvim')
     " 完全可以使用fzf来代替FlyGrep
     ""call dein#add('wsdjeg/FlyGrep.vim')
 
@@ -54,7 +54,8 @@ if g:dein_load_state
     call dein#add('sjl/gundo.vim')
     call dein#add('thaerkh/vim-workspace')
     "call dein#add('bronson/vim-trailing-whitespace')
-    call dein#add('yuttie/comfortable-motion.vim')
+    " 平滑滚动插件
+    "call dein#add('yuttie/comfortable-motion.vim')
     "call dein#add('ryanoasis/vim-devicons')
     call dein#add('tyru/open-browser.vim')
     call dein#add('suan/vim-instant-markdown')
@@ -69,6 +70,15 @@ if g:dein_load_state
     "call dein#add('mivok/vimtodo')
     call dein#add('junegunn/goyo.vim')
     call dein#add('freitass/todo.txt-vim')
+    call dein#add('svermeulen/vim-easyclip')
+    "call dein#add('vim-vdebug/vdebug')
+    "call dein#add('jodosha/vim-godebug')
+    " 提供了一些好用的command用于调试vimscript
+    call dein#add('tpope/vim-scriptease')
+    " 在vim中访问各种数据库
+    call dein#add('tpope/vim-dadbod')
+    call dein#add('tpope/vim-dispatch')
+    call dein#add('tveskag/nvim-blame-line')
 
    call dein#end()
     call dein#save_state()
@@ -98,6 +108,10 @@ set list lcs=tab:\|\
 let g:indentLine_enabled = 1
 
 let g:instant_markdown_autostart = 0
+let g:fzf_buffers_jump = 1
+
+let g:tagbar_sort = 0
+
 
 " 设置leader为空格
 let mapleader = " "
@@ -137,7 +151,19 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:UltiSnipsEditSplit="vertical"
 let g:table_mode_always_active = 1
+let g:vmt_auto_update_on_save = 1
 
+set cursorline
+
+"g:EasyClipUseYankDefaults*
+
+let g:EasyClipUseCutDefaults = 0
+
+"g:EasyClipUsePasteDefaults*
+
+let g:EasyClipEnableBlackHoleRedirect = 0
+
+"g:EasyClipUsePasteToggleDefaults
 
 " fzf使用悬浮窗
 " 让输入上方，搜索列表在下方
@@ -162,13 +188,16 @@ call vimfiler#custom#profile('default', 'context', {
 let g:tagbar_left = 1
 
 
+
 " 自定义指令
+command! -bang -nargs=? -complete=dir Cheats
+  \ call fzf#vim#files("~/.cheat", fzf#vim#with_preview(), <bang>0)
 command! ChangeTree exe "GundoToggle"
-command! Scratch call CreateScratch()
-command! Todo exe "Ag todo"
+"command! Scratch call CreateScratch()
+command! Todo exe "Rg todo"
 command! PluginInstall call <SID>PluginInstall()
 command! RunCode call commands#CodeRuner()
-command! -bang Registers call commands#Registers('<bang>' ==# '!')
+"command! -bang Registers call commands#Registers('<bang>' ==# '!')
 command! HomePage call startify#insane_in_the_membrane(0)
 command! SourceCurrentFile exe "source %"
 command! CleanPackages call commands#UninstallPackages()
@@ -179,6 +208,7 @@ command! EditConfig exe "vsplit ~/my.nvim/init.vim"
 
 " 自动命令
 autocmd FileType python call autocomplete#UseKite()
+"autocmd BufNew,BufEnter *.man setlocal filetype=man
 
 
 
@@ -222,6 +252,9 @@ endfunction
 "<C-o>a直接让提示框消失，什么也不做
 "inoremap <expr> <CR> complete_info()["selected"] != "-1" ?( EnterComplete() ? "\<C-Y>" : "\<C-o>a") :"\<C-g>u\<CR>"
 inoremap <expr> <CR> EnterComplete()
+"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 
 " 这里是要解决Java补全的时候会有多余字符出现在末尾的问题
 function! EnterComplete() abort
@@ -229,7 +262,7 @@ function! EnterComplete() abort
     " 选择了除java LS外的补全
     " 没有选择补全项直接enter
     let s:com_info = complete_info()
-    echom "com_info: " .  string(s:com_info)
+    "echom "com_info: " .  string(s:com_info)
     if s:com_info["selected"] < 0 
         return "\<C-g>u\<CR>"
     endif
@@ -309,6 +342,7 @@ endf
 
 
 autocmd BufEnter * Rooter
+"autocmd BufEnter * EnableBlameLine
 " 在使用O换行时不自动添加注释行
 augroup Format-Options  
     autocmd!  
@@ -335,3 +369,78 @@ fun! CreateScratch() abort
 endf
 
 autocmd User StartifyBufferOpened nested :Rooter
+
+function! s:filter_header(lines) abort
+    let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
+    let centered_lines = map(copy(a:lines),
+        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+    return centered_lines
+endfunction
+
+function! s:yank_list()
+  redir => ys
+  silent Yanks
+  redir END
+  return split(ys, '\n')[1:]
+endfunction
+
+function! s:yank_handler(reg)
+  if empty(a:reg)
+    echo "aborted register paste"
+  else
+    let token = split(a:reg, ' ')
+    execute 'Paste' . token[0]
+  endif
+endfunction
+
+command! FZFYank call fzf#run(fzf#wrap({
+\ 'source': <sid>yank_list(),
+\ 'sink': function('<sid>yank_handler'),
+\ 'options': '-m --prompt="Yank> "'
+\ }))
+
+
+let g:startify_custom_header = s:filter_header([
+    \ '      ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁    ░▓▓▒         ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁',
+    \ '     ▕                        ▁  ░░▓▓▒▒▒     ▁▔                        ▔▏',
+    \ '    ▕ ▗▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚  ░░░▓▓▓▓▓▒▒▒  ▕ ▗▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▖▒▒',
+    \ '    ▕ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▓▓▓▓▓▓▓▓▓▒▒ ▕ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒',
+    \ '    ▕ ▝▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚ ▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒ ▝▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▀▘▒',
+    \ '     ▕     ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▏',
+    \ '      ▔▔▔▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒  ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▒▒▒',
+    \ '        ░▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▒▒▒',
+    \ '       ░░▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒',
+    \ '     ░░░▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒',
+    \ '   ░░░▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒',
+    \ ' ░░░▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒  ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒',
+    \ '▒▒▒▓▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒',
+    \ ' ▒▒▒▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████',
+    \ '   ▒▒▒▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███',
+    \ '     ▒▒▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▖▖▖▖▖▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███',
+    \ '      ▒▒▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▚▚▚▚▚▘▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███',
+    \ '       ▒▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▚▚▚▚▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███',
+    \ '        ▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▚▚▚▚▚▚▚▚▓▓▓▚▚▚▚▚▚▖▓▓▗▚▚▚▚▚▖██ ▗▚▚▚▚▚',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▚▚▚▚▘▓▓▓▓▓▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▓▚▚▚▚▚▎▓▓▓▓▓▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▚▚▚▚▚▎▓▓▓▓▓▚▚▚▚▓▓▓▓▞▚▚▚▚▚      ▚▚▚▚▚',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▓▓▚▚▚▚▚▘▓▓▓▓▓▚▚▚▚▚▓▓██▞▚▚▚▚▚     ▚▚▚▚▚',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▚▚▚▚▚▘▓▓▓▓▚▚▚▚▚▓███  ▚▚▚▚      ▚▚▚▚▚',
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▒▒▒▒▒▒▒▓▓▓▚▚▚▚▞▞▓▓▓▓▓▚▚▚▚▓██   ▚▚▚▚▚     ▚▚▚▚▚',
+    \ '         ▏ ▚▚▚▚▚▚▒▒▒▒    ▒▒▒▒▚▚▚▚▚▚▓▓▓▓▓▚▚▚▚▚██    ▚▚▚▚     ▚▚▚▚▚▚',
+    \ '         ▔▁▀▒▒▒▒▒▒         ▒▒▚▚▚▚▚▚▚▚▓▓▓▚▚▚▚▚▚    ▚▚▚▚▚▚    ▚▚▚▚▚▚▚',
+    \ '           ▔                  ▒▒▓▓▓▓▓▓▓▓███',
+    \ '                               ▒▒▒▓▓▓▓███',
+    \ '                                 ▒▒▒▓██▓',
+    \ '                                   ▒█▓',
+    \ ])
+
+" 自动显示
+autocmd CursorHold *  call autocomplete#ShowDocumentation()

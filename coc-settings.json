@@ -1,0 +1,34 @@
+{
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "efm": {
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["vim", "eruby", "markdown", "yaml"],
+      "ignoredRootPaths": ["~"]
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    }
+  },
+  "java.import.maven.enabled": true,
+  "java.errors.incompleteClasspath.severity": "ignore",
+  "python.jediEnabled": false,
+  "python.linting.flake8Enabled": false,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Args": [
+    "--ignore=E303,E501,E305,E302,E226,E231,E265,E202,E128,E126,E201,E111,E701,E114,E261,E225"
+  ],
+  "diagnostic.virtualText": true,
+  "suggest.noselect": false,
+  "codeLens.enable": true,
+  "coc.preferences.jumpCommand": "vsplit",
+  "coc.preferences.formatOnType": true
+}
