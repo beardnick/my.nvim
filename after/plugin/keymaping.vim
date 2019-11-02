@@ -50,9 +50,10 @@ noremap <expr> <M-Left> ":<C-U>call ui#WindLineLeft(" .screencol() . ")\n"
 noremap <expr> <M-Right> ":<C-U>call ui#WindLineRight(" .screencol() . ")\n"
 noremap <expr> <M-UP> ":<C-U>call ui#WindLineUp(" .screenrow() . ")\n"
 noremap <expr> <M-Down> ":<C-U>call ui#WindLineDown(" .screenrow() . ")\n"
-nnoremap <silent><LEADER>t :<C-U>call ui#TagbarInit()<CR>
+noremap <F2> :LeaderfFunction!<cr>
 " 简单的文件浏览器使用
-nnoremap <silent><LEADER>ft :<C-U>call ui#VimfilerInit()<CR>
+"nnoremap <silent><LEADER>ft :<C-U>Defx<CR>
+nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
 
 " 跳转
 noremap <SPACE>w <C-W>

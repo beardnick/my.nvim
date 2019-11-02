@@ -64,13 +64,3 @@ function! ui#OpenFloatingWin()
         \ signcolumn=no
 endfunction
 
-
-function! ui#VimfilerInit()
-  exe 'VimFilerExplorer'
-  silent! nunmap <buffer> <Space>
-endfunction
-
-function! ui#TagbarInit()
-  exe 'Tagbar'
-  silent! nunmap <buffer> <Space>
-endfunction

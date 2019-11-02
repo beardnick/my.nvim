@@ -13,16 +13,23 @@ if g:dein_load_state
     call dein#add('morhetz/gruvbox') " 主题
     call dein#add('wsdjeg/dein-ui.vim') " 插件管理器
     call dein#add('justinmk/vim-sneak') " 快速跳转插件
-    call dein#add('terryma/vim-multiple-cursors') " 多光标编辑插件
+    " vim-visual-multi代替multicursor
+    "call dein#add('terryma/vim-multiple-cursors') " 多光标编辑插件
+    call dein#add('mg979/vim-visual-multi') 
     call dein#add('luochen1990/rainbow')
     call dein#add('neoclide/coc.nvim',{'build':'./install.sh'})
-    call dein#add('Shougo/unite.vim')
-    call dein#add('Shougo/vimfiler.vim', {'depends':'Shougo/unite.vim'})
+    "call dein#add('Shougo/unite.vim')
+    "call dein#add('Shougo/vimfiler.vim', {'depends':'Shougo/unite.vim'})
+    " defx代替vimfiler coc-explore 代替 defx
+    "call dein#add('Shougo/defx.nvim')
     "call dein#add('Shougo/denite.nvim')
     " 完全可以使用fzf来代替FlyGrep
     ""call dein#add('wsdjeg/FlyGrep.vim')
 
-    call dein#add('majutsushi/tagbar')
+    " tagbar已经落伍了
+    "call dein#add('majutsushi/tagbar')
+    " leaderF 代替tagbar
+    call dein#add('Yggdroot/LeaderF')
     call dein#add('mhinz/vim-startify')
     call dein#add('scrooloose/nerdcommenter')
     call dein#add('fatih/vim-go')
@@ -41,7 +48,7 @@ if g:dein_load_state
     call dein#add('tpope/vim-surround')
     call dein#add('mattesgroeger/vim-bookmarks')
     call dein#add('airblade/vim-gitgutter')
-    call dein#add('jiangmiao/auto-pairs')
+    "call dein#add('jiangmiao/auto-pairs')
     call dein#add('godlygeek/tabular')
 
     " 三个插件加起来有最好的文件搜索体验
@@ -79,6 +86,7 @@ if g:dein_load_state
     call dein#add('tpope/vim-dadbod')
     call dein#add('tpope/vim-dispatch')
     call dein#add('tveskag/nvim-blame-line')
+    call dein#add('andymass/vim-matchup')
 
    call dein#end()
     call dein#save_state()
@@ -171,21 +179,6 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse'
 " 打开 fzf 的方式选择 floating window
 let g:fzf_layout = { 'window': 'call ui#OpenFloatingWin()' }
 
-" vimfiler设置
-call vimfiler#custom#profile('default', 'context', {
-      \ 'explorer' : 1,
-      \ 'winminwidth' : 30,
-      \ 'toggle' : 1,
-      \ 'auto_expand': 1,
-      \ 'direction' : "rightbelow",
-      \ 'parent': 0,
-      \ 'status' : 1,
-      \ 'safe' : 0,
-      \ 'split' : 1,
-      \ 'no_quit' : 1,
-      \ 'force_hide' : 0,
-      \ })
-let g:tagbar_left = 1
 
 
 
@@ -442,5 +435,26 @@ let g:startify_custom_header = s:filter_header([
     \ '                                   ▒█▓',
     \ ])
 
-" 自动显示
-autocmd CursorHold *  call autocomplete#ShowDocumentation()
+" 自动显示文档
+"autocmd CursorHold  * if &filetype !=# "vim" | call autocomplete#ShowDocumentation()
+
+let g:Lf_GtagsAutoGenerate = 1
+
+
+
+"let g:Lf_WindowPosition = 'left'
+
+noremap <F2> ::Leaderf bufTag!<cr>
+
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
+
+let g:Lf_NormalMap = {
+	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+	\ }
