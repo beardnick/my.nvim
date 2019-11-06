@@ -3,20 +3,21 @@ if &compatible
     set nocompatible
 endif
 " dein的路径
-set runtimepath+=/Users/mac/study/git/dein.vim
-let g:dein_load_state = dein#load_state("/Users/mac/study/git/plugins")
+set runtimepath+=~/study/git/dein.vim
+let g:dein_load_state = dein#load_state("~/study/git/plugins")
 if g:dein_load_state
     " 加载dein插件管理器
-    call dein#begin("/Users/mac/study/git/plugins")
-    call dein#add("/Users/mac/study/git/dein.vim")
+    call dein#begin("~/study/git/plugins")
+    call dein#add("~/study/git/dein.vim")
 
-    call dein#add('morhetz/gruvbox') " 主题
+    call dein#add('morhetz/gruvbox',{'lazy':1}) " 主题
     call dein#add('wsdjeg/dein-ui.vim') " 插件管理器
     call dein#add('justinmk/vim-sneak') " 快速跳转插件
     " vim-visual-multi代替multicursor
     "call dein#add('terryma/vim-multiple-cursors') " 多光标编辑插件
     call dein#add('mg979/vim-visual-multi') 
     call dein#add('luochen1990/rainbow')
+    " 注意编译问题，很多时候编译出错了很多插件都会有问题
     call dein#add('neoclide/coc.nvim',{'build':'./install.sh'})
     "call dein#add('Shougo/unite.vim')
     "call dein#add('Shougo/vimfiler.vim', {'depends':'Shougo/unite.vim'})
@@ -44,16 +45,16 @@ if g:dein_load_state
     call dein#add('mzlogin/vim-markdown-toc')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('gcmt/wildfire.vim')
-    call dein#add('tpope/vim-fugitive')
+    "call dein#add('tpope/vim-fugitive')
     call dein#add('tpope/vim-surround')
     call dein#add('mattesgroeger/vim-bookmarks')
-    call dein#add('airblade/vim-gitgutter')
+    "call dein#add('airblade/vim-gitgutter')
     "call dein#add('jiangmiao/auto-pairs')
     call dein#add('godlygeek/tabular')
 
     " 三个插件加起来有最好的文件搜索体验
     call dein#add('tweekmonster/fzf-filemru')
-    call dein#add('/usr/local/opt/fzf')
+    call dein#add('/usr/local/opt/fzf', {'frozen':1})
     call dein#add('junegunn/fzf.vim')
 
     call dein#add('Yggdroot/indentLine')
@@ -85,8 +86,9 @@ if g:dein_load_state
     " 在vim中访问各种数据库
     call dein#add('tpope/vim-dadbod')
     call dein#add('tpope/vim-dispatch')
-    call dein#add('tveskag/nvim-blame-line')
+    call dein#add('tveskag/nvim-blame-line',{'lazy':1})
     call dein#add('andymass/vim-matchup')
+    call dein#add('flazz/vim-colorschemes')
 
    call dein#end()
     call dein#save_state()
@@ -100,6 +102,7 @@ endif
 "endif
 
 colorscheme gruvbox
+"colorscheme monokai
 
 " 属性配置
 " 启用彩虹括号颜色
@@ -198,6 +201,9 @@ command! VMaps call fzf#vim#maps("v", <bang>0)
 command! IMaps call fzf#vim#maps("i", <bang>0) 
 command! ReloadConfig  exe "source ~/my.nvim/init.vim"
 command! EditConfig exe "vsplit ~/my.nvim/init.vim" 
+command! ChunkInfo exe "CocCommand git.chunkInfo" 
+command! ChuckStage exe "CocCommand git.chunkStage" 
+command! ChunkUndo exe "CocCommand git.chunkUndo" 
 
 " 自动命令
 autocmd FileType python call autocomplete#UseKite()
@@ -238,36 +244,59 @@ endfunction
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
+
 "inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " Or use `complete_info` if your vim support it, like:
 "inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-Y>" : "\<C-g>u\<CR>"
 "inoremap <expr> <CR> EnterComplete() ? "\<C-Y>" : "\<C-g>u\<CR>"
 "<C-o>a直接让提示框消失，什么也不做
 "inoremap <expr> <CR> complete_info()["selected"] != "-1" ?( EnterComplete() ? "\<C-Y>" : "\<C-o>a") :"\<C-g>u\<CR>"
-inoremap <expr> <CR> EnterComplete()
-"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"inoremap <expr> <CR> EnterCompleteNew()
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 
-" 这里是要解决Java补全的时候会有多余字符出现在末尾的问题
-function! EnterComplete() abort
-    " 选择了java的LS补全enter什么都不做，让提示框隐藏
-    " 选择了除java LS外的补全
-    " 没有选择补全项直接enter
-    let s:com_info = complete_info()
+ "这里是要解决Java补全的时候会有多余字符出现在末尾的问题
+"function! EnterComplete() abort
+     "选择了java的LS补全enter什么都不做，让提示框隐藏
+     "选择了除java LS外的补全
+     "没有选择补全项直接enter
+    "let s:com_info = complete_info()
     "echom "com_info: " .  string(s:com_info)
-    if s:com_info["selected"] < 0 
-        return "\<C-g>u\<CR>"
-    endif
+    "if s:com_info["selected"] < 0 
+        "return "\<C-g>u\<CR>"
+    "endif
         "echom "selected:" . string(s:com_info["items"][s:com_info["selected"]])
-        let s:selected_item = s:com_info["items"][s:com_info["selected"]]
-        if ! has_key(s:selected_item,"user_data")
-            return "\<C-Y>"
-        endif
-        let s:user_data = json_decode(s:selected_item["user_data"])
+        "let s:selected_item = s:com_info["items"][s:com_info["selected"]]
+        "if ! has_key(s:selected_item,"user_data")
+            "return "\<C-Y>"
+        "endif
+        "let s:user_data = json_decode(s:selected_item["user_data"])
         "echom "source:" s:user_data["source"]
-        return s:user_data["source"] == "java" ? "\<C-o>a" : "\<C-Y>"
-endfunction
+        "return s:user_data["source"] == "java" ? "\<C-o>a" : "\<C-Y>"
+"endfunction
+
+
+ "这里是要解决Java补全的时候会有多余字符出现在末尾的问题
+"function! EnterCompleteNew() abort
+     "选择了java的LS补全enter什么都不做，让提示框隐藏
+     "选择了除java LS外的补全
+     "没有选择补全项直接enter
+    "let s:com_info = complete_info()
+    "echom "com_info: " .  string(s:com_info)
+    "if s:com_info["selected"] < 0 
+        "return "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+    "endif
+        "echom "selected:" . string(s:com_info["items"][s:com_info["selected"]])
+        "let s:selected_item = s:com_info["items"][s:com_info["selected"]]
+        "if ! has_key(s:selected_item,"user_data")
+            "return coc#_select_confirm()
+        "endif
+        "let s:user_data = json_decode(s:selected_item["user_data"])
+        "echom "source:" s:user_data["source"]
+        "return s:user_data["source"] == "java" ? "\<C-o>a" : "\<C-Y>"
+"endfunction
 
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -313,16 +342,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}\ >\ 
 
-" complete的原理
-inoremap <C-L> <C-R>=ListMonths()<CR>
-
-func! ListMonths()
-  call complete(col('.') - 3, ['January', 'February', 'March',
-    \ 'April', 'May', 'June', 'July', 'August', 'September',
-    \ 'October', 'November', 'December'])
-  return ''
-endfunc
-
 
 fun! s:PluginInstall() abort
     if dein#check_install()
@@ -335,7 +354,7 @@ endf
 
 
 autocmd BufEnter * Rooter
-"autocmd BufEnter * EnableBlameLine
+
 " 在使用O换行时不自动添加注释行
 augroup Format-Options  
     autocmd!  
@@ -345,21 +364,21 @@ augroup Format-Options
     autocmd BufEnter * setlocal formatoptions=crqn2l1j  
 augroup END
 
-fun! CreateScratch() abort
-    let s:current_filetype = &filetype
-    let s:current_directory = getcwd()
-    "echom s:current_filetype
-    "echom s:current_directory
-    let s:scratch_file_name = substitute(s:current_directory, "/", "%", 'g') . "." . s:current_filetype
-    "echom s:scratch_file_name
-    call ui#OpenFloatingWin()
-    setlocal buftype =
-    let s:scratch_file_name = "~/.cache/scratch/" . shellescape(fnameescape(s:scratch_file_name))
-    "echom s:scratch_file_name
-    execute "edit " . s:scratch_file_name
-    let &filetype = s:current_filetype
-    setlocal autowriteall
-endf
+"fun! CreateScratch() abort
+    "let s:current_filetype = &filetype
+    "let s:current_directory = getcwd()
+    ""echom s:current_filetype
+    ""echom s:current_directory
+    "let s:scratch_file_name = substitute(s:current_directory, "/", "%", 'g') . "." . s:current_filetype
+    ""echom s:scratch_file_name
+    "call ui#OpenFloatingWin()
+    "setlocal buftype =
+    "let s:scratch_file_name = "~/.cache/scratch/" . shellescape(fnameescape(s:scratch_file_name))
+    ""echom s:scratch_file_name
+    "execute "edit " . s:scratch_file_name
+    "let &filetype = s:current_filetype
+    "setlocal autowriteall
+"endf
 
 autocmd User StartifyBufferOpened nested :Rooter
 
@@ -394,45 +413,45 @@ command! FZFYank call fzf#run(fzf#wrap({
 
 
 let g:startify_custom_header = s:filter_header([
-    \ '      ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁    ░▓▓▒         ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁',
-    \ '     ▕                        ▁  ░░▓▓▒▒▒     ▁▔                        ▔▏',
-    \ '    ▕ ▗▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚  ░░░▓▓▓▓▓▒▒▒  ▕ ▗▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▖▒▒',
-    \ '    ▕ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▓▓▓▓▓▓▓▓▓▒▒ ▕ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒',
-    \ '    ▕ ▝▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚ ▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒ ▝▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▀▘▒',
-    \ '     ▕     ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▏',
-    \ '      ▔▔▔▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒  ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▒▒▒',
-    \ '        ░▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▒▒▒',
-    \ '       ░░▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒',
-    \ '     ░░░▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒',
-    \ '   ░░░▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒',
-    \ ' ░░░▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒  ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒',
-    \ '▒▒▒▓▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒',
-    \ ' ▒▒▒▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████',
-    \ '   ▒▒▒▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███',
-    \ '     ▒▒▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▖▖▖▖▖▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███',
-    \ '      ▒▒▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▚▚▚▚▚▘▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███',
-    \ '       ▒▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▚▚▚▚▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███',
-    \ '        ▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▚▚▚▚▚▚▚▚▓▓▓▚▚▚▚▚▚▖▓▓▗▚▚▚▚▚▖██ ▗▚▚▚▚▚',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▚▚▚▚▘▓▓▓▓▓▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▓▚▚▚▚▚▎▓▓▓▓▓▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▚▚▚▚▚▎▓▓▓▓▓▚▚▚▚▓▓▓▓▞▚▚▚▚▚      ▚▚▚▚▚',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▓▓▚▚▚▚▚▘▓▓▓▓▓▚▚▚▚▚▓▓██▞▚▚▚▚▚     ▚▚▚▚▚',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▚▚▚▚▚▘▓▓▓▓▚▚▚▚▚▓███  ▚▚▚▚      ▚▚▚▚▚',
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▒▒▒▒▒▒▒▓▓▓▚▚▚▚▞▞▓▓▓▓▓▚▚▚▚▓██   ▚▚▚▚▚     ▚▚▚▚▚',
-    \ '         ▏ ▚▚▚▚▚▚▒▒▒▒    ▒▒▒▒▚▚▚▚▚▚▓▓▓▓▓▚▚▚▚▚██    ▚▚▚▚     ▚▚▚▚▚▚',
-    \ '         ▔▁▀▒▒▒▒▒▒         ▒▒▚▚▚▚▚▚▚▚▓▓▓▚▚▚▚▚▚    ▚▚▚▚▚▚    ▚▚▚▚▚▚▚',
-    \ '           ▔                  ▒▒▓▓▓▓▓▓▓▓███',
-    \ '                               ▒▒▒▓▓▓▓███',
-    \ '                                 ▒▒▒▓██▓',
-    \ '                                   ▒█▓',
+    \ '      ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁    ░▓▓▒         ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁'     ,
+    \ '     ▕                        ▁  ░░▓▓▒▒▒     ▁▔                        ▔▏'   ,
+    \ '    ▕ ▗▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚  ░░░▓▓▓▓▓▒▒▒  ▕ ▗▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▖▒▒'   ,
+    \ '    ▕ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▓▓▓▓▓▓▓▓▓▒▒ ▕ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒'   ,
+    \ '    ▕ ▝▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚ ▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒ ▝▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▀▘▒'    ,
+    \ '     ▕     ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▏' ,
+    \ '      ▔▔▔▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒  ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒'       ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒'         ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒'           ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒'            ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒'            ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒'                ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒'                ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▒▒▒'              ,
+    \ '        ░▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▒▒▒'            ,
+    \ '       ░░▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒'          ,
+    \ '     ░░░▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒'       ,
+    \ '   ░░░▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒'      ,
+    \ ' ░░░▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒  ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒'    ,
+    \ '▒▒▒▓▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒'    ,
+    \ ' ▒▒▒▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████'     ,
+    \ '   ▒▒▒▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███'       ,
+    \ '     ▒▒▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▖▖▖▖▖▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███'         ,
+    \ '      ▒▒▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▚▚▚▚▚▘▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███'           ,
+    \ '       ▒▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▚▚▚▚▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███'             ,
+    \ '        ▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███'              ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▚▚▚▚▚▚▚▚▓▓▓▚▚▚▚▚▚▖▓▓▗▚▚▚▚▚▖██ ▗▚▚▚▚▚'        ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▚▚▚▚▘▓▓▓▓▓▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚'       ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▓▚▚▚▚▚▎▓▓▓▓▓▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚'       ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▚▚▚▚▚▎▓▓▓▓▓▚▚▚▚▓▓▓▓▞▚▚▚▚▚      ▚▚▚▚▚'        ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▓▓▚▚▚▚▚▘▓▓▓▓▓▚▚▚▚▚▓▓██▞▚▚▚▚▚     ▚▚▚▚▚'         ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▚▚▚▚▚▘▓▓▓▓▚▚▚▚▚▓███  ▚▚▚▚      ▚▚▚▚▚'         ,
+    \ '         ▏ ▚▚▚▚▚▚▚▚▚▒▒▒▒▒▒▒▓▓▓▚▚▚▚▞▞▓▓▓▓▓▚▚▚▚▓██   ▚▚▚▚▚     ▚▚▚▚▚'          ,
+    \ '         ▏ ▚▚▚▚▚▚▒▒▒▒    ▒▒▒▒▚▚▚▚▚▚▓▓▓▓▓▚▚▚▚▚██    ▚▚▚▚     ▚▚▚▚▚▚'          ,
+    \ '         ▔▁▀▒▒▒▒▒▒         ▒▒▚▚▚▚▚▚▚▚▓▓▓▚▚▚▚▚▚    ▚▚▚▚▚▚    ▚▚▚▚▚▚▚'         ,
+    \ '           ▔                  ▒▒▓▓▓▓▓▓▓▓███'                                 ,
+    \ '                               ▒▒▒▓▓▓▓███'                                   ,
+    \ '                                 ▒▒▒▓██▓'                                    ,
+    \ '                                   ▒█▓'                                      ,
     \ ])
 
 " 自动显示文档
@@ -458,3 +477,6 @@ let g:Lf_NormalMap = {
 	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
 	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
 	\ }
+
+"set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
+ "let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']

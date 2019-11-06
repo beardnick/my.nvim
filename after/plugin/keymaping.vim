@@ -34,9 +34,12 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+nmap <silent> ]c <Plug>(coc-git-nextchunk)
+nmap <silent> [c <Plug>(coc-git-prevchunk)
+
 " 快速修复
 nmap <silent> <M-CR> <Plug>(coc-fix-current)
-" 
+
 nmap <silent> gne <Plug>(coc-diagnostic-next-error)
 nmap <silent> gpe <Plug>(coc-diagnostic-previous-error)
 nmap <silent> gl  <Plug>(coc-openlink)
@@ -111,6 +114,7 @@ nnoremap <Leader>rc viw"cp
 nnoremap <silent>]] :<C-U>call NextUncommentedBlock(1)<CR>
 nnoremap <silent>[[ :<C-U>call NextUncommentedBlock(-1)<CR>
 nnoremap <C-Y> :<C-U>FZFYank<CR>
+nnoremap <silent><Leader>gb :<C-U>ToggleBlameLine<CR>
 
 "FZF Command History
 "function! s:mycommand_sink(cmd)

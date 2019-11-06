@@ -30,5 +30,7 @@
   "suggest.noselect": false,
   "codeLens.enable": true,
   "coc.preferences.jumpCommand": "vsplit",
-  "coc.preferences.formatOnType": true
+  "coc.preferences.formatOnType": true,
+  "git.addGBlameToVirtualText": true,
+  "git.addGBlameToBufferVar": true
 }
