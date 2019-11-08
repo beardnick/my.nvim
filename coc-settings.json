@@ -6,12 +6,6 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     },
-    "efm": {
-      "command": "efm-langserver",
-      "args": [],
-      "filetypes": ["vim", "eruby", "markdown", "yaml"],
-      "ignoredRootPaths": ["~"]
-    },
     "golang": {
       "command": "gopls",
       "rootPatterns": ["go.mod"],
@@ -29,8 +23,9 @@
   "diagnostic.virtualText": true,
   "suggest.noselect": false,
   "codeLens.enable": true,
-  "coc.preferences.jumpCommand": "vsplit",
   "coc.preferences.formatOnType": true,
   "git.addGBlameToVirtualText": true,
-  "git.addGBlameToBufferVar": true
+  "git.addGBlameToBufferVar": true,
+  "suggest.fixInsertedWord": false,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true
 }

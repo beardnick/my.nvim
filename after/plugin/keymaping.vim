@@ -45,7 +45,8 @@ nmap <silent> gpe <Plug>(coc-diagnostic-previous-error)
 nmap <silent> gl  <Plug>(coc-openlink)
 nmap <silent> \ <Plug>(coc-codeaction)
 nmap <silent> <M-l> <Plug>(coc-codelens-action)
-nmap <silent> <M-r> <Plug>(coc-refactor)
+"nmap <silent> <M-r> <Plug>(coc-refactor)
+nmap <silent> <M-r> :<C-U>call commands#CodeRuner()<CR>
 
 " 界面
 nnoremap <silent><C-L> :<C-U>nohlsearch<CR>
@@ -74,6 +75,7 @@ vmap <LEADER>s <Plug>VSurround
 nmap <LEADER>s <Plug>Ysurround
 nnoremap <silent><C-J> :<C-U>Snippets<CR>
 nnoremap <silent><C-S> :<C-U>Scratch<CR>
+inoremap <silent><C-\> <C-O>:<C-U>TableModeRealign<CR>
 
  "快速注释
 nnoremap <silent><LEADER>; :<C-U>call NERDComment("n", "Toggle")<CR>

@@ -40,7 +40,7 @@ if g:dein_load_state
      "这个markdown有点烦人，总是自作主张地改变样式
     "call dein#add('plasticboy/vim-markdown')
     call dein#add('iamcco/markdown-preview.nvim')
-    call dein#add('lvht/tagbar-markdown')
+    "call dein#add('lvht/tagbar-markdown')
     call dein#add('SpaceVim/vim-markdown')
     call dein#add('mzlogin/vim-markdown-toc')
     call dein#add('dhruvasagar/vim-table-mode')
@@ -86,7 +86,6 @@ if g:dein_load_state
     " 在vim中访问各种数据库
     call dein#add('tpope/vim-dadbod')
     call dein#add('tpope/vim-dispatch')
-    call dein#add('tveskag/nvim-blame-line',{'lazy':1})
     call dein#add('andymass/vim-matchup')
     call dein#add('flazz/vim-colorschemes')
 
@@ -192,7 +191,8 @@ command! ChangeTree exe "GundoToggle"
 "command! Scratch call CreateScratch()
 command! Todo exe "Rg todo"
 command! PluginInstall call <SID>PluginInstall()
-command! RunCode call commands#CodeRuner()
+command! Run call commands#CodeRuner()
+command! Refactor call CocActionAsync('refactor')
 "command! -bang Registers call commands#Registers('<bang>' ==# '!')
 command! HomePage call startify#insane_in_the_membrane(0)
 command! SourceCurrentFile exe "source %"
@@ -209,7 +209,9 @@ command! ChunkUndo exe "CocCommand git.chunkUndo"
 autocmd FileType python call autocomplete#UseKite()
 "autocmd BufNew,BufEnter *.man setlocal filetype=man
 
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
+highlight default link CocHighlightText  MatchParen
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -463,20 +465,22 @@ let g:Lf_GtagsAutoGenerate = 1
 
 "let g:Lf_WindowPosition = 'left'
 
-noremap <F2> ::Leaderf bufTag!<cr>
+"noremap <F2> :Leaderf bufTag!<cr>
 
 let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
 let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
 
 let g:Lf_NormalMap = {
-	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
-	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
-	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
-	\ }
+    \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+    \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+    \ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+    \ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+    \ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+    \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+    \ }
 
 "set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
  "let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
+
+
