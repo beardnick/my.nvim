@@ -88,6 +88,8 @@ if g:dein_load_state
     call dein#add('tpope/vim-dispatch')
     call dein#add('andymass/vim-matchup')
     call dein#add('flazz/vim-colorschemes')
+    "添加tmux框中文字的补全源
+    call dein#add('wellle/tmux-complete.vim')
 
    call dein#end()
     call dein#save_state()
