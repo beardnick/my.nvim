@@ -67,6 +67,7 @@ if g:dein_load_state
     "call dein#add('ryanoasis/vim-devicons')
     call dein#add('tyru/open-browser.vim')
     call dein#add('suan/vim-instant-markdown')
+    "call dein#add('airblade/vim-rooter', {'if':0})
     call dein#add('airblade/vim-rooter')
     " 切换自定义格式的工具
     call dein#add('AndrewRadev/switch.vim')
@@ -384,6 +385,7 @@ augroup END
     "setlocal autowriteall
 "endf
 
+let g:bookmark_save_per_working_dir = 1
 autocmd User StartifyBufferOpened nested :Rooter
 
 function! s:filter_header(lines) abort
