@@ -72,6 +72,7 @@ if g:dein_load_state
     " 切换自定义格式的工具
     call dein#add('AndrewRadev/switch.vim')
     call dein#add('benmills/vimux')
+    call dein#add('ap/vim-buftabline')
 
     " 自动切换输入法的工具
     call dein#add('xcodebuild/fcitx-vim-osx')
@@ -184,8 +185,8 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse'
 " 打开 fzf 的方式选择 floating window
 let g:fzf_layout = { 'window': 'call ui#OpenFloatingWin()' }
 
-
-
+let g:buftabline_numbers = 2
+let g:buftabline_separators = 1 
 
 " 自定义指令
 command! -bang -nargs=? -complete=dir Cheats
@@ -359,6 +360,8 @@ endf
 
 
 autocmd BufEnter * Rooter
+
+let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', '.hgignore','.gitignore', '.cquery']
 
 " 在使用O换行时不自动添加注释行
 augroup Format-Options  

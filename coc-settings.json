@@ -10,6 +10,15 @@
       "command": "gopls",
       "rootPatterns": ["go.mod"],
       "filetypes": ["go"]
+    },
+     "cquery": {
+      "command": "cquery",
+      "args": ["--log-file=/tmp/cq.log"],
+      "filetypes": ["c", "cpp"],
+      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/", ".hgignore", ".gitignore", ".cquery"],
+      "initializationOptions": {
+        "cacheDirectory": "/tmp/cquery"
+      }
     }
   },
   "java.import.maven.enabled": true,

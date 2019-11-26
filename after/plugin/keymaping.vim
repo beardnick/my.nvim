@@ -44,9 +44,24 @@ nmap <silent> gne <Plug>(coc-diagnostic-next-error)
 nmap <silent> gpe <Plug>(coc-diagnostic-previous-error)
 nmap <silent> gl  <Plug>(coc-openlink)
 nmap <silent> \ <Plug>(coc-codeaction)
-nmap <silent> <M-l> <Plug>(coc-codelens-action)
+"nmap <silent> <M-l> <Plug>(coc-codelens-action)
 "nmap <silent> <M-r> <Plug>(coc-refactor)
 nmap <silent> <M-r> :<C-U>call commands#CodeRuner()<CR>
+
+nmap <silent> <M-l> :<C-U>bnext<CR>
+nmap <silent> <M-h> :<C-U>bprevious<CR>
+nmap <silent> <M-x> :<C-U>bdelete<CR>
+
+nmap <leader>1 <Plug>BufTabLine.Go(1)
+nmap <leader>2 <Plug>BufTabLine.Go(2)
+nmap <leader>3 <Plug>BufTabLine.Go(3)
+nmap <leader>4 <Plug>BufTabLine.Go(4)
+nmap <leader>5 <Plug>BufTabLine.Go(5)
+nmap <leader>6 <Plug>BufTabLine.Go(6)
+nmap <leader>7 <Plug>BufTabLine.Go(7)
+nmap <leader>8 <Plug>BufTabLine.Go(8)
+nmap <leader>9 <Plug>BufTabLine.Go(9)
+nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 " 界面
 nnoremap <silent><C-L> :<C-U>nohlsearch<CR>
@@ -54,10 +69,11 @@ noremap <expr> <M-Left> ":<C-U>call ui#WindLineLeft(" .screencol() . ")\n"
 noremap <expr> <M-Right> ":<C-U>call ui#WindLineRight(" .screencol() . ")\n"
 noremap <expr> <M-UP> ":<C-U>call ui#WindLineUp(" .screenrow() . ")\n"
 noremap <expr> <M-Down> ":<C-U>call ui#WindLineDown(" .screenrow() . ")\n"
-noremap <F2> :LeaderfFunction!<cr>
+noremap <F2> :<C-U>LeaderfBufTag<cr>
 " 简单的文件浏览器使用
 "nnoremap <silent><LEADER>ft :<C-U>Defx<CR>
 nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
+nnoremap <silent><LEADER>t :<C-U>CocCommand translator.echo<CR>
 
 " 跳转
 noremap <SPACE>w <C-W>

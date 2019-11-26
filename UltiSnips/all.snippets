@@ -114,4 +114,8 @@ snip.rv = str(subprocess.check_output(match.group(1),shell=True),encoding="utf-8
 `
 endsnippet
 
+snippet /#(.*)/ "add a taged note" br
+`!p snip.rv=get_comment_format()[0]` `!p snip.rv="#" + match.group(1).upper() + ":"` `!v strftime('%d-%m-%y')` ${1:note} `!p snip.rv=get_comment_format()[2]`
+endsnippet
+
 # vim:ft=snippets:
