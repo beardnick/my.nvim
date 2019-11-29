@@ -40,6 +40,41 @@ install_mac(){
     sudo cp -rv "$src"/share/*  "$INSTALL_DIR/share"
 }
 
+download_config(){
+	if [[ ! -e "/home/$USER/.config/" ]]; then
+	    mkdir -p "/home/$USER/.config"
+	fi
+
+	# backup your config
+	if [[ -e "/home/$USER/.config/nvim" ]]; then
+	    mv "/home/$USER/.config/nvim"{,.bak} 
+	else
+	    mkdir -p "/home/$USER/.config/nvim"
+	fi
+
+	# clone the config
+	echo "downloading the config files"
+	git clone https://github.com/beardnick/my.nvim.git  ~/.config/nvim
+}
+
+download_basic_plugins(){
+	DEIN="/home/$USER/.cache/mynvim/repos/github.com/Shougo/dein.vim"
+	DEIN_UI="/home/$USER/.cache/mynvim/repos/github.com/wsdjeg/dein-ui.vim"
+
+	if ! [[ -e "$DEIN" ]]; then
+		mkdir -p "$DEIN"
+	fi
+
+
+	if ! [[ -e "$DEIN_UI" ]]; then
+		mkdir -p "$DEIN_UI"
+	fi
+
+	git clone https://github.com/Shougo/dein.vim.git "$DEIN"
+	git clone https://github.com/wsdjeg/dein-ui.vim "$DEIN_UI"
+}
+
+
 #install_windows(){}
 
 
@@ -67,17 +102,13 @@ case "$(uname)" in
         ;;
 esac
 
-if [[ ! -e "/home/$USER/.config/" ]]; then
-    mkdir -p "/home/$USER/.config"
-fi
 
-# backup your config
-if [[ -e "/home/$USER/.config/nvim" ]]; then
-    mv "/home/$USER/.config/nvim"{,.bak} 
-else
-    mkdir -p "/home/$USER/.config/nvim"
-fi
+echo "cloning nvim config from github..."
 
-# clone the config
-echo "downloading the config files"
-git clone https://github.com/beardnick/my.nvim.git  ~/.config/nvim
+download_config
+
+echo "downloading basic plugin manager..."
+
+download_basic_plugins
+
+

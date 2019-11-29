@@ -3,16 +3,17 @@ if &compatible
     set nocompatible
 endif
 
-DEIN="~/.cache/mynvim/repos/github.com/Shougo/dein.vim"
-PLUGINS="~/.cache/mynvim/"
-
+let g:DEIN=expand('~/.cache/mynvim/repos/github.com/Shougo/dein.vim')
+let g:PLUGINS=expand('~/.cache/mynvim/')
+echom g:DEIN
+echom g:PLUGINS
 " dein的路径
-set runtimepath+=~/study/git/dein.vim
-let g:dein_load_state = dein#load_state("~/study/git/plugins")
+let &runtimepath.="," . g:DEIN
+let g:dein_load_state = dein#load_state(g:PLUGINS)
 if g:dein_load_state
     " 加载dein插件管理器
-    call dein#begin("~/study/git/plugins")
-    call dein#add("~/study/git/dein.vim")
+    call dein#begin(g:PLUGINS)
+    call dein#add(g:DEIN)
 
     call dein#add('morhetz/gruvbox') " 主题
     call dein#add('wsdjeg/dein-ui.vim') " 插件管理器
@@ -57,9 +58,13 @@ if g:dein_load_state
     "call dein#add('jiangmiao/auto-pairs')
     call dein#add('godlygeek/tabular')
 
+    if filereadable("/usr/local/opt/fzf")
+        call dein#add('/usr/local/opt/fzf', {'frozen':1})
+    else
+        call dein#add('~/.fzf', {'frozen':1})
+    endif
     " 三个插件加起来有最好的文件搜索体验
     call dein#add('tweekmonster/fzf-filemru')
-    call dein#add('/usr/local/opt/fzf', {'frozen':1})
     call dein#add('junegunn/fzf.vim')
 
     call dein#add('Yggdroot/indentLine')
@@ -102,12 +107,13 @@ if g:dein_load_state
     call dein#save_state()
 endif
 
-"if dein#check_install()
-    "let g:spacevim_plugin_manager = 'dein'
-    "let g:spacevim_plugin_manager_processes = 10 
-    "" 自动安装未安装的插件
-    "call SpaceVim#commands#install_plugin()
-"endif
+if dein#check_install()
+    call dein#recache_runtimepath()
+    let g:spacevim_plugin_manager = 'dein'
+    let g:spacevim_plugin_manager_processes = 10 
+    " 自动安装未安装的插件
+    call SpaceVim#commands#install_plugin()
+endif
 
 colorscheme gruvbox
 "colorscheme monokai
