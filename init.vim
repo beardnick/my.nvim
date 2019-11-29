@@ -2,6 +2,10 @@
 if &compatible
     set nocompatible
 endif
+
+DEIN="~/.cache/mynvim/repos/github.com/Shougo/dein.vim"
+PLUGINS="~/.cache/mynvim/"
+
 " dein的路径
 set runtimepath+=~/study/git/dein.vim
 let g:dein_load_state = dein#load_state("~/study/git/plugins")
@@ -10,7 +14,7 @@ if g:dein_load_state
     call dein#begin("~/study/git/plugins")
     call dein#add("~/study/git/dein.vim")
 
-    call dein#add('morhetz/gruvbox',{'lazy':1}) " 主题
+    call dein#add('morhetz/gruvbox') " 主题
     call dein#add('wsdjeg/dein-ui.vim') " 插件管理器
     call dein#add('justinmk/vim-sneak') " 快速跳转插件
     " vim-visual-multi代替multicursor
@@ -18,6 +22,7 @@ if g:dein_load_state
     call dein#add('mg979/vim-visual-multi') 
     call dein#add('luochen1990/rainbow')
     " 注意编译问题，很多时候编译出错了很多插件都会有问题
+    " 大部分时候可以通过call coc#util#install()解决问题
     call dein#add('neoclide/coc.nvim',{'build':'./install.sh'})
     "call dein#add('Shougo/unite.vim')
     "call dein#add('Shougo/vimfiler.vim', {'depends':'Shougo/unite.vim'})
@@ -158,7 +163,7 @@ if has("termguicolors")
 endif
 
 " 为了markdown插件而设置的
-"set conceallevel=2
+set conceallevel=0
 " 只在 normal模式下隐藏符号
 set concealcursor=n
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
