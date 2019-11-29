@@ -5,8 +5,6 @@ endif
 
 let g:DEIN=expand('~/.cache/mynvim/repos/github.com/Shougo/dein.vim')
 let g:PLUGINS=expand('~/.cache/mynvim/')
-echom g:DEIN
-echom g:PLUGINS
 " dein的路径
 let &runtimepath.="," . g:DEIN
 let g:dein_load_state = dein#load_state(g:PLUGINS)
@@ -58,7 +56,8 @@ if g:dein_load_state
     "call dein#add('jiangmiao/auto-pairs')
     call dein#add('godlygeek/tabular')
 
-    if filereadable("/usr/local/opt/fzf")
+    if !empty(glob("/usr/local/opt/fzf")) 
+    " if filereadable("/usr/local/opt/fzf")
         call dein#add('/usr/local/opt/fzf', {'frozen':1})
     else
         call dein#add('~/.fzf', {'frozen':1})
@@ -170,8 +169,7 @@ endif
 
 " 为了markdown插件而设置的
 set conceallevel=0
-" 只在 normal模式下隐藏符号
-set concealcursor=n
+set concealcursor=c
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:UltiSnipsEditSplit="vertical"
@@ -500,5 +498,3 @@ let g:Lf_NormalMap = {
 
 "set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
  "let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
-
-
