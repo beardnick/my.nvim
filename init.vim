@@ -41,11 +41,10 @@ if g:dein_load_state
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
-     "这个markdown有点烦人，总是自作主张地改变样式
-    "call dein#add('plasticboy/vim-markdown')
+    call dein#add('plasticboy/vim-markdown')
     call dein#add('iamcco/markdown-preview.nvim')
     "call dein#add('lvht/tagbar-markdown')
-    call dein#add('SpaceVim/vim-markdown')
+    "call dein#add('SpaceVim/vim-markdown')
     call dein#add('mzlogin/vim-markdown-toc')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('gcmt/wildfire.vim')
@@ -170,6 +169,7 @@ endif
 " 为了markdown插件而设置的
 set conceallevel=0
 set concealcursor=c
+"let g:vim_markdown_conceal = 0
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:UltiSnipsEditSplit="vertical"
@@ -221,6 +221,7 @@ command! ChunkUndo exe "CocCommand git.chunkUndo"
 " 自动命令
 autocmd FileType python call autocomplete#UseKite()
 "autocmd BufNew,BufEnter *.man setlocal filetype=man
+autocmd BufEnter,BufNew,BufRead *.{markdown,json} set concealcursor=c
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
