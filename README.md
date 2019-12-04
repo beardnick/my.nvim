@@ -23,7 +23,19 @@
 
 ## 安装
 
-**注意安装脚本没有完全测试过，在执行之前最好先读一下脚本!**
+### 手动安装
+
+1. 手动安装fzf、rg、ag
+2. 安装4.0以上的neovim
+3. 将本配置文件clone到~/.confg/nvim中
+4. 手动clone dein和dein-ui项目并手动修改配置文件里面的DEIN,PLUGINS路径
+5. 修改fzf的安装路径
+6. 打开neovim，等待自动安装插件完成
+7. 使用CocInstall安装一些你需要的coc.nvim插件
+
+### 脚本安装
+
+**注意安装脚本没有完全测试过，所以目前还是建议你手动进行安装，如果你还是想要使用脚本安装的话，请在执行之前最好先读一下脚本!**
 
 curl -fsSL https://raw.githubusercontent.com/beardnick/my.nvim/master/install.sh | bash
 
