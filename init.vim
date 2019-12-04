@@ -41,10 +41,10 @@ if g:dein_load_state
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
-    call dein#add('plasticboy/vim-markdown')
+    "call dein#add('plasticboy/vim-markdown')
     call dein#add('iamcco/markdown-preview.nvim')
     "call dein#add('lvht/tagbar-markdown')
-    "call dein#add('SpaceVim/vim-markdown')
+    call dein#add('SpaceVim/vim-markdown')
     call dein#add('mzlogin/vim-markdown-toc')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('gcmt/wildfire.vim')
