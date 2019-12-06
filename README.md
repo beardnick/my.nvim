@@ -37,7 +37,7 @@
 
 **注意安装脚本没有完全测试过，所以目前还是建议你手动进行安装，如果你还是想要使用脚本安装的话，请在执行之前最好先读一下脚本!**
 
-curl -fsSL https://raw.githubusercontent.com/beardnick/my.nvim/master/install.sh | bash
+`curl -fsSL https://raw.githubusercontent.com/beardnick/my.nvim/master/install.sh | bash`
 
 ## 其它注意事项
 

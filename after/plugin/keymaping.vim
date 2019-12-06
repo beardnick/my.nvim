@@ -37,6 +37,10 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> ]c <Plug>(coc-git-nextchunk)
 nmap <silent> [c <Plug>(coc-git-prevchunk)
 
+nmap <Leader>ca <Plug>(coc-calc-result-append)
+" replace result on current expression
+nmap <Leader>cr <Plug>(coc-calc-result-replace)
+
 " 快速修复
 nmap <silent> <M-CR> <Plug>(coc-fix-current)
 
@@ -174,3 +178,14 @@ endfunction
 function! ExpandAwkTemplate() abort
 
 endfunction
+
+" press <esc> to cancel.
+nmap f <Plug>(coc-smartf-forward)
+nmap F <Plug>(coc-smartf-backward)
+nmap ; <Plug>(coc-smartf-repeat)
+nmap , <Plug>(coc-smartf-repeat-opposite)
+
+augroup Smartf
+  autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
+  autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
+augroup end

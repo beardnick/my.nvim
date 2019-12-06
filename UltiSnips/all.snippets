@@ -108,7 +108,7 @@ snippet uuid "Random UUID" w
 endsnippet
 
 
-snippet /sh>(.*)/ "expand shell commands directly" br
+snippet /sh>(.*)/ "expand shell commands directly" r
 `!p import subprocess
 snip.rv = str(subprocess.check_output(match.group(1),shell=True),encoding="utf-8").strip()
 `

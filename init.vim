@@ -105,13 +105,13 @@ if g:dein_load_state
     call dein#save_state()
 endif
 
-if dein#check_install()
-    call dein#recache_runtimepath()
-    let g:spacevim_plugin_manager = 'dein'
-    let g:spacevim_plugin_manager_processes = 10 
-    " 自动安装未安装的插件
-    call SpaceVim#commands#install_plugin()
-endif
+"if dein#check_install()
+    "call dein#recache_runtimepath()
+    "let g:spacevim_plugin_manager = 'dein'
+    "let g:spacevim_plugin_manager_processes = 10 
+    "" 自动安装未安装的插件
+    "call SpaceVim#commands#install_plugin()
+"endif
 
 colorscheme gruvbox
 "colorscheme monokai
@@ -156,6 +156,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
+
 " 终端开启真彩色
 if has("termguicolors")
     " fix bug for vim
@@ -217,11 +218,24 @@ command! EditConfig exe "vsplit ~/my.nvim/init.vim"
 command! ChunkInfo exe "CocCommand git.chunkInfo" 
 command! ChuckStage exe "CocCommand git.chunkStage" 
 command! ChunkUndo exe "CocCommand git.chunkUndo" 
+command! Clock call <SID>ToggleClock()
+
+let g:coc_clock_enabled=0
+function! s:ToggleClock() abort
+    if g:coc_clock_enabled
+        exe "CocCommand clock.disable"
+        let g:coc_clock_enabled=0
+    else
+        exe "CocCommand clock.enable"
+        let g:coc_clock_enabled=1
+    endif
+endfunction
+
 
 " 自动命令
 autocmd FileType python call autocomplete#UseKite()
 "autocmd BufNew,BufEnter *.man setlocal filetype=man
-autocmd BufEnter,BufNew,BufRead *.{markdown,json} set concealcursor=c
+"autocmd BufEnter,BufNew,BufRead *.{markdown,json} set concealcursor=c
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 

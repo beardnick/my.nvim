@@ -36,5 +36,6 @@
   "git.addGBlameToVirtualText": true,
   "git.addGBlameToBufferVar": true,
   "suggest.fixInsertedWord": false,
-  "coc.preferences.currentFunctionSymbolAutoUpdate": true
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "calc.highlight": true
 }
