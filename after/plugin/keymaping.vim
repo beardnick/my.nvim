@@ -1,13 +1,13 @@
-  let cmd = 'ag'
-  let opt = 
-      \ [
-      \ '-i', '--nocolor', '--filename', '--noheading', '--column', '--hidden', '--ignore',
-      \ '.hg', '--ignore', '.svn', '--ignore', '.git', '--ignore', '.bzr',
-      \ ]
-  let ropt = []
-  let ignore = ['-i']
-  let smart = ['-S']
-  let expr = []
+  "let cmd = 'ag'
+  "let opt = 
+      "\ [
+      "\ '-i', '--nocolor', '--filename', '--noheading', '--column', '--hidden', '--ignore',
+      "\ '.hg', '--ignore', '.svn', '--ignore', '.git', '--ignore', '.bzr',
+      "\ ]
+  "let ropt = []
+  "let ignore = ['-i']
+  "let smart = ['-S']
+  "let expr = []
 
 " 搜索
 "nnoremap <C-F> :<C-U> call SpaceVim#plugins#flygrep#open({ 'input' : expand('<cword>'), 'cmd' : cmd, 'opt' : opt, 'ropt' : ropt, 'ignore_case' : ignore, 'smart_case' : smart, 'expr_opt' : expr })<CR>
@@ -19,8 +19,6 @@ nnoremap <silent><C-H> :<C-U>Helptags<CR>
 nnoremap <silent><LEADER><LEADER> :<C-U>Commands<CR><C-P>
 nnoremap <silent><D-A> :<C-U>Commands<CR><C-P>
 nnoremap <silent><LEADER>rl:<C-U>Registers<CR>
-" 使用fzfmru来模拟如vscode go to file 那样的文件模糊查找行为
-nnoremap <silent><C-P> :<C-U>FilesMru --tiebreak=index<CR>
 
 " 语法
 " 先禁用vim-go的文档显示
@@ -56,16 +54,6 @@ nmap <silent> <M-l> :<C-U>bnext<CR>
 nmap <silent> <M-h> :<C-U>bprevious<CR>
 nmap <silent> <M-x> :<C-U>bdelete<CR>
 
-nmap <leader>1 <Plug>BufTabLine.Go(1)
-nmap <leader>2 <Plug>BufTabLine.Go(2)
-nmap <leader>3 <Plug>BufTabLine.Go(3)
-nmap <leader>4 <Plug>BufTabLine.Go(4)
-nmap <leader>5 <Plug>BufTabLine.Go(5)
-nmap <leader>6 <Plug>BufTabLine.Go(6)
-nmap <leader>7 <Plug>BufTabLine.Go(7)
-nmap <leader>8 <Plug>BufTabLine.Go(8)
-nmap <leader>9 <Plug>BufTabLine.Go(9)
-nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 " 界面
 nnoremap <silent><C-L> :<C-U>nohlsearch<CR>
@@ -74,10 +62,9 @@ noremap <expr> <M-Right> ":<C-U>call ui#WindLineRight(" .screencol() . ")\n"
 noremap <expr> <M-UP> ":<C-U>call ui#WindLineUp(" .screenrow() . ")\n"
 noremap <expr> <M-Down> ":<C-U>call ui#WindLineDown(" .screenrow() . ")\n"
 noremap <F2> :<C-U>LeaderfBufTag<cr>
-" 简单的文件浏览器使用
-"nnoremap <silent><LEADER>ft :<C-U>Defx<CR>
-nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
 nnoremap <silent><LEADER>t :<C-U>CocCommand translator.echo<CR>
+"nmap <silent> <Leader>t <Plug>TranslateW
+"vmap <silent> <Leader>t <Plug>TranslateWV
 
 " 跳转
 noremap <SPACE>w <C-W>
@@ -179,13 +166,59 @@ function! ExpandAwkTemplate() abort
 
 endfunction
 
-" press <esc> to cancel.
-nmap f <Plug>(coc-smartf-forward)
-nmap F <Plug>(coc-smartf-backward)
-nmap ; <Plug>(coc-smartf-repeat)
-nmap , <Plug>(coc-smartf-repeat-opposite)
+" 这个插件还有一点小bug
+ "press <esc> to cancel.
+"nmap f <Plug>(coc-smartf-forward)
+"nmap F <Plug>(coc-smartf-backward)
+"nmap ; <Plug>(coc-smartf-repeat)
+"nmap , <Plug>(coc-smartf-repeat-opposite)
 
-augroup Smartf
-  autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
-  autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
-augroup end
+"augroup Smartf
+  "autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
+  "autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
+"augroup end
+
+
+
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<C-U>WhichKeyVisual '<Space>'<CR>
+
+"buffer
+
+nmap <LEADER>b1 <Plug>BufTabLine.Go(1)
+nmap <LEADER>b2 <Plug>BufTabLine.Go(2)
+nmap <LEADER>b3 <Plug>BufTabLine.Go(3)
+nmap <LEADER>b4 <Plug>BufTabLine.Go(4)
+nmap <LEADER>b5 <Plug>BufTabLine.Go(5)
+nmap <LEADER>b6 <Plug>BufTabLine.Go(6)
+nmap <LEADER>b7 <Plug>BufTabLine.Go(7)
+nmap <LEADER>b8 <Plug>BufTabLine.Go(8)
+nmap <LEADER>b9 <Plug>BufTabLine.Go(9)
+nmap <LEADER>b0 <Plug>BufTabLine.Go(10)
+
+nmap <LEADER>bh :<C-U>call startify#insane_in_the_membrane(0)<CR>
+nmap <LEADER>bn :<C-U>bnext<CR>
+nmap <LEADER>bp :<C-U>bprevious<CR>
+nmap <LEADER>bd :<C-U>bdelete<CR>
+nmap <LEADER>bl :<C-U>blast<CR>
+nmap <LEADER>bf :<C-U>bfirst<CR>
+
+" language
+xmap <LEADER>lf  <Plug>(coc-format-selected)
+nmap <LEADER>lf  <Plug>(coc-format-selected)
+nmap <silent><LEADER>lr :<C-U>call commands#CodeRuner()<CR>
+
+" file
+nnoremap <silent><LEADER>fs :<C-U>FilesMru --tiebreak=index<CR>
+
+" 简单的文件浏览器使用
+"nnoremap <silent><LEADER>ft :<C-U>Defx<CR>
+nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
+
+" 使用fzfmru来模拟如vscode go to file 那样的文件模糊查找行为
+nnoremap <silent><C-P> :<C-U>FilesMru --tiebreak=index<CR>
+
+" help
+nnoremap <silent><LEADER>hv :<C-U>Helptags<CR>
+nnoremap <silent><LEADER>hm :<C-U>Maps<CR>
+nnoremap <silent><LEADER>hc :<C-U>Cheats<CR>

@@ -100,6 +100,8 @@ if g:dein_load_state
     call dein#add('flazz/vim-colorschemes')
     "添加tmux框中文字的补全源
     call dein#add('wellle/tmux-complete.vim')
+    call dein#add('liuchengxu/vim-which-key')
+    "call dein#add('voldikss/vim-translate-me')
 
    call dein#end()
     call dein#save_state()
@@ -135,6 +137,8 @@ let g:fzf_buffers_jump = 1
 
 let g:tagbar_sort = 0
 
+let g:Lf_WindowPosition = 'popup' 
+
 
 " 设置leader为空格
 let mapleader = " "
@@ -156,6 +160,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
+set timeoutlen=200
 
 " 终端开启真彩色
 if has("termguicolors")
@@ -176,6 +181,9 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:UltiSnipsEditSplit="vertical"
 let g:table_mode_always_active = 1
 let g:vmt_auto_update_on_save = 1
+
+let g:Lf_ShortcutB = '<LEADER>bs'                               
+let g:Lf_ShortcutF = ''
 
 set cursorline
 
@@ -333,9 +341,6 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
