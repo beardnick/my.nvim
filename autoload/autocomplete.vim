@@ -11,3 +11,11 @@ function! autocomplete#ShowDocumentation()
     call CocAction('doHover')
   endif
 endfunction
+
+
+function! autocomplete#Definition()
+    if ! CocAction('jumpDefinition')
+        execute 'normal! \<C-]>'
+    endif
+endfunction
+

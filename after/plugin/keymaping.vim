@@ -1,20 +1,5 @@
-  "let cmd = 'ag'
-  "let opt = 
-      "\ [
-      "\ '-i', '--nocolor', '--filename', '--noheading', '--column', '--hidden', '--ignore',
-      "\ '.hg', '--ignore', '.svn', '--ignore', '.git', '--ignore', '.bzr',
-      "\ ]
-  "let ropt = []
-  "let ignore = ['-i']
-  "let smart = ['-S']
-  "let expr = []
-
-" 搜索
-"nnoremap <C-F> :<C-U> call SpaceVim#plugins#flygrep#open({ 'input' : expand('<cword>'), 'cmd' : cmd, 'opt' : opt, 'ropt' : ropt, 'ignore_case' : ignore, 'smart_case' : smart, 'expr_opt' : expr })<CR>
-
 nnoremap <silent><expr> <LEADER>/ ":<C-U>Lines " . expand("<cword>") . "<CR>"
 nnoremap <expr> <C-F> ":<C-U>Rg " . expand("<cword>") . "<CR>"
-"nnoremap  <C-F> :<C-U>Rg<CR>
 nnoremap <silent><C-H> :<C-U>Helptags<CR>
 nnoremap <silent><LEADER><LEADER> :<C-U>Commands<CR><C-P>
 nnoremap <silent><D-A> :<C-U>Commands<CR><C-P>
@@ -27,13 +12,16 @@ nnoremap <silent>K  :<C-U>call autocomplete#ShowDocumentation()<CR>
 " Remap keys for gotos
 " 先禁用vim-go的跳转定义插件
 let g:go_def_mapping_enabled = 0
-nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gd :<C-U>call autocomplete#Definition()<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 nmap <silent> ]c <Plug>(coc-git-nextchunk)
 nmap <silent> [c <Plug>(coc-git-prevchunk)
+nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
+nmap <silent> [e <Plug>(coc-diagnostic-previous-error)
 
 nmap <Leader>ca <Plug>(coc-calc-result-append)
 " replace result on current expression
@@ -42,8 +30,8 @@ nmap <Leader>cr <Plug>(coc-calc-result-replace)
 " 快速修复
 nmap <silent> <M-CR> <Plug>(coc-fix-current)
 
-nmap <silent> gne <Plug>(coc-diagnostic-next-error)
-nmap <silent> gpe <Plug>(coc-diagnostic-previous-error)
+"nmap <silent> gne <Plug>(coc-diagnostic-next-error)
+"nmap <silent> gpe <Plug>(coc-diagnostic-previous-error)
 nmap <silent> gl  <Plug>(coc-openlink)
 nmap <silent> \ <Plug>(coc-codeaction)
 "nmap <silent> <M-l> <Plug>(coc-codelens-action)
@@ -61,8 +49,8 @@ noremap <expr> <M-Left> ":<C-U>call ui#WindLineLeft(" .screencol() . ")\n"
 noremap <expr> <M-Right> ":<C-U>call ui#WindLineRight(" .screencol() . ")\n"
 noremap <expr> <M-UP> ":<C-U>call ui#WindLineUp(" .screenrow() . ")\n"
 noremap <expr> <M-Down> ":<C-U>call ui#WindLineDown(" .screenrow() . ")\n"
-noremap <F2> :<C-U>LeaderfBufTag<cr>
-nnoremap <silent><LEADER>t :<C-U>CocCommand translator.echo<CR>
+"noremap <F2> :<C-U>LeaderfBufTag<cr>
+"nnoremap <silent><LEADER>t :<C-U>CocCommand translator.echo<CR>
 "nmap <silent> <Leader>t <Plug>TranslateW
 "vmap <silent> <Leader>t <Plug>TranslateWV
 
@@ -162,10 +150,6 @@ function! NextUncommentedBlock(direction) abort
     call cursor(s:next_match, col('.'))
 endfunction
 
-function! ExpandAwkTemplate() abort
-
-endfunction
-
 " 这个插件还有一点小bug
  "press <esc> to cancel.
 "nmap f <Plug>(coc-smartf-forward)
@@ -202,6 +186,7 @@ nmap <LEADER>bp :<C-U>bprevious<CR>
 nmap <LEADER>bd :<C-U>bdelete<CR>
 nmap <LEADER>bl :<C-U>blast<CR>
 nmap <LEADER>bf :<C-U>bfirst<CR>
+nmap <LEADER>bt :<C-U>LeaderfBufTag<CR>
 
 " language
 xmap <LEADER>lf  <Plug>(coc-format-selected)
@@ -210,9 +195,6 @@ nmap <silent><LEADER>lr :<C-U>call commands#CodeRuner()<CR>
 
 " file
 nnoremap <silent><LEADER>fs :<C-U>FilesMru --tiebreak=index<CR>
-
-" 简单的文件浏览器使用
-"nnoremap <silent><LEADER>ft :<C-U>Defx<CR>
 nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
 
 " 使用fzfmru来模拟如vscode go to file 那样的文件模糊查找行为
@@ -222,3 +204,17 @@ nnoremap <silent><C-P> :<C-U>FilesMru --tiebreak=index<CR>
 nnoremap <silent><LEADER>hv :<C-U>Helptags<CR>
 nnoremap <silent><LEADER>hm :<C-U>Maps<CR>
 nnoremap <silent><LEADER>hc :<C-U>Cheats<CR>
+
+" tag
+nnoremap <LEADER>ts :<C-U>LeaderfTag<CR>
+nnoremap <LEADER>tb :<C-U>Tagbar<CR>
+
+" ui
+nnoremap <LEADER>uc :<C-U>Clock<CR>
+nnoremap <LEADER>uw :<C-U>set wrap!<CR>
+nnoremap <LEADER>ut :<C-U>Tagbar<CR>
+nnoremap <LEADER>un :<C-U>set number!<CR>
+nnoremap <LEADER>up :<C-U>Goyo<CR>
+nnoremap <LEADER>uh :<C-U>set concealcursor=c<CR>
+
+" applications

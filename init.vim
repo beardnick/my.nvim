@@ -31,9 +31,11 @@ if g:dein_load_state
     " 完全可以使用fzf来代替FlyGrep
     ""call dein#add('wsdjeg/FlyGrep.vim')
 
-    " tagbar已经落伍了
-    "call dein#add('majutsushi/tagbar')
-    " leaderF 代替tagbar
+    " tagbar用来显示tag
+    call dein#add('majutsushi/tagbar')
+    " 自动tag生成与管理
+    call dein#add('ludovicchabant/vim-gutentags')
+    " leaderf用来搜索
     call dein#add('Yggdroot/LeaderF')
     call dein#add('mhinz/vim-startify')
     call dein#add('scrooloose/nerdcommenter')
@@ -107,13 +109,14 @@ if g:dein_load_state
     call dein#save_state()
 endif
 
-"if dein#check_install()
-    "call dein#recache_runtimepath()
-    "let g:spacevim_plugin_manager = 'dein'
-    "let g:spacevim_plugin_manager_processes = 10 
-    "" 自动安装未安装的插件
-    "call SpaceVim#commands#install_plugin()
-"endif
+let g:auto_install_missing_plugins = 0
+if dein#check_install() && g:auto_install_missing_plugins
+    call dein#recache_runtimepath()
+    let g:spacevim_plugin_manager = 'dein'
+    let g:spacevim_plugin_manager_processes = 10 
+    " 自动安装未安装的插件
+    call SpaceVim#commands#install_plugin()
+endif
 
 colorscheme gruvbox
 "colorscheme monokai
@@ -137,6 +140,27 @@ let g:fzf_buffers_jump = 1
 
 let g:tagbar_sort = 0
 
+" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+
+" 配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+" 检测 ~/.cache/tags 不存在就新建
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+
+" leaderf使用悬浮窗来显示
 let g:Lf_WindowPosition = 'popup' 
 
 
