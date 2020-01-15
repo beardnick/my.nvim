@@ -1,19 +1,21 @@
-nnoremap <silent><expr> <LEADER>/ ":<C-U>Lines " . expand("<cword>") . "<CR>"
-nnoremap <expr> <C-F> ":<C-U>Rg " . expand("<cword>") . "<CR>"
+nnoremap <silent><LEADER>/ :<C-U>Lines <C-R><C-W><CR>
+nnoremap <silent><C-F> :<C-U>Rg <C-R><C-W><CR>
 nnoremap <silent><C-H> :<C-U>Helptags<CR>
 nnoremap <silent><LEADER><LEADER> :<C-U>Commands<CR><C-P>
-nnoremap <silent><D-A> :<C-U>Commands<CR><C-P>
+
 nnoremap <silent><LEADER>rl:<C-U>Registers<CR>
 
 " 语法
 " 先禁用vim-go的文档显示
 let g:go_doc_keywordprg_enabled = 0
-nnoremap <silent>K  :<C-U>call autocomplete#ShowDocumentation()<CR>
+
+nnoremap <silent>K  :<C-U> call CocAction('doHover')<CR>
+
 " Remap keys for gotos
 " 先禁用vim-go的跳转定义插件
 let g:go_def_mapping_enabled = 0
-"nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gd :<C-U>call autocomplete#Definition()<CR>
+
+nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -23,12 +25,9 @@ nmap <silent> [c <Plug>(coc-git-prevchunk)
 nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
 nmap <silent> [e <Plug>(coc-diagnostic-previous-error)
 
-nmap <Leader>ca <Plug>(coc-calc-result-append)
-" replace result on current expression
-nmap <Leader>cr <Plug>(coc-calc-result-replace)
 
 " 快速修复
-nmap <silent> <M-CR> <Plug>(coc-fix-current)
+"nmap <silent> <M-CR> <Plug>(coc-fix-current)
 
 "nmap <silent> gne <Plug>(coc-diagnostic-next-error)
 "nmap <silent> gpe <Plug>(coc-diagnostic-previous-error)
@@ -36,7 +35,8 @@ nmap <silent> gl  <Plug>(coc-openlink)
 nmap <silent> \ <Plug>(coc-codeaction)
 "nmap <silent> <M-l> <Plug>(coc-codelens-action)
 "nmap <silent> <M-r> <Plug>(coc-refactor)
-nmap <silent> <M-r> :<C-U>call commands#CodeRuner()<CR>
+"nmap <silent> <M-r> :<C-U>call commands#CodeRuner()<CR>
+nmap <silent> <M-r> :<C-U>QuickRun<CR>
 
 nmap <silent> <M-l> :<C-U>bnext<CR>
 nmap <silent> <M-h> :<C-U>bprevious<CR>
@@ -45,10 +45,13 @@ nmap <silent> <M-x> :<C-U>bdelete<CR>
 
 " 界面
 nnoremap <silent><C-L> :<C-U>nohlsearch<CR>
-noremap <expr> <M-Left> ":<C-U>call ui#WindLineLeft(" .screencol() . ")\n"
-noremap <expr> <M-Right> ":<C-U>call ui#WindLineRight(" .screencol() . ")\n"
-noremap <expr> <M-UP> ":<C-U>call ui#WindLineUp(" .screenrow() . ")\n"
-noremap <expr> <M-Down> ":<C-U>call ui#WindLineDown(" .screenrow() . ")\n"
+
+noremap <M-Left> :3wincmd <<CR>
+noremap <M-Right>  :3wincmd ><CR>
+noremap <M-Up>  :3wincmd +<CR>
+noremap <M-Down>  :3wincmd -<CR>
+
+
 "noremap <F2> :<C-U>LeaderfBufTag<cr>
 "nnoremap <silent><LEADER>t :<C-U>CocCommand translator.echo<CR>
 "nmap <silent> <Leader>t <Plug>TranslateW
@@ -71,6 +74,9 @@ nmap <LEADER>s <Plug>Ysurround
 nnoremap <silent><C-J> :<C-U>Snippets<CR>
 nnoremap <silent><C-S> :<C-U>Scratch<CR>
 inoremap <silent><C-\> <C-O>:<C-U>TableModeRealign<CR>
+vnoremap < <gv
+vnoremap > >gv
+
 
  "快速注释
 nnoremap <silent><LEADER>; :<C-U>call NERDComment("n", "Toggle")<CR>
@@ -191,7 +197,9 @@ nmap <LEADER>bt :<C-U>LeaderfBufTag<CR>
 " language
 xmap <LEADER>lf  <Plug>(coc-format-selected)
 nmap <LEADER>lf  <Plug>(coc-format-selected)
-nmap <silent><LEADER>lr :<C-U>call commands#CodeRuner()<CR>
+nmap <silent> <LEADER>lc <Plug>(coc-fix-current)
+xmap <silent> <LEADER>lc <Plug>(coc-fix-current)
+nmap <silent><LEADER>lr :<C-U>QuickRun<CR>
 
 " file
 nnoremap <silent><LEADER>fs :<C-U>FilesMru --tiebreak=index<CR>
@@ -216,5 +224,16 @@ nnoremap <LEADER>ut :<C-U>Tagbar<CR>
 nnoremap <LEADER>un :<C-U>set number!<CR>
 nnoremap <LEADER>up :<C-U>Goyo<CR>
 nnoremap <LEADER>uh :<C-U>set concealcursor=c<CR>
+nnoremap <LEADER>us :<C-U>terminal<CR>
 
-" applications
+" coc
+nmap <Leader>ca <Plug>(coc-calc-result-append)
+" replace result on current expression
+nmap <Leader>cr <Plug>(coc-calc-result-replace)
+nmap <Leader>cq <Plug>(coc-fix-current)
+xmap <leader>ca  <Plug>(coc-codeaction-selected)
+nmap <leader>ca  <Plug>(coc-codeaction-selected)
+
+" search
+nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR>
+nnoremap <Leader>sr  :<C-U>Rg<CR>

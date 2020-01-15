@@ -50,7 +50,7 @@ if g:dein_load_state
     call dein#add('mzlogin/vim-markdown-toc')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('gcmt/wildfire.vim')
-    "call dein#add('tpope/vim-fugitive')
+    call dein#add('tpope/vim-fugitive')
     call dein#add('tpope/vim-surround')
     call dein#add('mattesgroeger/vim-bookmarks')
     "call dein#add('airblade/vim-gitgutter')
@@ -66,7 +66,7 @@ if g:dein_load_state
     " 三个插件加起来有最好的文件搜索体验
     call dein#add('tweekmonster/fzf-filemru')
     call dein#add('junegunn/fzf.vim')
-
+    call dein#add('thinca/vim-quickrun')
     call dein#add('Yggdroot/indentLine')
     " 修改树
     call dein#add('sjl/gundo.vim')
@@ -130,6 +130,7 @@ let g:gitgutter_enabled = 1
 let g:UltiSnipsExpandTrigger       = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:NERDDefaultAlign = 'left'
 " 使通过tab对齐的文件显示对齐线,注意末尾有一个空格
 set list lcs=tab:\|\ 
 " 下面的只能使通过空格对齐的文件显示对齐线
@@ -154,6 +155,8 @@ let g:gutentags_cache_dir = s:vim_tags
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:quickrun_no_default_key_mappings = 1
+
 
 " 检测 ~/.cache/tags 不存在就新建
 if !isdirectory(s:vim_tags)
@@ -197,10 +200,7 @@ if has("termguicolors")
 endif
 
 " 为了markdown插件而设置的
-set conceallevel=0
-set concealcursor=c
-"let g:vim_markdown_conceal = 0
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+set conceallevel=3 concealcursor=niv
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:UltiSnipsEditSplit="vertical"
 let g:table_mode_always_active = 1
@@ -225,7 +225,7 @@ let g:EasyClipEnableBlackHoleRedirect = 0
 " 让输入上方，搜索列表在下方
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 " 打开 fzf 的方式选择 floating window
-let g:fzf_layout = { 'window': 'call ui#OpenFloatingWin()' }
+let g:fzf_layout = { 'window': 'call ui#FloatingFZF()' }
 
 let g:buftabline_numbers = 2
 let g:buftabline_separators = 1 
@@ -265,11 +265,11 @@ endfunction
 
 
 " 自动命令
-autocmd FileType python call autocomplete#UseKite()
+"autocmd FileType python call autocomplete#UseKite()
 "autocmd BufNew,BufEnter *.man setlocal filetype=man
 "autocmd BufEnter,BufNew,BufRead *.{markdown,json} set concealcursor=c
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 highlight default link CocHighlightText  MatchParen
 
@@ -521,12 +521,6 @@ let g:startify_custom_header = s:filter_header([
 
 let g:Lf_GtagsAutoGenerate = 1
 
-
-
-"let g:Lf_WindowPosition = 'left'
-
-"noremap <F2> :Leaderf bufTag!<cr>
-
 let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
 let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
@@ -539,6 +533,13 @@ let g:Lf_NormalMap = {
     \ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
     \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
     \ }
+
+
+if executable('rg') 
+    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+    set grepprg=rg\ --vimgrep
+    command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '      .shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+endif
 
 "set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
  "let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']

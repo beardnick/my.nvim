@@ -37,5 +37,6 @@
   "git.addGBlameToBufferVar": true,
   "suggest.fixInsertedWord": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-  "calc.highlight": true
+  "calc.highlight": true,
+  "tabnine.disable_filetypes": ["java"]
 }
