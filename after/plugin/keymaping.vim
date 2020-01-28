@@ -119,27 +119,6 @@ nnoremap <silent>[[ :<C-U>call NextUncommentedBlock(-1)<CR>
 nnoremap <C-Y> :<C-U>FZFYank<CR>
 nnoremap <silent><Leader>gb :<C-U>ToggleBlameLine<CR>
 
-"FZF Command History
-"function! s:mycommand_sink(cmd)
-    "let cmd = substitute(a:cmd, '\d..', '', 'g') 
-    "execute cmd
-"endfunction
-
-"function! s:commands(bang)
-  "redir => history
-  "silent history
-  "redir END
-  "let list = split(history, '\n')
-    "call fzf#run({
-                "\ 'source':  reverse(extend(list[0:0], map(list[2:], 's:format_cmd(v:val)'))),
-                "\ 'sink':    function('s:mycommand_sink'),
-                "\ 'options': '--ansi -x --prompt "Commands> " ',
-                "\ 'window': 'aboveleft 20new'}, a:bang)
-"endfunction
-
-"command! -bang Cmds call s:commands(<bang>0)
-
-
 function! NextUncommentedBlock(direction) abort
     let s:next_match = line('.')
     let s:last_match = s:next_match - a:direction
@@ -157,15 +136,16 @@ function! NextUncommentedBlock(direction) abort
 endfunction
 
 " 这个插件还有一点小bug
- "press <esc> to cancel.
+" press <esc> to cancel.
+
 "nmap f <Plug>(coc-smartf-forward)
 "nmap F <Plug>(coc-smartf-backward)
 "nmap ; <Plug>(coc-smartf-repeat)
 "nmap , <Plug>(coc-smartf-repeat-opposite)
 
 "augroup Smartf
-  "autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
-  "autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
+"  autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
+"  autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
 "augroup end
 
 
@@ -185,7 +165,6 @@ nmap <LEADER>b7 <Plug>BufTabLine.Go(7)
 nmap <LEADER>b8 <Plug>BufTabLine.Go(8)
 nmap <LEADER>b9 <Plug>BufTabLine.Go(9)
 nmap <LEADER>b0 <Plug>BufTabLine.Go(10)
-
 nmap <LEADER>bh :<C-U>call startify#insane_in_the_membrane(0)<CR>
 nmap <LEADER>bn :<C-U>bnext<CR>
 nmap <LEADER>bp :<C-U>bprevious<CR>
@@ -225,15 +204,24 @@ nnoremap <LEADER>un :<C-U>set number!<CR>
 nnoremap <LEADER>up :<C-U>Goyo<CR>
 nnoremap <LEADER>uh :<C-U>set concealcursor=c<CR>
 nnoremap <LEADER>us :<C-U>terminal<CR>
+nnoremap <LEADER>ug :<C-U>ChunkInfo<CR>
 
 " coc
 nmap <Leader>ca <Plug>(coc-calc-result-append)
 " replace result on current expression
 nmap <Leader>cr <Plug>(coc-calc-result-replace)
 nmap <Leader>cq <Plug>(coc-fix-current)
-xmap <leader>ca  <Plug>(coc-codeaction-selected)
-nmap <leader>ca  <Plug>(coc-codeaction-selected)
+"nmap <leader>ca  <Plug>(coc-codeaction-selected)
+"xmap <leader>ca  <Plug>(coc-codeaction-selected)
+nmap <leader>ca  :<C-U>CocCommand actions.open<CR>
+xmap <leader>ca  :<C-U>CocCommand actions.open<CR>
+nmap <leader>co  :<C-U>call CocAction('runCommand', 'editor.action.organizeImport')<CR>
+
 
 " search
 nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR>
 nnoremap <Leader>sr  :<C-U>Rg<CR>
+nnoremap <Leader>st :<C-U>LeaderfTag<CR>
+nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR>
+nnoremap <Leader>st :<C-U>LeaderfTag<CR>
+nnoremap <Leader>st :<C-U>LeaderfTag<CR>

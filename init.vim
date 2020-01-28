@@ -66,6 +66,7 @@ if g:dein_load_state
     " 三个插件加起来有最好的文件搜索体验
     call dein#add('tweekmonster/fzf-filemru')
     call dein#add('junegunn/fzf.vim')
+
     call dein#add('thinca/vim-quickrun')
     call dein#add('Yggdroot/indentLine')
     " 修改树
@@ -104,6 +105,9 @@ if g:dein_load_state
     call dein#add('wellle/tmux-complete.vim')
     call dein#add('liuchengxu/vim-which-key')
     "call dein#add('voldikss/vim-translate-me')
+    "记录上一次打开文件的位置
+    call dein#add('farmergreg/vim-lastplace')
+    call dein#add('brooth/far.vim')
 
    call dein#end()
     call dein#save_state()
@@ -156,6 +160,8 @@ let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:quickrun_no_default_key_mappings = 1
+let g:sneak#s_next = 1
+
 
 
 " 检测 ~/.cache/tags 不存在就新建
@@ -230,6 +236,13 @@ let g:fzf_layout = { 'window': 'call ui#FloatingFZF()' }
 let g:buftabline_numbers = 2
 let g:buftabline_separators = 1 
 
+let g:quickrun#default_config = {
+\ '_': {
+    \ "runner":"terminal",
+  \ }
+\ }
+
+
 " 自定义指令
 command! -bang -nargs=? -complete=dir Cheats
   \ call fzf#vim#files("~/.cheat", fzf#vim#with_preview(), <bang>0)
@@ -269,7 +282,7 @@ endfunction
 "autocmd BufNew,BufEnter *.man setlocal filetype=man
 "autocmd BufEnter,BufNew,BufRead *.{markdown,json} set concealcursor=c
 
-"autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 highlight default link CocHighlightText  MatchParen
 
@@ -304,61 +317,8 @@ function! s:check_back_space() abort
   return !s:col || getline('.')[s:col - 1]  =~# '\s'
 endfunction
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Or use `complete_info` if your vim support it, like:
-"inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-Y>" : "\<C-g>u\<CR>"
-"inoremap <expr> <CR> EnterComplete() ? "\<C-Y>" : "\<C-g>u\<CR>"
-"<C-o>a直接让提示框消失，什么也不做
-"inoremap <expr> <CR> complete_info()["selected"] != "-1" ?( EnterComplete() ? "\<C-Y>" : "\<C-o>a") :"\<C-g>u\<CR>"
-"inoremap <expr> <CR> EnterCompleteNew()
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                 \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-
- "这里是要解决Java补全的时候会有多余字符出现在末尾的问题
-"function! EnterComplete() abort
-     "选择了java的LS补全enter什么都不做，让提示框隐藏
-     "选择了除java LS外的补全
-     "没有选择补全项直接enter
-    "let s:com_info = complete_info()
-    "echom "com_info: " .  string(s:com_info)
-    "if s:com_info["selected"] < 0 
-        "return "\<C-g>u\<CR>"
-    "endif
-        "echom "selected:" . string(s:com_info["items"][s:com_info["selected"]])
-        "let s:selected_item = s:com_info["items"][s:com_info["selected"]]
-        "if ! has_key(s:selected_item,"user_data")
-            "return "\<C-Y>"
-        "endif
-        "let s:user_data = json_decode(s:selected_item["user_data"])
-        "echom "source:" s:user_data["source"]
-        "return s:user_data["source"] == "java" ? "\<C-o>a" : "\<C-Y>"
-"endfunction
-
-
- "这里是要解决Java补全的时候会有多余字符出现在末尾的问题
-"function! EnterCompleteNew() abort
-     "选择了java的LS补全enter什么都不做，让提示框隐藏
-     "选择了除java LS外的补全
-     "没有选择补全项直接enter
-    "let s:com_info = complete_info()
-    "echom "com_info: " .  string(s:com_info)
-    "if s:com_info["selected"] < 0 
-        "return "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-    "endif
-        "echom "selected:" . string(s:com_info["items"][s:com_info["selected"]])
-        "let s:selected_item = s:com_info["items"][s:com_info["selected"]]
-        "if ! has_key(s:selected_item,"user_data")
-            "return coc#_select_confirm()
-        "endif
-        "let s:user_data = json_decode(s:selected_item["user_data"])
-        "echom "source:" s:user_data["source"]
-        "return s:user_data["source"] == "java" ? "\<C-o>a" : "\<C-Y>"
-"endfunction
 
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -424,22 +384,6 @@ augroup Format-Options
     " This can be done as well instead of the previous line, for setting formatoptions as you choose:  
     autocmd BufEnter * setlocal formatoptions=crqn2l1j  
 augroup END
-
-"fun! CreateScratch() abort
-    "let s:current_filetype = &filetype
-    "let s:current_directory = getcwd()
-    ""echom s:current_filetype
-    ""echom s:current_directory
-    "let s:scratch_file_name = substitute(s:current_directory, "/", "%", 'g') . "." . s:current_filetype
-    ""echom s:scratch_file_name
-    "call ui#OpenFloatingWin()
-    "setlocal buftype =
-    "let s:scratch_file_name = "~/.cache/scratch/" . shellescape(fnameescape(s:scratch_file_name))
-    ""echom s:scratch_file_name
-    "execute "edit " . s:scratch_file_name
-    "let &filetype = s:current_filetype
-    "setlocal autowriteall
-"endf
 
 let g:bookmark_save_per_working_dir = 1
 autocmd User StartifyBufferOpened nested :Rooter

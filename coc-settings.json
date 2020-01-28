@@ -11,11 +11,20 @@
       "rootPatterns": ["go.mod"],
       "filetypes": ["go"]
     },
-     "cquery": {
+    "cquery": {
       "command": "cquery",
       "args": ["--log-file=/tmp/cq.log"],
       "filetypes": ["c", "cpp"],
-      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/", ".hgignore", ".gitignore", ".cquery"],
+      "rootPatterns": [
+        "compile_flags.txt",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/",
+        ".hgignore",
+        ".gitignore",
+        ".cquery"
+      ],
       "initializationOptions": {
         "cacheDirectory": "/tmp/cquery"
       }
@@ -38,5 +47,6 @@
   "suggest.fixInsertedWord": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "calc.highlight": true,
-  "tabnine.disable_filetypes": ["java"]
+  "tabnine.disable_filetypes": ["java"],
+  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok-1.18.4.jar -Xbootclasspath/a:/usr/local/share/lombok/lombok-1.18.4.jar"
 }
