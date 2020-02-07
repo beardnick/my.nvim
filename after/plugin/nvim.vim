@@ -1,3 +1,5 @@
+if ! exists('g:vscode')
+
 nnoremap <silent><LEADER>/ :<C-U>Lines <C-R><C-W><CR>
 nnoremap <silent><C-F> :<C-U>Rg <C-R><C-W><CR>
 nnoremap <silent><C-H> :<C-U>Helptags<CR>
@@ -224,3 +226,5 @@ nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR>
 nnoremap <Leader>sr  :<C-U>Rg<CR>
 nnoremap <Leader>st :<C-U>Tags<CR>
 nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR>
+
+endif
