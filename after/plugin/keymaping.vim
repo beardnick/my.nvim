@@ -171,7 +171,8 @@ nmap <LEADER>bp :<C-U>bprevious<CR>
 nmap <LEADER>bd :<C-U>bdelete<CR>
 nmap <LEADER>bl :<C-U>blast<CR>
 nmap <LEADER>bf :<C-U>bfirst<CR>
-nmap <LEADER>bt :<C-U>LeaderfBufTag<CR>
+"nmap <LEADER>bt :<C-U>LeaderfBufTag<CR>
+nmap <LEADER>bt :<C-U>BTags<CR>
 
 " language
 xmap <LEADER>lf  <Plug>(coc-format-selected)
@@ -193,7 +194,7 @@ nnoremap <silent><LEADER>hm :<C-U>Maps<CR>
 nnoremap <silent><LEADER>hc :<C-U>Cheats<CR>
 
 " tag
-nnoremap <LEADER>ts :<C-U>LeaderfTag<CR>
+nnoremap <LEADER>ts :<C-U>Tags<CR>
 nnoremap <LEADER>tb :<C-U>Tagbar<CR>
 
 " ui
@@ -221,7 +222,5 @@ nmap <leader>co  :<C-U>call CocAction('runCommand', 'editor.action.organizeImpor
 " search
 nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR>
 nnoremap <Leader>sr  :<C-U>Rg<CR>
-nnoremap <Leader>st :<C-U>LeaderfTag<CR>
+nnoremap <Leader>st :<C-U>Tags<CR>
 nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR>
-nnoremap <Leader>st :<C-U>LeaderfTag<CR>
-nnoremap <Leader>st :<C-U>LeaderfTag<CR>
