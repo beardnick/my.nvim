@@ -108,6 +108,7 @@ if g:dein_load_state
     "记录上一次打开文件的位置
     call dein#add('farmergreg/vim-lastplace')
     call dein#add('brooth/far.vim')
+    call dein#add('skywind3000/vim-quickui')
 
    call dein#end()
     call dein#save_state()
@@ -161,7 +162,6 @@ let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:quickrun_no_default_key_mappings = 1
 let g:sneak#s_next = 1
-
 
 
 " 检测 ~/.cache/tags 不存在就新建
@@ -487,3 +487,6 @@ endif
 
 "set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
  "let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
+
+let g:quickui_border_style = 2
+let g:quickui_color_scheme = 'gruvbox'
