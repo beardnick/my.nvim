@@ -206,7 +206,8 @@ nnoremap <LEADER>ut :<C-U>Tagbar<CR>
 nnoremap <LEADER>un :<C-U>set number!<CR>
 nnoremap <LEADER>up :<C-U>Goyo<CR>
 nnoremap <LEADER>uh :<C-U>set concealcursor=c<CR>
-nnoremap <LEADER>us :<C-U>terminal<CR>
+nnoremap <LEADER>us :<C-U>FloatermToggle<CR>
+tnoremap <LEADER>us <C-\><C-N>:<C-U>FloatermToggle<CR>
 nnoremap <LEADER>ug :<C-U>ChunkInfo<CR>
 
 " coc
@@ -228,3 +229,5 @@ nnoremap <Leader>st :<C-U>Tags<CR>
 nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR>
 
 endif
+
+

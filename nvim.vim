@@ -23,14 +23,6 @@ if g:dein_load_state
     " 注意编译问题，很多时候编译出错了很多插件都会有问题
     " 大部分时候可以通过call coc#util#install()解决问题
     call dein#add('neoclide/coc.nvim',{'build':'./install.sh'})
-    "call dein#add('Shougo/unite.vim')
-    "call dein#add('Shougo/vimfiler.vim', {'depends':'Shougo/unite.vim'})
-    " defx代替vimfiler coc-explore 代替 defx
-    "call dein#add('Shougo/defx.nvim')
-    "call dein#add('Shougo/denite.nvim')
-    " 完全可以使用fzf来代替FlyGrep
-    ""call dein#add('wsdjeg/FlyGrep.vim')
-
     " tagbar用来显示tag
     call dein#add('majutsushi/tagbar')
     " 自动tag生成与管理
@@ -43,11 +35,12 @@ if g:dein_load_state
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
-    "call dein#add('plasticboy/vim-markdown')
-    call dein#add('iamcco/markdown-preview.nvim')
-    "call dein#add('lvht/tagbar-markdown')
-    call dein#add('SpaceVim/vim-markdown')
-    call dein#add('mzlogin/vim-markdown-toc')
+    call dein#add('plasticboy/vim-markdown')
+    call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+					\ 'build': 'sh -c "cd app & yarn install"' })
+    call dein#add('lvht/tagbar-markdown')
+    "call dein#add('SpaceVim/vim-markdown')
+    "call dein#add('mzlogin/vim-markdown-toc')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('gcmt/wildfire.vim')
     call dein#add('tpope/vim-fugitive')
@@ -73,11 +66,7 @@ if g:dein_load_state
     call dein#add('sjl/gundo.vim')
     call dein#add('thaerkh/vim-workspace')
     "call dein#add('bronson/vim-trailing-whitespace')
-    " 平滑滚动插件
-    "call dein#add('yuttie/comfortable-motion.vim')
-    "call dein#add('ryanoasis/vim-devicons')
     call dein#add('tyru/open-browser.vim')
-    call dein#add('suan/vim-instant-markdown')
     "call dein#add('airblade/vim-rooter', {'if':0})
     call dein#add('airblade/vim-rooter')
     " 切换自定义格式的工具
@@ -108,13 +97,16 @@ if g:dein_load_state
     "记录上一次打开文件的位置
     call dein#add('farmergreg/vim-lastplace')
     call dein#add('brooth/far.vim')
+    call dein#add('xuhdev/vim-latex-live-preview')
+    call dein#add('lervag/vimtex')
     call dein#add('skywind3000/vim-quickui')
+    call dein#add('voldikss/vim-floaterm')
 
    call dein#end()
     call dein#save_state()
 endif
 
-let g:auto_install_missing_plugins = 0
+let g:auto_install_missing_plugins = 1
 if dein#check_install() && g:auto_install_missing_plugins
     call dein#recache_runtimepath()
     let g:spacevim_plugin_manager = 'dein'
@@ -141,7 +133,6 @@ set list lcs=tab:\|\
 " 下面的只能使通过空格对齐的文件显示对齐线
 let g:indentLine_enabled = 1
 
-let g:instant_markdown_autostart = 0
 let g:fzf_buffers_jump = 1
 
 let g:tagbar_sort = 0
@@ -180,8 +171,8 @@ set statusline=%F\ >\ %y
 set number
 set nowrap
 " 使光标始终在屏幕中间
-set sidescrolloff=999
-set scrolloff=999
+"set sidescrolloff=999
+"set scrolloff=999
 " 使用语法折叠
 set foldmethod=syntax
 set foldlevelstart=99
@@ -206,7 +197,7 @@ if has("termguicolors")
 endif
 
 " 为了markdown插件而设置的
-set conceallevel=3 concealcursor=niv
+set concealcursor=c
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:UltiSnipsEditSplit="vertical"
 let g:table_mode_always_active = 1
@@ -490,3 +481,31 @@ endif
 
 let g:quickui_border_style = 2
 let g:quickui_color_scheme = 'gruvbox'
+
+let g:mkdp_auto_start = 0
+let g:tex_flavor = 'latex'
+
+let g:vim_json_syntax_conceal = 0
+let g:indentLine_concealcursor = 'c' 
+
+ 
+let g:vim_markdown_math = 1
+let g:vim_markdown_toc_autofit = 1
+"let g:livepreview_previewer = 'open -a Preview'
+let g:livepreview_engine = 'xelatex'
+let g:floaterm_position = 'topleft'
+let g:floaterm_width = 0.99 
+let g:floaterm_type = 'normal'
+if g:floaterm_type ==# 'normal'
+    let g:floaterm_height = 0.4
+else
+    let g:floaterm_height = 0.6
+endif
+
+
+augroup open_terminal
+  autocmd!
+    "autocmd TermOpen * setlocal sidescroll=1 sidescrolloff=0 nonumber bufhidden
+    autocmd TermClose <buffer> bdelete!
+    autocmd FileType floaterm setlocal sidescroll=1 sidescrolloff=0 nonumber bufhidden
+augroup END
