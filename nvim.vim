@@ -97,7 +97,7 @@ if g:dein_load_state
     "记录上一次打开文件的位置
     call dein#add('farmergreg/vim-lastplace')
     call dein#add('brooth/far.vim')
-    call dein#add('xuhdev/vim-latex-live-preview')
+    " vimtex viewer 带了实时预览的功能
     call dein#add('lervag/vimtex')
     call dein#add('skywind3000/vim-quickui')
     call dein#add('voldikss/vim-floaterm')
@@ -489,9 +489,9 @@ let g:vim_json_syntax_conceal = 0
 let g:indentLine_concealcursor = 'c' 
 
  
+let g:vimtex_view_method= 'skim'
 let g:vim_markdown_math = 1
 let g:vim_markdown_toc_autofit = 1
-"let g:livepreview_previewer = 'open -a Preview'
 let g:livepreview_engine = 'xelatex'
 let g:floaterm_position = 'topleft'
 let g:floaterm_width = 0.99 
