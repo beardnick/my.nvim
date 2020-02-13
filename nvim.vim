@@ -3,11 +3,11 @@ if &compatible
     set nocompatible
 endif
 
-set rtp+=...
 let g:DEIN=expand('~/.cache/mynvim/repos/github.com/Shougo/dein.vim')
 let g:PLUGINS=expand('~/.cache/mynvim/')
 " dein的路径
 let &runtimepath.="," . g:DEIN
+let &runtimepath.=",~/my.nvim"
 let g:dein_load_state = dein#load_state(g:PLUGINS)
 if g:dein_load_state
     " 加载dein插件管理器
@@ -531,6 +531,4 @@ let g:asynctasks_term_pos = 'bottom'
 let g:asyncrun_open = 10
 let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
 let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
-let g:asynctasks_rtp_config = '~/.vim/tasks.ini'
-"let g:asynctasks_config_name = '.vim/tasks.ini'
 
