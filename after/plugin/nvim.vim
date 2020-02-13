@@ -48,15 +48,9 @@ nmap <silent> <M-x> :<C-U>bdelete<CR>
 " 界面
 nnoremap <silent><C-L> :<C-U>nohlsearch<CR>
 
-noremap <M-Left> :3wincmd <<CR>
-noremap <M-Right>  :3wincmd ><CR>
-noremap <M-Up>  :3wincmd +<CR>
-noremap <M-Down>  :3wincmd -<CR>
-
-
 "noremap <F2> :<C-U>LeaderfBufTag<cr>
 "nnoremap <silent><LEADER>t :<C-U>CocCommand translator.echo<CR>
-"nmap <silent> <Leader>t <Plug>TranslateW
+nmap <silent> <Leader>t <Plug>TranslateW
 "vmap <silent> <Leader>t <Plug>TranslateWV
 
 " 跳转
@@ -175,13 +169,19 @@ nmap <LEADER>bl :<C-U>blast<CR>
 nmap <LEADER>bf :<C-U>bfirst<CR>
 "nmap <LEADER>bt :<C-U>LeaderfBufTag<CR>
 nmap <LEADER>bt :<C-U>BTags<CR>
+nmap <LEADER>bs :<C-U>Buffers<CR>
+
+
+
+
 
 " language
 xmap <LEADER>lf  <Plug>(coc-format-selected)
 nmap <LEADER>lf  <Plug>(coc-format-selected)
 nmap <silent> <LEADER>lc <Plug>(coc-fix-current)
 xmap <silent> <LEADER>lc <Plug>(coc-fix-current)
-nmap <silent><LEADER>lr :<C-U>QuickRun<CR>
+nmap <silent><LEADER>lr :<C-U>AsyncTask file-run<CR>
+nmap <silent><LEADER>lp :<C-U>AsyncTask project-run<CR>
 
 " file
 nnoremap <silent><LEADER>fs :<C-U>FilesMru --tiebreak=index<CR>
@@ -206,9 +206,15 @@ nnoremap <LEADER>ut :<C-U>Tagbar<CR>
 nnoremap <LEADER>un :<C-U>set number!<CR>
 nnoremap <LEADER>up :<C-U>Goyo<CR>
 nnoremap <LEADER>uh :<C-U>set concealcursor=c<CR>
-nnoremap <LEADER>us :<C-U>FloatermToggle<CR>
-tnoremap <LEADER>us <C-\><C-N>:<C-U>FloatermToggle<CR>
+nnoremap <LEADER>us :<C-U>call TerminalToggle()<CR>
+tnoremap <LEADER>us <C-\><C-N>:<C-U>call TerminalToggle()<CR>
 nnoremap <LEADER>ug :<C-U>ChunkInfo<CR>
+
+"window
+nnoremap <LEADER>w+ :<C-U>5wincmd +<CR>
+nnoremap <LEADER>w- :<C-U>5wincmd -<CR>
+nnoremap <LEADER>w< :<C-U>5wincmd <<CR>
+nnoremap <LEADER>w> :<C-U>5wincmd ><CR>
 
 " coc
 nmap <Leader>ca <Plug>(coc-calc-result-append)
@@ -226,7 +232,9 @@ nmap <leader>co  :<C-U>call CocAction('runCommand', 'editor.action.organizeImpor
 nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR>
 nnoremap <Leader>sr  :<C-U>Rg<CR>
 nnoremap <Leader>st :<C-U>Tags<CR>
+"nnoremap <Leader>ss :<C-U>Tags<CR>
 nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR>
+nnoremap <Leader>sb :<C-U>Buffers<CR>
 
 endif
 

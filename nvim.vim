@@ -3,6 +3,7 @@ if &compatible
     set nocompatible
 endif
 
+set rtp+=...
 let g:DEIN=expand('~/.cache/mynvim/repos/github.com/Shougo/dein.vim')
 let g:PLUGINS=expand('~/.cache/mynvim/')
 " dein的路径
@@ -28,7 +29,7 @@ if g:dein_load_state
     " 自动tag生成与管理
     call dein#add('ludovicchabant/vim-gutentags')
     " leaderf用来搜索
-    call dein#add('Yggdroot/LeaderF')
+    "call dein#add('Yggdroot/LeaderF')
     call dein#add('mhinz/vim-startify')
     call dein#add('scrooloose/nerdcommenter')
     call dein#add('fatih/vim-go')
@@ -100,7 +101,10 @@ if g:dein_load_state
     " vimtex viewer 带了实时预览的功能
     call dein#add('lervag/vimtex')
     call dein#add('skywind3000/vim-quickui')
-    call dein#add('voldikss/vim-floaterm')
+    "call dein#add('voldikss/vim-floaterm')
+    call dein#add('skywind3000/asynctasks.vim')
+    call dein#add('skywind3000/asyncrun.vim')
+    call dein#add('skywind3000/vim-terminal-help')
 
    call dein#end()
     call dein#save_state()
@@ -197,7 +201,6 @@ if has("termguicolors")
 endif
 
 " 为了markdown插件而设置的
-set concealcursor=c
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:UltiSnipsEditSplit="vertical"
 let g:table_mode_always_active = 1
@@ -280,8 +283,6 @@ highlight default link CocHighlightText  MatchParen
 " if hidden is not set, TextEdit might fail.
 set hidden
 
-" Some servers have issues with backup files, see #649
-set nobackup
 set nowritebackup
 
 " You will have bad experience for diagnostic messages when it's default 4000.
@@ -363,8 +364,6 @@ fun! s:PluginInstall() abort
 endf
 
 
-autocmd BufEnter * Rooter
-
 let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', '.hgignore','.gitignore', '.cquery']
 
 " 在使用O换行时不自动添加注释行
@@ -377,7 +376,6 @@ augroup Format-Options
 augroup END
 
 let g:bookmark_save_per_working_dir = 1
-autocmd User StartifyBufferOpened nested :Rooter
 
 function! s:filter_header(lines) abort
     let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
@@ -486,21 +484,22 @@ let g:mkdp_auto_start = 0
 let g:tex_flavor = 'latex'
 
 let g:vim_json_syntax_conceal = 0
-let g:indentLine_concealcursor = 'c' 
+"let g:indentLine_concealcursor = 'c' 
 
  
 let g:vimtex_view_method= 'skim'
 let g:vim_markdown_math = 1
 let g:vim_markdown_toc_autofit = 1
 let g:livepreview_engine = 'xelatex'
-let g:floaterm_position = 'topleft'
-let g:floaterm_width = 0.99 
-let g:floaterm_type = 'normal'
-if g:floaterm_type ==# 'normal'
-    let g:floaterm_height = 0.4
-else
-    let g:floaterm_height = 0.6
-endif
+"let g:floaterm_position = 'topleft'
+"let g:floaterm_width = 0.99 
+"let g:floaterm_type = 'normal'
+"if g:floaterm_type ==# 'normal'
+"    let g:floaterm_height = 0.4
+"else
+"    let g:floaterm_height = 0.6
+"endif
+
 
 
 augroup open_terminal
@@ -509,3 +508,29 @@ augroup open_terminal
     autocmd TermClose <buffer> bdelete!
     autocmd FileType floaterm setlocal sidescroll=1 sidescrolloff=0 nonumber bufhidden
 augroup END
+
+augroup find_root
+    autocmd!
+    autocmd BufEnter * Rooter
+    autocmd User StartifyBufferOpened nested :Rooter
+augroup END
+
+
+augroup conceal_filetype
+    autocmd!
+    autocmd FileType markdown,json setlocal concealcursor=c
+augroup END
+
+
+" terminal_help
+let g:terminal_height = 15 
+let g:terminal_pos = 'botright'
+
+" asynctasks
+let g:asynctasks_term_pos = 'bottom'
+let g:asyncrun_open = 10
+let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
+let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
+let g:asynctasks_rtp_config = '~/.vim/tasks.ini'
+"let g:asynctasks_config_name = '.vim/tasks.ini'
+
