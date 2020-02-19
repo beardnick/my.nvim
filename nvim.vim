@@ -76,8 +76,9 @@ if g:dein_load_state
     call dein#add('ap/vim-buftabline')
 
     " 自动切换输入法的工具
-    call dein#add('xcodebuild/fcitx-vim-osx')
-    call dein#add('xcodebuild/fcitx-remote-for-osx')
+    " 这个容易出问题，还是不用了
+    "call dein#add('xcodebuild/fcitx-vim-osx')
+    "call dein#add('xcodebuild/fcitx-remote-for-osx')
     "call dein#add('mivok/vimtodo')
     call dein#add('junegunn/goyo.vim')
     call dein#add('freitass/todo.txt-vim')
@@ -105,6 +106,7 @@ if g:dein_load_state
     call dein#add('skywind3000/asynctasks.vim')
     call dein#add('skywind3000/asyncrun.vim')
     call dein#add('skywind3000/vim-terminal-help')
+    call dein#add('brglng/vim-sidebar-manager')
 
    call dein#end()
     call dein#save_state()
@@ -531,4 +533,7 @@ let g:asynctasks_term_pos = 'bottom'
 let g:asyncrun_open = 10
 let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
 let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
+
+" tagbar
+let g:tagbar_map_showproto = ''
 
