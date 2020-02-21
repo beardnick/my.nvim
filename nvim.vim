@@ -106,7 +106,8 @@ if g:dein_load_state
     call dein#add('skywind3000/asynctasks.vim')
     call dein#add('skywind3000/asyncrun.vim')
     call dein#add('skywind3000/vim-terminal-help')
-    call dein#add('brglng/vim-sidebar-manager')
+    call dein#add('skywind3000/vim-keysound')
+    "call dein#add('brglng/vim-sidebar-manager')
 
    call dein#end()
     call dein#save_state()
@@ -536,4 +537,13 @@ let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
 
 " tagbar
 let g:tagbar_map_showproto = ''
+
+" 启动 Vim 时自动启动
+let g:keysound_enable = 1
+
+" 设置默认音效主题，可以选择：default, typewriter, mario, bubble, sword
+let g:keysound_theme = 'typewriter'
+
+" 设置音量：0-1000
+let g:keysound_volume = 1000
 

@@ -28,21 +28,6 @@ nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
 nmap <silent> [e <Plug>(coc-diagnostic-previous-error)
 
 
-" 快速修复
-"nmap <silent> <M-CR> <Plug>(coc-fix-current)
-
-"nmap <silent> gne <Plug>(coc-diagnostic-next-error)
-"nmap <silent> gpe <Plug>(coc-diagnostic-previous-error)
-nmap <silent> gl  <Plug>(coc-openlink)
-nmap <silent> \ <Plug>(coc-codeaction)
-"nmap <silent> <M-l> <Plug>(coc-codelens-action)
-"nmap <silent> <M-r> <Plug>(coc-refactor)
-"nmap <silent> <M-r> :<C-U>call commands#CodeRuner()<CR>
-nmap <silent> <M-r> :<C-U>QuickRun<CR>
-
-nmap <silent> <M-l> :<C-U>bnext<CR>
-nmap <silent> <M-h> :<C-U>bprevious<CR>
-nmap <silent> <M-x> :<C-U>bdelete<CR>
 
 
 " 界面
@@ -113,7 +98,7 @@ nnoremap <Leader>rc viw"cp
 nnoremap <silent>]] :<C-U>call NextUncommentedBlock(1)<CR>
 nnoremap <silent>[[ :<C-U>call NextUncommentedBlock(-1)<CR>
 nnoremap <C-Y> :<C-U>FZFYank<CR>
-nnoremap <silent><Leader>gb :<C-U>ToggleBlameLine<CR>
+nnoremap <silent><Leader>gb :<C-U>Gblame<CR>
 
 function! NextUncommentedBlock(direction) abort
     let s:next_match = line('.')
@@ -170,6 +155,7 @@ nmap <LEADER>bf :<C-U>bfirst<CR>
 "nmap <LEADER>bt :<C-U>LeaderfBufTag<CR>
 nmap <LEADER>bt :<C-U>BTags<CR>
 nmap <LEADER>bs :<C-U>Buffers<CR>
+nmap <LEADER>bv :<C-U>call commands#BufferSplitVertical()<CR>
 
 
 
@@ -226,6 +212,16 @@ nmap <Leader>cq <Plug>(coc-fix-current)
 nmap <leader>ca  :<C-U>CocCommand actions.open<CR>
 xmap <leader>ca  :<C-U>CocCommand actions.open<CR>
 nmap <leader>co  :<C-U>call CocAction('runCommand', 'editor.action.organizeImport')<CR>
+
+
+nmap <silent> <M-CR> :<C-U>CocCommand action.open<CR>
+xmap <silent> <M-CR> :<C-U>CocCommand action.open<CR>
+nmap <silent> gl  <Plug>(coc-openlink)
+
+nnoremap <M-.> :<C-U>5wincmd ><CR>
+nnoremap <M-,> :<C-U>5wincmd <<CR>
+nnoremap <M-=> :<C-U>5wincmd +<CR>
+nnoremap <M--> :<C-U>5wincmd -<CR>
 
 
 " search

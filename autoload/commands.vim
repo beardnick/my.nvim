@@ -22,17 +22,15 @@ endfunction
 "endfunction
 
 
-
-function! commands#CodeRuner() abort
-    let s:file_type = &filetype
-    let s:file = expand("%:p")
-    "echom "filetype:" s:file_type
-    "echom "file:" s:file
-    let s:runner = {
-    \ 'python':'python',
-    \ 'java':'java',
-    \ 'go':'go run',
-    \ 'sh':'bash'
-    \}
-    exe "VimuxRunCommand \'" . s:runner[s:file_type] . " " . s:file " \' "
+function! commands#BufferSplitVertical() abort
+    let l:this_buf = bufnr()
+    execute 'wincmd k'
+    let l:upper_buf = bufnr()
+    if l:this_buf !=# l:upper_buf
+        execute 'wincmd v'
+        if buffer_exists(l:this_buf)
+            execute 'buffer ' . l:this_buf
+            execute 'wincmd j | q'
+        endif
+    endif
 endfunction
