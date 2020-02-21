@@ -23,7 +23,9 @@ if g:dein_load_state
     call dein#add('luochen1990/rainbow')
     " 注意编译问题，很多时候编译出错了很多插件都会有问题
     " 大部分时候可以通过call coc#util#install()解决问题
-    call dein#add('neoclide/coc.nvim',{'build':'./install.sh'})
+    "call dein#add('neoclide/coc.nvim',{'build':'./install.sh'})
+    "call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+    call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
     " tagbar用来显示tag
     call dein#add('majutsushi/tagbar')
     " 自动tag生成与管理
@@ -40,8 +42,6 @@ if g:dein_load_state
     call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
 					\ 'build': 'sh -c "cd app & yarn install"' })
     call dein#add('lvht/tagbar-markdown')
-    "call dein#add('SpaceVim/vim-markdown')
-    "call dein#add('mzlogin/vim-markdown-toc')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('gcmt/wildfire.vim')
     call dein#add('tpope/vim-fugitive')
@@ -50,16 +50,10 @@ if g:dein_load_state
     "call dein#add('airblade/vim-gitgutter')
     "call dein#add('jiangmiao/auto-pairs')
     call dein#add('godlygeek/tabular')
-
-    if !empty(glob("/usr/local/opt/fzf")) 
-    " if filereadable("/usr/local/opt/fzf")
-        call dein#add('/usr/local/opt/fzf', {'frozen':1})
-    else
-        call dein#add('~/.fzf', {'frozen':1})
-    endif
     " 三个插件加起来有最好的文件搜索体验
-    call dein#add('tweekmonster/fzf-filemru')
-    call dein#add('junegunn/fzf.vim')
+    call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+    call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+    call dein#add('tweekmonster/fzf-filemru',{'depends': 'fzf.vim'})
 
     call dein#add('thinca/vim-quickrun')
     call dein#add('Yggdroot/indentLine')
@@ -551,4 +545,7 @@ let g:keysound_volume = 1000
 
 
 let g:templates_directory = '~/my.nvim/templates'
+
+
+let g:UltiSnipsSnippetDirectories=['~/my.nvim/UltiSnips']
 
