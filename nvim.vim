@@ -108,6 +108,7 @@ if g:dein_load_state
     call dein#add('skywind3000/vim-terminal-help')
     call dein#add('skywind3000/vim-keysound')
     "call dein#add('brglng/vim-sidebar-manager')
+    call dein#add('aperezdc/vim-template')
 
    call dein#end()
     call dein#save_state()
@@ -131,9 +132,9 @@ let g:rainbow_active = 1
 " 启用git符号栏 
 let g:gitgutter_enabled = 1
 " 设置代码模版触发器
-let g:UltiSnipsExpandTrigger       = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsExpandTrigger       = '<c-j>'
+let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:NERDDefaultAlign = 'left'
 " 使通过tab对齐的文件显示对齐线,注意末尾有一个空格
 set list lcs=tab:\|\ 
@@ -534,6 +535,7 @@ let g:asynctasks_term_pos = 'bottom'
 let g:asyncrun_open = 10
 let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
 let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
+let g:asynctasks_rtp_config = "tasks.ini"
 
 " tagbar
 let g:tagbar_map_showproto = ''
@@ -546,4 +548,7 @@ let g:keysound_theme = 'typewriter'
 
 " 设置音量：0-1000
 let g:keysound_volume = 1000
+
+
+let g:templates_directory = '~/my.nvim/templates'
 
