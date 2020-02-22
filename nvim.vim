@@ -34,7 +34,7 @@ if g:dein_load_state
     "call dein#add('Yggdroot/LeaderF')
     call dein#add('mhinz/vim-startify')
     call dein#add('scrooloose/nerdcommenter')
-    call dein#add('fatih/vim-go')
+    "call dein#add('fatih/vim-go')
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
@@ -103,7 +103,7 @@ if g:dein_load_state
     call dein#add('skywind3000/vim-keysound')
     "call dein#add('brglng/vim-sidebar-manager')
     call dein#add('aperezdc/vim-template')
-
+    call dein#add('voldikss/vim-floaterm') 
    call dein#end()
     call dein#save_state()
 endif
@@ -526,9 +526,9 @@ let g:terminal_pos = 'botright'
 
 " asynctasks
 let g:asynctasks_term_pos = 'bottom'
-let g:asyncrun_open = 10
-let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
-let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
+let g:asyncrun_open = 15
+"let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
+"let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
 let g:asynctasks_rtp_config = "tasks.ini"
 
 " tagbar
@@ -543,9 +543,22 @@ let g:keysound_theme = 'typewriter'
 " 设置音量：0-1000
 let g:keysound_volume = 1000
 
+let g:go_template_autocreate = 0
+
 
 let g:templates_directory = '~/my.nvim/templates'
 
 
 let g:UltiSnipsSnippetDirectories=['~/my.nvim/UltiSnips']
 
+
+let g:go_template_use_pkg = 1
+let g:go_gopls_enabled = 0
+let g:go_rename_command = 'gopls'
+let g:go_fmt_fail_silently = 1
+let g:go_def_mapping_enabled = 0
+
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
+
+let g:templates_no_autocmd = 1

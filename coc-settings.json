@@ -6,11 +6,6 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     },
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod"],
-      "filetypes": ["go"]
-    },
     "cquery": {
       "command": "cquery",
       "args": ["--log-file=/tmp/cq.log"],
@@ -48,5 +43,9 @@
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "calc.highlight": true,
   "tabnine.disable_filetypes": ["java"],
-  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok-1.18.4.jar -Xbootclasspath/a:/usr/local/share/lombok/lombok-1.18.4.jar"
+  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok-1.18.4.jar -Xbootclasspath/a:/usr/local/share/lombok/lombok-1.18.4.jar",
+  "go.goplsOptions": {
+      "completeUnimported": true
+  },
+  "go.enable": true
 }
