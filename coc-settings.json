@@ -47,5 +47,5 @@
   "go.goplsOptions": {
       "completeUnimported": true
   },
-  "go.enable": true
+ "go.enable": true
 }

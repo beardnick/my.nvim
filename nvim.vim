@@ -7,7 +7,7 @@ let g:DEIN=expand('~/.cache/mynvim/repos/github.com/Shougo/dein.vim')
 let g:PLUGINS=expand('~/.cache/mynvim/')
 " dein的路径
 let &runtimepath.="," . g:DEIN
-let &runtimepath.=",~/my.nvim"
+let &runtimepath.=",~/.config/nvim"
 let g:dein_load_state = dein#load_state(g:PLUGINS)
 if g:dein_load_state
     " 加载dein插件管理器
@@ -34,7 +34,7 @@ if g:dein_load_state
     "call dein#add('Yggdroot/LeaderF')
     call dein#add('mhinz/vim-startify')
     call dein#add('scrooloose/nerdcommenter')
-    "call dein#add('fatih/vim-go')
+    call dein#add('fatih/vim-go')
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
@@ -549,7 +549,7 @@ let g:go_template_autocreate = 0
 let g:templates_directory = '~/my.nvim/templates'
 
 
-let g:UltiSnipsSnippetDirectories=['~/my.nvim/UltiSnips']
+"let g:UltiSnipsSnippetDirectories=[$HOME . '/my.nvim/UltiSnips']
 
 
 let g:go_template_use_pkg = 1

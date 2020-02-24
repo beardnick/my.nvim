@@ -98,6 +98,12 @@ nnoremap <Leader>rc viw"cp
 nnoremap <silent>]] :<C-U>call NextUncommentedBlock(1)<CR>
 nnoremap <silent>[[ :<C-U>call NextUncommentedBlock(-1)<CR>
 nnoremap <C-Y> :<C-U>FZFYank<CR>
+
+
+
+
+nnoremap <silent><Leader>gi :<C-U>ChunkInfo<CR>
+nnoremap <silent><Leader>gu :<C-U>ChunkUndo<CR>
 nnoremap <silent><Leader>gb :<C-U>Gblame<CR>
 
 function! NextUncommentedBlock(direction) abort
@@ -214,8 +220,8 @@ xmap <leader>ca  :<C-U>CocCommand actions.open<CR>
 nmap <leader>co  :<C-U>call CocAction('runCommand', 'editor.action.organizeImport')<CR>
 
 
-nmap <silent> <M-CR> :<C-U>CocCommand action.open<CR>
-xmap <silent> <M-CR> :<C-U>CocCommand action.open<CR>
+nmap <silent> <M-CR> :<C-U>CocCommand actions.open<CR>
+xmap <silent> <M-CR> :<C-U>CocCommand actions.open<CR>
 nmap <silent> gl  <Plug>(coc-openlink)
 
 nnoremap <M-.> :<C-U>5wincmd ><CR>

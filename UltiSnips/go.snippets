@@ -119,10 +119,14 @@ snippet "([a-zA-Z.]+).append" "Description" r
 endsnippet
 
 
-snippet ret "return" b
-return ${1:value}, retval${0}
-endsnippet
+#snippet ret "return" b
+#return ${1:value}, retval${0}
+#endsnippet
 
-snippet retval "return value" i
-${1:value}, retval${2}
+#snippet retval "return value" i
+#${1:value}, retval${2}
+#endsnippet
+
+snippet unimp "unimplemented function" b
+panic("not implemented")
 endsnippet
