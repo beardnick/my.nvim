@@ -9,7 +9,7 @@
     "cquery": {
       "command": "cquery",
       "args": ["--log-file=/tmp/cq.log"],
-      "filetypes": ["c", "cpp"],
+      "filetypes": ["c", "cpp","cuda"],
       "rootPatterns": [
         "compile_flags.txt",
         "compile_commands.json",

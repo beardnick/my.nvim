@@ -104,6 +104,7 @@ if g:dein_load_state
     "call dein#add('brglng/vim-sidebar-manager')
     call dein#add('aperezdc/vim-template')
     call dein#add('voldikss/vim-floaterm') 
+    call dein#add('zenbro/mirror.vim') 
    call dein#end()
     call dein#save_state()
 endif
@@ -500,11 +501,12 @@ let g:livepreview_engine = 'xelatex'
 
 
 
+autocmd BufWrite * if exists(":MirrorPush") | exe ':MirrorPush' | endif
+
 augroup open_terminal
   autocmd!
-    "autocmd TermOpen * setlocal sidescroll=1 sidescrolloff=0 nonumber bufhidden
+    autocmd TermOpen * setlocal sidescroll=1 sidescrolloff=0 nonumber bufhidden
     autocmd TermClose <buffer> bdelete!
-    autocmd FileType floaterm setlocal sidescroll=1 sidescrolloff=0 nonumber bufhidden
 augroup END
 
 augroup find_root
@@ -560,5 +562,62 @@ let g:go_def_mapping_enabled = 0
 
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
-
 let g:templates_no_autocmd = 1
+
+"
+let g:coc_global_extensions =['coc-actions'
+                            \,'coc-browser'
+                            \,'coc-calc'
+                            \,'coc-ccls'
+                            \,'coc-clock'
+                            \,'coc-css'
+                            \,'coc-dictionary'
+                            \,'coc-docker'
+                            \,'coc-emmet'
+                            \,'coc-emoji'
+                            \,'coc-eslint'
+                            \,'coc-explorer'
+                            \,'coc-git'
+                            \,'coc-gitignore'
+                            \,'coc-go'
+                            \,'coc-highlight'
+                            \,'coc-html'
+                            \,'coc-imselect'
+                            \,'coc-java'
+                            \,'coc-json'
+                            \,'coc-kite'
+                            \,'coc-lines'
+                            \,'coc-lists'
+                            \,'coc-lua'
+                            \,'coc-marketplace'
+                            \,'coc-omni'
+                            \,'coc-omnisharp'
+                            \,'coc-pairs'
+                            \,'coc-post'
+                            \,'coc-prettier'
+                            \,'coc-python'
+                            \,'coc-rls'
+                            \,'coc-sh'
+                            \,'coc-snippets'
+                            \,'coc-solargraph'
+                            \,'coc-sql'
+                            \,'coc-stylelint'
+                            \,'coc-syntax'
+                            \,'coc-tabnine'
+                            \,'coc-tag'
+                            \,'coc-template'
+                            \,'coc-terminal'
+                            \,'coc-todolist'
+                            \,'coc-translator'
+                            \,'coc-tsserver'
+                            \,'coc-ultisnips'
+                            \,'coc-utils'
+                            \,'coc-vetur'
+                            \,'coc-vimlsp'
+                            \,'coc-vimtex'
+                            \,'coc-word'
+                            \,'coc-xml'
+                            \,'coc-yaml'
+                            \,'coc-yank'
+                            \]
+
