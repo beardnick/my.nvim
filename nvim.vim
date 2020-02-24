@@ -505,7 +505,7 @@ autocmd BufWrite * if exists(":MirrorPush") | exe ':MirrorPush' | endif
 
 augroup open_terminal
   autocmd!
-    autocmd TermOpen * setlocal sidescroll=1 sidescrolloff=0 nonumber bufhidden
+    autocmd TermOpen * setlocal sidescroll=1 sidescrolloff=0 nonumber
     autocmd TermClose <buffer> bdelete!
 augroup END
 
@@ -598,12 +598,10 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-python'
                             \,'coc-rls'
                             \,'coc-sh'
-                            \,'coc-snippets'
                             \,'coc-solargraph'
                             \,'coc-sql'
                             \,'coc-stylelint'
                             \,'coc-syntax'
-                            \,'coc-tabnine'
                             \,'coc-tag'
                             \,'coc-template'
                             \,'coc-terminal'

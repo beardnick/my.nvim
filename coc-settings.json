@@ -6,25 +6,29 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     },
-    "cquery": {
-      "command": "cquery",
-      "args": ["--log-file=/tmp/cq.log"],
-      "filetypes": ["c", "cpp","cuda"],
-      "rootPatterns": [
-        "compile_flags.txt",
-        "compile_commands.json",
-        ".vim/",
-        ".git/",
-        ".hg/",
-        ".hgignore",
-        ".gitignore",
-        ".cquery"
-      ],
-      "initializationOptions": {
-        "cacheDirectory": "/tmp/cquery"
-      }
-    }
-  },
+    "ccls": {
+        "command": "ccls",
+        "filetypes": [
+            "c",
+            "cpp",
+            "cuda",
+            "objc",
+            "objcpp"
+        ],
+        "rootPatterns": [
+            ".ccls-root",
+            "compile_commands.json"
+        ],
+        "initializationOptions": {
+            "cache": {
+                "directory": ".ccls-cache"
+            },
+            "client": {
+                "snippetSupport": true
+            }
+        }
+    },
+},
   "java.import.maven.enabled": true,
   "java.errors.incompleteClasspath.severity": "ignore",
   "python.jediEnabled": false,
