@@ -78,29 +78,28 @@ download_basic_plugins(){
 #install_windows(){}
 
 
-if $(has_command nvim) ; then
-    read  -p "you have already installed neovim, do you want to install the latest neovim?[yn]:"
-    if ! [[  $REPLY == "y" || $REPLY == "Y" ]]; then
-        exit 0
-    fi
-fi
-
-
 if ! $(has_command curl); then
     echo "please install curl" >&2
     exit 1
 fi
 
-# install latest neovim to support more features
-echo "installing latest neovim..."
-case "$(uname)" in
-    Linux)
-        install_linux
-        ;;
-    Darwin)
-        install_mac
-        ;;
-esac
+
+if $(has_command nvim) ; then
+    read  -p "you have already installed neovim, do you want to install the latest neovim?[yn]:"
+    if [[  $REPLY == "y" || $REPLY == "Y" ]]; then
+        # install latest neovim to support more features
+        echo "installing latest neovim..."
+        case "$(uname)" in
+            Linux)
+                install_linux
+                ;;
+            Darwin)
+                install_mac
+                ;;
+        esac
+    fi
+fi
+
 
 
 echo "cloning nvim config from github..."
