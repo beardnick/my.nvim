@@ -551,7 +551,7 @@ let g:go_template_autocreate = 0
 let g:templates_directory = '~/my.nvim/templates'
 
 
-"let g:UltiSnipsSnippetDirectories=[$HOME . '/my.nvim/UltiSnips']
+let g:UltiSnipsSnippetDir=[$HOME . '/.config/nvim/UltiSnips']
 
 
 let g:go_template_use_pkg = 1
