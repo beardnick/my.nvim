@@ -619,3 +619,12 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-yank'
                             \]
 
+
+let g:indentLine_fileTypeExclude = ['defx','json', 'denite','startify','tagbar','vista_kind','vista']
+let g:indentLine_concealcursor = 'niv'
+
+
+autocmd WinEnter,InsertLeave * set cursorline
+
+autocmd WinLeave,InsertEnter * set nocursorline
+
