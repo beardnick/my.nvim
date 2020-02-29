@@ -105,6 +105,9 @@ if g:dein_load_state
     call dein#add('aperezdc/vim-template')
     call dein#add('voldikss/vim-floaterm') 
     call dein#add('zenbro/mirror.vim') 
+    call dein#add('antoinemadec/coc-fzf') 
+    "call dein#add('vim-pandoc/vim-pandoc') 
+    "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
     call dein#save_state()
 endif
@@ -130,6 +133,9 @@ let g:gitgutter_enabled = 1
 let g:UltiSnipsExpandTrigger       = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+" visual 的时候使用<C-J>来使用visual placeholder
+
+
 let g:NERDDefaultAlign = 'left'
 " 使通过tab对齐的文件显示对齐线,注意末尾有一个空格
 set list lcs=tab:\|\ 
@@ -274,6 +280,8 @@ endfunction
 "autocmd FileType python call autocomplete#UseKite()
 "autocmd BufNew,BufEnter *.man setlocal filetype=man
 "autocmd BufEnter,BufNew,BufRead *.{markdown,json} set concealcursor=c
+
+autocmd BufNew,BufEnter *.pdc setfiletype markdown
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -620,11 +628,25 @@ let g:coc_global_extensions =['coc-actions'
                             \]
 
 
-let g:indentLine_fileTypeExclude = ['defx','json', 'denite','startify','tagbar','vista_kind','vista']
-let g:indentLine_concealcursor = 'niv'
+let g:indentLine_fileTypeExclude = ['defx','json', 'denite','startify','tagbar','vista_kind','vista','markdown']
 
 
 autocmd WinEnter,InsertLeave * set cursorline
 
 autocmd WinLeave,InsertEnter * set nocursorline
+
+
+    let g:vim_markdown_fenced_languages = [
+      \ 'c++=cpp',
+      \ 'viml=vim',
+      \ 'bash=sh',
+      \ 'ini=dosini',
+      \ 'js=javascript',
+      \ 'json=javascript',
+      \ 'jsx=javascriptreact',
+      \ 'tsx=typescriptreact',
+      \ 'docker=Dockerfile',
+      \ 'makefile=make',
+      \ 'py=python'
+      \ ]
 

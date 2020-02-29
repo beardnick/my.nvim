@@ -238,6 +238,22 @@ nnoremap <Leader>st :<C-U>Tags<CR>
 nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR>
 nnoremap <Leader>sb :<C-U>Buffers<CR>
 
+
+" coc-fzf
+
+nnoremap <silent> <Leader>se  :<C-u>CocFzfListDiagnostics<CR>
+nnoremap <silent> <Leader>sc  :<C-u>CocFzfListCommands<CR>
+nnoremap <silent> <Leader>sp  :<C-u>CocFzfListExtensions<CR>
+nnoremap <silent> <Leader>sl  :<C-u>CocFzfListLocation<CR>
+"nnoremap <silent> <Leader>o  :<C-u>CocFzfListOutline<CR>
+"nnoremap <silent> <Leader>p  :<C-u>CocFzfListResume<CR>
+"nnoremap <silent> <Leader>s  :<C-u>CocFzfListSymbols<CR>
+"nnoremap <silent> <Leader>S  :<C-u>CocFzfListServices<CR>
+
+
+
+
+
 endif
 
 

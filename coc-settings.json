@@ -52,5 +52,6 @@
       "completeUnimported": true
   },
  "go.enable": true,
- "git.virtualTextPrefix": ">>>  "
+ "git.virtualTextPrefix": ">>>  ",
+ "suggest.minTriggerInputLength": 2
 }
