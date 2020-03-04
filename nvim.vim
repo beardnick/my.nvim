@@ -537,7 +537,7 @@ let g:asynctasks_rtp_config = "tasks.ini"
 let g:tagbar_map_showproto = ''
 
 " 启动 Vim 时自动启动
-let g:keysound_enable = 1
+"let g:keysound_enable = 1
 
 " 设置默认音效主题，可以选择：default, typewriter, mario, bubble, sword
 let g:keysound_theme = 'typewriter'
@@ -551,7 +551,7 @@ let g:go_template_autocreate = 0
 let g:templates_directory = '~/my.nvim/templates'
 
 
-"let g:UltiSnipsSnippetDirectories=[$HOME . '/my.nvim/UltiSnips']
+let g:UltiSnipsSnippetDir=[$HOME . '/.config/nvim/UltiSnips']
 
 
 let g:go_template_use_pkg = 1
@@ -598,12 +598,10 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-python'
                             \,'coc-rls'
                             \,'coc-sh'
-                            \,'coc-snippets'
                             \,'coc-solargraph'
                             \,'coc-sql'
                             \,'coc-stylelint'
                             \,'coc-syntax'
-                            \,'coc-tabnine'
                             \,'coc-tag'
                             \,'coc-template'
                             \,'coc-terminal'
