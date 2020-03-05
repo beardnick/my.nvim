@@ -27,7 +27,7 @@ if g:dein_load_state
     "call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
     call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
     " tagbar用来显示tag
-    call dein#add('majutsushi/tagbar')
+    "call dein#add('majutsushi/tagbar')
     " 自动tag生成与管理
     call dein#add('ludovicchabant/vim-gutentags')
     " leaderf用来搜索
@@ -41,7 +41,7 @@ if g:dein_load_state
     call dein#add('plasticboy/vim-markdown')
     call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
 					\ 'build': 'sh -c "cd app & yarn install"' })
-    call dein#add('lvht/tagbar-markdown')
+    "call dein#add('lvht/tagbar-markdown')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('gcmt/wildfire.vim')
     call dein#add('tpope/vim-fugitive')
@@ -106,6 +106,7 @@ if g:dein_load_state
     call dein#add('voldikss/vim-floaterm') 
     call dein#add('zenbro/mirror.vim') 
     call dein#add('antoinemadec/coc-fzf') 
+    call dein#add('liuchengxu/vista.vim') 
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -146,7 +147,7 @@ let g:indentLine_enabled = 1
 
 let g:fzf_buffers_jump = 1
 
-let g:tagbar_sort = 0
+"let g:tagbar_sort = 0
 
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
@@ -544,7 +545,7 @@ let g:asyncrun_open = 15
 let g:asynctasks_rtp_config = "tasks.ini"
 
 " tagbar
-let g:tagbar_map_showproto = ''
+"let g:tagbar_map_showproto = ''
 
 " 启动 Vim 时自动启动
 let g:keysound_enable = 1

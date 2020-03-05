@@ -189,12 +189,12 @@ nnoremap <silent><LEADER>hc :<C-U>Cheats<CR>
 
 " tag
 nnoremap <LEADER>ts :<C-U>Tags<CR>
-nnoremap <LEADER>tb :<C-U>Tagbar<CR>
+nnoremap <LEADER>tb :<C-U>Vista!!<CR>
 
 " ui
 nnoremap <LEADER>uc :<C-U>Clock<CR>
 nnoremap <LEADER>uw :<C-U>set wrap!<CR>
-nnoremap <LEADER>ut :<C-U>Tagbar<CR>
+nnoremap <LEADER>ut :<C-U>Vista!!<CR>
 nnoremap <LEADER>un :<C-U>set number!<CR>
 nnoremap <LEADER>up :<C-U>Goyo<CR>
 nnoremap <LEADER>uh :<C-U>set concealcursor=c<CR>
