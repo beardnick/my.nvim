@@ -46,7 +46,7 @@ if g:dein_load_state
     call dein#add('gcmt/wildfire.vim')
     call dein#add('tpope/vim-fugitive')
     call dein#add('tpope/vim-surround')
-    call dein#add('mattesgroeger/vim-bookmarks')
+    "call dein#add('mattesgroeger/vim-bookmarks')
     "call dein#add('airblade/vim-gitgutter')
     "call dein#add('jiangmiao/auto-pairs')
     call dein#add('godlygeek/tabular')
@@ -122,6 +122,8 @@ if dein#check_install() && g:auto_install_missing_plugins
 endif
 
 colorscheme gruvbox
+set background=light
+"colorscheme solarized8_light_flat
 "colorscheme monokai
 
 " 属性配置
@@ -230,7 +232,7 @@ let g:EasyClipEnableBlackHoleRedirect = 0
 " 让输入上方，搜索列表在下方
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 " 打开 fzf 的方式选择 floating window
-let g:fzf_layout = { 'window': 'call ui#FloatingFZF()' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 let g:buftabline_numbers = 2
 let g:buftabline_separators = 1 
@@ -382,7 +384,7 @@ augroup Format-Options
     autocmd BufEnter * setlocal formatoptions=crqn2l1j  
 augroup END
 
-let g:bookmark_save_per_working_dir = 1
+"let g:bookmark_save_per_working_dir = 1
 
 function! s:filter_header(lines) abort
     let longest_line   = max(map(copy(a:lines), 'len(v:val)'))

@@ -251,6 +251,12 @@ nnoremap <silent> <Leader>sl  :<C-u>CocFzfListLocation<CR>
 "nnoremap <silent> <Leader>S  :<C-u>CocFzfListServices<CR>
 
 
+"coc-bookmark
+nmap mn <Plug>(coc-bookmark-next)
+nmap mp <Plug>(coc-bookmark-prev)
+nmap mm <Plug>(coc-bookmark-toggle)
+nmap mi <Plug>(coc-bookmark-annotate)
+nnoremap ma :<C-U>CocList bookmark<CR>
 
 
 

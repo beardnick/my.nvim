@@ -53,5 +53,24 @@
   },
  "go.enable": true,
  "git.virtualTextPrefix": ">>>  ",
- "suggest.minTriggerInputLength": 2
+ "suggest.minTriggerInputLength": 2,
+ "cSpell.enabledLanguageIds": [
+        "csharp",
+        "go",
+        "c",
+        "c++",
+        "markdown",
+        "java",
+        "javascript",
+        "javascriptreact",
+        "markdown",
+        "php",
+        "plaintext",
+        "typescript",
+        "typescriptreact",
+        "yml"
+    ],
+    "solargraph.completion": true,
+    "solargraph.hover": true,
+    "solargraph.autoformat": true
 }
