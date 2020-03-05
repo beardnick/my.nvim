@@ -35,7 +35,7 @@ nnoremap <silent><C-L> :<C-U>nohlsearch<CR>
 
 "noremap <F2> :<C-U>LeaderfBufTag<cr>
 "nnoremap <silent><LEADER>t :<C-U>CocCommand translator.echo<CR>
-nmap <silent> <Leader>t <Plug>TranslateW
+"nmap <silent> <Leader>t <Plug>TranslateW
 "vmap <silent> <Leader>t <Plug>TranslateWV
 
 " 跳转
@@ -53,7 +53,7 @@ inoremap kk <ESC>
 vmap <LEADER>s <Plug>VSurround
 nmap <LEADER>s <Plug>Ysurround
 nnoremap <silent><C-J> :<C-U>Snippets<CR>
-nnoremap <silent><C-S> :<C-U>Scratch<CR>
+"nnoremap <silent><C-S> :<C-U>Scratch<CR>
 inoremap <silent><C-\> <C-O>:<C-U>TableModeRealign<CR>
 vnoremap < <gv
 vnoremap > >gv
@@ -237,6 +237,22 @@ nnoremap <Leader>st :<C-U>Tags<CR>
 "nnoremap <Leader>ss :<C-U>Tags<CR>
 nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR>
 nnoremap <Leader>sb :<C-U>Buffers<CR>
+
+
+" coc-fzf
+
+nnoremap <silent> <Leader>se  :<C-u>CocFzfListDiagnostics<CR>
+nnoremap <silent> <Leader>sc  :<C-u>CocFzfListCommands<CR>
+nnoremap <silent> <Leader>sp  :<C-u>CocFzfListExtensions<CR>
+nnoremap <silent> <Leader>sl  :<C-u>CocFzfListLocation<CR>
+"nnoremap <silent> <Leader>o  :<C-u>CocFzfListOutline<CR>
+"nnoremap <silent> <Leader>p  :<C-u>CocFzfListResume<CR>
+"nnoremap <silent> <Leader>s  :<C-u>CocFzfListSymbols<CR>
+"nnoremap <silent> <Leader>S  :<C-u>CocFzfListServices<CR>
+
+
+
+
 
 endif
 

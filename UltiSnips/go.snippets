@@ -119,6 +119,7 @@ snippet "([a-zA-Z.]+).append" "Description" r
 endsnippet
 
 
+
 #snippet ret "return" b
 #return ${1:value}, retval${0}
 #endsnippet
@@ -129,4 +130,13 @@ endsnippet
 
 snippet unimp "unimplemented function" b
 panic("not implemented")
+endsnippet
+
+
+snippet out "println" b
+fmt.Println(${1:text})
+endsnippet
+
+snippet ret "return" b
+return ${1:value}
 endsnippet

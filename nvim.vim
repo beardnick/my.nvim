@@ -105,6 +105,9 @@ if g:dein_load_state
     call dein#add('aperezdc/vim-template')
     call dein#add('voldikss/vim-floaterm') 
     call dein#add('zenbro/mirror.vim') 
+    call dein#add('antoinemadec/coc-fzf') 
+    "call dein#add('vim-pandoc/vim-pandoc') 
+    "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
     call dein#save_state()
 endif
@@ -119,6 +122,8 @@ if dein#check_install() && g:auto_install_missing_plugins
 endif
 
 colorscheme gruvbox
+set background=light
+"colorscheme solarized8_light_flat
 "colorscheme monokai
 
 " 属性配置
@@ -130,6 +135,9 @@ let g:gitgutter_enabled = 1
 let g:UltiSnipsExpandTrigger       = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+" visual 的时候使用<C-J>来使用visual placeholder
+
+
 let g:NERDDefaultAlign = 'left'
 " 使通过tab对齐的文件显示对齐线,注意末尾有一个空格
 set list lcs=tab:\|\ 
@@ -224,7 +232,8 @@ let g:EasyClipEnableBlackHoleRedirect = 0
 " 让输入上方，搜索列表在下方
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 " 打开 fzf 的方式选择 floating window
-let g:fzf_layout = { 'window': 'call ui#FloatingFZF()' }
+"let g:fzf_layout = { 'window': 'call ui#FloatingFZF()' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 let g:buftabline_numbers = 2
 let g:buftabline_separators = 1 
@@ -274,6 +283,8 @@ endfunction
 "autocmd FileType python call autocomplete#UseKite()
 "autocmd BufNew,BufEnter *.man setlocal filetype=man
 "autocmd BufEnter,BufNew,BufRead *.{markdown,json} set concealcursor=c
+
+autocmd BufNew,BufEnter *.pdc setfiletype markdown
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -505,7 +516,7 @@ autocmd BufWrite * if exists(":MirrorPush") | exe ':MirrorPush' | endif
 
 augroup open_terminal
   autocmd!
-    autocmd TermOpen * setlocal sidescroll=1 sidescrolloff=0 nonumber bufhidden
+    autocmd TermOpen * setlocal sidescroll=1 sidescrolloff=0 nonumber
     autocmd TermClose <buffer> bdelete!
 augroup END
 
@@ -540,10 +551,10 @@ let g:tagbar_map_showproto = ''
 "let g:keysound_enable = 1
 
 " 设置默认音效主题，可以选择：default, typewriter, mario, bubble, sword
-let g:keysound_theme = 'typewriter'
+"let g:keysound_theme = 'typewriter'
 
 " 设置音量：0-1000
-let g:keysound_volume = 1000
+"let g:keysound_volume = 1000
 
 let g:go_template_autocreate = 0
 
@@ -618,4 +629,27 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-yaml'
                             \,'coc-yank'
                             \]
+
+
+let g:indentLine_fileTypeExclude = ['defx','json', 'denite','startify','tagbar','vista_kind','vista','markdown']
+
+
+autocmd WinEnter,InsertLeave * set cursorline
+
+autocmd WinLeave,InsertEnter * set nocursorline
+
+
+    let g:vim_markdown_fenced_languages = [
+      \ 'c++=cpp',
+      \ 'viml=vim',
+      \ 'bash=sh',
+      \ 'ini=dosini',
+      \ 'js=javascript',
+      \ 'json=javascript',
+      \ 'jsx=javascriptreact',
+      \ 'tsx=typescriptreact',
+      \ 'docker=Dockerfile',
+      \ 'makefile=make',
+      \ 'py=python'
+      \ ]
 

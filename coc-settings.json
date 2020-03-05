@@ -7,19 +7,28 @@
       "ignoredRootPaths": ["~"]
     },
     "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "compile_commands.json"],
-      "initializationOptions": {
-        "cache": {
-          "directory": ".ccls-cache"
-        },
-        "client": {
-          "snippetSupport": true
+        "command": "ccls",
+        "filetypes": [
+            "c",
+            "cpp",
+            "cuda",
+            "objc",
+            "objcpp"
+        ],
+        "rootPatterns": [
+            ".ccls-root",
+            "compile_commands.json"
+        ],
+        "initializationOptions": {
+            "cache": {
+                "directory": ".ccls-cache"
+            },
+            "client": {
+                "snippetSupport": true
+            }
         }
-      }
     },
-  },
+},
   "java.import.maven.enabled": true,
   "java.errors.incompleteClasspath.severity": "ignore",
   "python.jediEnabled": false,
@@ -42,5 +51,7 @@
   "go.goplsOptions": {
       "completeUnimported": true
   },
- "go.enable": true
+ "go.enable": true,
+ "git.virtualTextPrefix": ">>>  ",
+ "suggest.minTriggerInputLength": 2
 }
