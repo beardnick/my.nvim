@@ -137,8 +137,8 @@ endfunction
 
 
 
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :<C-U>WhichKeyVisual '<Space>'<CR>
+"nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+"vnoremap <silent> <leader> :<C-U>WhichKeyVisual '<Space>'<CR>
 
 "buffer
 
@@ -258,6 +258,23 @@ nmap mm <Plug>(coc-bookmark-toggle)
 nmap mi <Plug>(coc-bookmark-annotate)
 nnoremap ma :<C-U>CocList bookmark<CR>
 
+"debug
+nmap <Leader>db <Plug>VimspectorContinue
+nmap <Leader>dx <Plug>VimspectorStop
+nmap <Leader>dr <Plug>VimspectorRestart
+nmap <Leader>dp <Plug>VimspectorPause
+nmap <Leader>dl <Plug>VimspectorToggleBreakpoint
+nmap <Leader>df <Plug>VimspectorAddFunctionBreakpoint
+nmap <Leader>dn <Plug>VimspectorStepOver
+nmap <Leader>di <Plug>VimspectorStepInto
+nmap <Leader>do <Plug>VimspectorStepOut
+
+nmap <M-l> <Plug>VimspectorToggleBreakpoint
+nmap <M-n> <Plug>VimspectorStepOver
+nmap <M-x> <Plug>VimspectorStop
+nmap <M-r> <Plug>VimspectorRestart
+nmap <M-i> <Plug>VimspectorStepInto
+nmap <M-o> <Plug>VimspectorStepOut
 
 
 endif

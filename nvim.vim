@@ -66,7 +66,7 @@ if g:dein_load_state
     call dein#add('airblade/vim-rooter')
     " 切换自定义格式的工具
     call dein#add('AndrewRadev/switch.vim')
-    call dein#add('benmills/vimux')
+    "call dein#add('benmills/vimux')
     call dein#add('ap/vim-buftabline')
 
     " 自动切换输入法的工具
@@ -88,7 +88,7 @@ if g:dein_load_state
     call dein#add('flazz/vim-colorschemes')
     "添加tmux框中文字的补全源
     call dein#add('wellle/tmux-complete.vim')
-    call dein#add('liuchengxu/vim-which-key')
+    "call dein#add('liuchengxu/vim-which-key')
     "call dein#add('voldikss/vim-translate-me')
     "记录上一次打开文件的位置
     call dein#add('farmergreg/vim-lastplace')
@@ -107,6 +107,7 @@ if g:dein_load_state
     call dein#add('zenbro/mirror.vim') 
     call dein#add('antoinemadec/coc-fzf') 
     call dein#add('liuchengxu/vista.vim') 
+    call dein#add('puremourning/vimspector') 
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -653,3 +654,35 @@ autocmd WinLeave,InsertEnter * set nocursorline
       \ 'py=python'
       \ ]
 
+
+function! s:fzf_sink(what)
+	let p1 = stridx(a:what, '<')
+	if p1 >= 0
+		let name = strpart(a:what, 0, p1)
+		let name = substitute(name, '^\s*\(.\{-}\)\s*$', '\1', '')
+		if name != ''
+			exec "AsyncTask ". fnameescape(name)
+		endif
+	endif
+endfunction
+
+function! s:fzf_task()
+	let rows = asynctasks#source(&columns * 48 / 100)
+	let source = []
+	for row in rows
+		let name = row[0]
+		let source += [name . '  ' . row[1] . '  : ' . row[2]]
+	endfor
+	let opts = { 'source': source, 'sink': function('s:fzf_sink'),
+				\ 'options': '+m --nth 1 --inline-info --tac' }
+	if exists('g:fzf_layout')
+		for key in keys(g:fzf_layout)
+			let opts[key] = deepcopy(g:fzf_layout[key])
+		endfor
+	endif
+	call fzf#run(opts)
+endfunction
+
+command! -nargs=0 AsyncTaskFzf call s:fzf_task()
+
+let g:vimspector_enable_mappings = 'HUMAN'
