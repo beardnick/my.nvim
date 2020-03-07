@@ -107,6 +107,7 @@ if g:dein_load_state
     call dein#add('zenbro/mirror.vim') 
     call dein#add('antoinemadec/coc-fzf') 
     call dein#add('liuchengxu/vista.vim') 
+    "call dein#add('puremourning/vimspector') 
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -124,6 +125,7 @@ endif
 
 colorscheme gruvbox
 set background=light
+"set background=dark
 "colorscheme solarized8_light_flat
 "colorscheme monokai
 
@@ -149,12 +151,12 @@ let g:fzf_buffers_jump = 1
 
 "let g:tagbar_sort = 0
 
+let g:vista_sidebar_width = 35 
+
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-
 " 所生成的数据文件的名称
 let g:gutentags_ctags_tagfile = '.tags'
-
 " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
@@ -585,7 +587,6 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-dictionary'
                             \,'coc-docker'
                             \,'coc-emmet'
-                            \,'coc-emoji'
                             \,'coc-eslint'
                             \,'coc-explorer'
                             \,'coc-git'
