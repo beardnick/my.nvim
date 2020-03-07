@@ -276,6 +276,9 @@ nmap <M-r> <Plug>VimspectorRestart
 nmap <M-i> <Plug>VimspectorStepInto
 nmap <M-o> <Plug>VimspectorStepOut
 
+nmap <M-k> <Plug>(coc-translator-p)
+vmap <M-k> <Plug>(coc-translator-pv)
+
 
 endif
 
