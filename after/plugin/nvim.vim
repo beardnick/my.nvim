@@ -184,9 +184,10 @@ nnoremap <silent><LEADER>hv :<C-U>Helptags<CR>
 nnoremap <silent><LEADER>hm :<C-U>Maps<CR>
 nnoremap <silent><LEADER>hc :<C-U>Cheats<CR>
 
-" tag
-nnoremap <LEADER>ts :<C-U>Tags<CR>
-nnoremap <LEADER>tb :<C-U>Vista!!<CR>
+" floaterm tool
+"nnoremap <LEADER>tt :<C-U>FloatermToggle<CR>
+"nnoremap <LEADER>tn :<C-U>FloatermNext<CR>
+"nnoremap <LEADER>tp :<C-U>FloatermPrev<CR>
 
 " ui
 nnoremap <LEADER>uc :<C-U>Clock<CR>
@@ -228,25 +229,17 @@ nnoremap <M--> :<C-U>5wincmd -<CR>
 
 
 " search
-nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR>
+"nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR> "=><C-F>
 nnoremap <Leader>sr  :<C-U>Rg<CR>
 nnoremap <Leader>st :<C-U>Tags<CR>
-"nnoremap <Leader>ss :<C-U>Tags<CR>
-nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR>
+"nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR> "=><C-P>
+nnoremap <Leader>sf :<C-U>CocList floaterm<CR>
 nnoremap <Leader>sb :<C-U>Buffers<CR>
-nnoremap <Leader>se :<C-U>CocFzfListDiagnostics<CR>
-
-
 " coc-fzf
-
 nnoremap <silent> <Leader>se  :<C-u>CocFzfListDiagnostics<CR>
 nnoremap <silent> <Leader>sc  :<C-u>CocFzfListCommands<CR>
-nnoremap <silent> <Leader>sp  :<C-u>CocFzfListExtensions<CR>
-nnoremap <silent> <Leader>sl  :<C-u>CocFzfListLocation<CR>
-"nnoremap <silent> <Leader>o  :<C-u>CocFzfListOutline<CR>
-"nnoremap <silent> <Leader>p  :<C-u>CocFzfListResume<CR>
-"nnoremap <silent> <Leader>s  :<C-u>CocFzfListSymbols<CR>
-"nnoremap <silent> <Leader>S  :<C-u>CocFzfListServices<CR>
+"nnoremap <silent> <Leader>sp  :<C-u>CocFzfListExtensions<CR>
+"nnoremap <silent> <Leader>sl  :<C-u>CocFzfListLocation<CR> "=>gd
 
 
 "coc-bookmark

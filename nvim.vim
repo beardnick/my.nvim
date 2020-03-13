@@ -58,7 +58,7 @@ if g:dein_load_state
     call dein#add('thinca/vim-quickrun')
     call dein#add('Yggdroot/indentLine')
     " 修改树
-    call dein#add('sjl/gundo.vim')
+    "call dein#add('sjl/gundo.vim')
     call dein#add('thaerkh/vim-workspace')
     "call dein#add('bronson/vim-trailing-whitespace')
     call dein#add('tyru/open-browser.vim')
@@ -97,7 +97,6 @@ if g:dein_load_state
     " vimtex viewer 带了实时预览的功能
     call dein#add('lervag/vimtex')
     call dein#add('skywind3000/vim-quickui')
-    "call dein#add('voldikss/vim-floaterm')
     call dein#add('skywind3000/asynctasks.vim')
     call dein#add('skywind3000/asyncrun.vim')
     call dein#add('skywind3000/vim-terminal-help')
@@ -112,6 +111,7 @@ if g:dein_load_state
     call dein#add('dearrrfish/vim-applescript') 
     "call dein#add('camspiers/animate.vim') 
     "call dein#add('camspiers/lens.vim') 
+    call dein#add('dstein64/vim-win')
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -128,7 +128,7 @@ if dein#check_install() && g:auto_install_missing_plugins
 endif
 
 colorscheme gruvbox
-if str2nr(strftime("%H")) > 18 || str2nr(strftime("%H")) < 8 
+if str2nr(strftime("%H")) >= 17 || str2nr(strftime("%H")) <= 8 
     set background=dark
 else
     set background=light
@@ -246,13 +246,10 @@ let g:quickrun#default_config = {
 " 自定义指令
 command! -bang -nargs=? -complete=dir Cheats
   \ call fzf#vim#files("~/.cheat", fzf#vim#with_preview(), <bang>0)
-command! ChangeTree exe "GundoToggle"
-"command! Scratch call CreateScratch()
 command! Todo exe "Rg todo"
 command! PluginInstall call <SID>PluginInstall()
 command! Run call commands#CodeRuner()
 command! Refactor call CocActionAsync('refactor')
-"command! -bang Registers call commands#Registers('<bang>' ==# '!')
 command! HomePage call startify#insane_in_the_membrane(0)
 command! SourceCurrentFile exe "source %"
 command! CleanPackages call commands#UninstallPackages()
@@ -391,28 +388,6 @@ function! s:filter_header(lines) abort
         \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
     return centered_lines
 endfunction
-
-function! s:yank_list()
-  redir => ys
-  silent Yanks
-  redir END
-  return split(ys, '\n')[1:]
-endfunction
-
-function! s:yank_handler(reg)
-  if empty(a:reg)
-    echo "aborted register paste"
-  else
-    let token = split(a:reg, ' ')
-    execute 'Paste' . token[0]
-  endif
-endfunction
-
-command! FZFYank call fzf#run(fzf#wrap({
-\ 'source': <sid>yank_list(),
-\ 'sink': function('<sid>yank_handler'),
-\ 'options': '-m --prompt="Yank> "'
-\ }))
 
 
 let g:startify_custom_header = s:filter_header([
@@ -684,3 +659,25 @@ command! -nargs=0 AsyncTaskFzf call s:fzf_task()
 
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:switch_mapping = "-"
+
+let g:table_mode_map_prefix = ''
+
+let g:floaterm_width = 0.8
+let g:floaterm_height = 0.7
+
+""" Configuration example
+"let g:floaterm_keymap_new    = '<F7>'
+let g:floaterm_position = 'center'
+let g:floaterm_keymap_prev   = '<Leader>tp'
+let g:floaterm_keymap_next   = '<Leader>tn'
+let g:floaterm_keymap_toggle = '<Leader>tt'
+
+function s:floatermSettings()
+    "setlocal number
+    " more settings
+    setlocal background=dark
+    "hi FloatermNF guibg=black
+    highlight FloatermNF ctermfg=grey ctermbg=darkblue
+endfunction
+
+autocmd FileType floaterm call s:floatermSettings()
