@@ -97,7 +97,7 @@ snippet datetime "YYYY-MM-DD hh:mm" w
 endsnippet
 
 snippet todo "TODO comment" bw
-`!p snip.rv=get_comment_format()[0]` ${2:@todo}: $0${3: <${4:`!v strftime('%d-%m-%y')`}${5:, `!v g:snips_author`}>} `!p snip.rv=get_comment_format()[2]`
+`!p snip.rv=get_comment_format()[0]` ${2:@todo}: $0${3: <${4:`!v strftime('%y-%m-%d')`}${5:, `!v g:snips_author`}>} `!p snip.rv=get_comment_format()[2]`
 endsnippet
 
 ##########
@@ -115,7 +115,7 @@ snip.rv = str(subprocess.check_output(match.group(1),shell=True),encoding="utf-8
 endsnippet
 
 snippet /#(.*)/ "add a taged note" br
-`!p snip.rv=get_comment_format()[0]` `!p snip.rv="#" + match.group(1).upper() + ":"` `!v strftime('%d-%m-%y')` ${1:note} `!p snip.rv=get_comment_format()[2]`
+`!p snip.rv=get_comment_format()[0]` `!p snip.rv="#" + match.group(1).upper() + ":"` `!v strftime('%y-%m-%d')` ${1:note} `!p snip.rv=get_comment_format()[2]`
 endsnippet
 
 # vim:ft=snippets:

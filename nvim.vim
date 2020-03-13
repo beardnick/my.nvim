@@ -1,4 +1,4 @@
-"AndrewRadev/switch.vim nvim总是不兼容vi的
+"nvim总是不兼容vi的
 if &compatible
     set nocompatible
 endif
@@ -76,7 +76,7 @@ if g:dein_load_state
     "call dein#add('mivok/vimtodo')
     call dein#add('junegunn/goyo.vim')
     call dein#add('freitass/todo.txt-vim')
-    call dein#add('svermeulen/vim-easyclip')
+    "call dein#add('svermeulen/vim-easyclip')
     "call dein#add('vim-vdebug/vdebug')
     "call dein#add('jodosha/vim-godebug')
     " 提供了一些好用的command用于调试vimscript
@@ -92,6 +92,7 @@ if g:dein_load_state
     "call dein#add('voldikss/vim-translate-me')
     "记录上一次打开文件的位置
     call dein#add('farmergreg/vim-lastplace')
+    "全局修改插件
     call dein#add('brooth/far.vim')
     " vimtex viewer 带了实时预览的功能
     call dein#add('lervag/vimtex')
@@ -108,6 +109,9 @@ if g:dein_load_state
     call dein#add('antoinemadec/coc-fzf') 
     call dein#add('liuchengxu/vista.vim') 
     call dein#add('puremourning/vimspector') 
+    call dein#add('dearrrfish/vim-applescript') 
+    "call dein#add('camspiers/animate.vim') 
+    "call dein#add('camspiers/lens.vim') 
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -124,9 +128,11 @@ if dein#check_install() && g:auto_install_missing_plugins
 endif
 
 colorscheme gruvbox
-set background=light
-"colorscheme solarized8_light_flat
-"colorscheme monokai
+if str2nr(strftime("%H")) > 18 || str2nr(strftime("%H")) < 8 
+    set background=dark
+else
+    set background=light
+endif
 
 " 属性配置
 " 启用彩虹括号颜色
@@ -197,7 +203,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
-set timeoutlen=200
+set timeoutlen=500
 
 " 终端开启真彩色
 if has("termguicolors")
@@ -220,15 +226,6 @@ let g:Lf_ShortcutF = ''
 
 set cursorline
 
-"g:EasyClipUseYankDefaults*
-
-let g:EasyClipUseCutDefaults = 0
-
-"g:EasyClipUsePasteDefaults*
-
-let g:EasyClipEnableBlackHoleRedirect = 0
-
-"g:EasyClipUsePasteToggleDefaults
 
 " fzf使用悬浮窗
 " 让输入上方，搜索列表在下方
@@ -686,3 +683,4 @@ endfunction
 command! -nargs=0 AsyncTaskFzf call s:fzf_task()
 
 let g:vimspector_enable_mappings = 'HUMAN'
+let g:switch_mapping = "-"

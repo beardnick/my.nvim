@@ -163,10 +163,6 @@ nmap <LEADER>bt :<C-U>BTags<CR>
 nmap <LEADER>bs :<C-U>Buffers<CR>
 nmap <LEADER>bv :<C-U>call commands#BufferSplitVertical()<CR>
 
-
-
-
-
 " language
 xmap <LEADER>lf  <Plug>(coc-format-selected)
 nmap <LEADER>lf  <Plug>(coc-format-selected)
@@ -174,6 +170,7 @@ nmap <silent> <LEADER>lc <Plug>(coc-fix-current)
 xmap <silent> <LEADER>lc <Plug>(coc-fix-current)
 nmap <silent><LEADER>lr :<C-U>AsyncTask file-run<CR>
 nmap <silent><LEADER>lp :<C-U>AsyncTask project-run<CR>
+nmap <silent><LEADER>lg :<C-U>TemplateHere<CR>
 
 " file
 nnoremap <silent><LEADER>fs :<C-U>FilesMru --tiebreak=index<CR>
@@ -237,6 +234,7 @@ nnoremap <Leader>st :<C-U>Tags<CR>
 "nnoremap <Leader>ss :<C-U>Tags<CR>
 nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR>
 nnoremap <Leader>sb :<C-U>Buffers<CR>
+nnoremap <Leader>se :<C-U>CocFzfListDiagnostics<CR>
 
 
 " coc-fzf
@@ -279,6 +277,8 @@ nmap <M-o> <Plug>VimspectorStepOut
 nmap <M-k> <Plug>(coc-translator-p)
 vmap <M-k> <Plug>(coc-translator-pv)
 
+nmap <silent> w <Plug>(coc-ci-w)
+nmap <silent> b <Plug>(coc-ci-b)
 
 endif
 
