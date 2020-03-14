@@ -72,5 +72,6 @@
     ],
     "solargraph.completion": true,
     "solargraph.hover": true,
-    "solargraph.autoformat": true
+    "solargraph.autoformat": true,
+    "diagnostic.errorSign": "x"
 }

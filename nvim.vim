@@ -37,7 +37,8 @@ if g:dein_load_state
     call dein#add('fatih/vim-go')
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     call dein#add('SirVer/ultisnips')
-    call dein#add('honza/vim-snippets')
+    " 使用自己fork的snippets
+    call dein#add('beardnick/vim-snippets')
     call dein#add('plasticboy/vim-markdown')
     call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
 					\ 'build': 'sh -c "cd app & yarn install"' })
@@ -535,7 +536,7 @@ let g:go_template_autocreate = 0
 let g:templates_directory = '~/my.nvim/templates'
 
 
-let g:UltiSnipsSnippetDir=[$HOME . '/.config/nvim/UltiSnips']
+"let g:UltiSnipsSnippetDir=[$HOME . '/.config/nvim/UltiSnips']
 
 
 let g:go_template_use_pkg = 1
@@ -662,22 +663,16 @@ let g:switch_mapping = "-"
 
 let g:table_mode_map_prefix = ''
 
-let g:floaterm_width = 0.8
-let g:floaterm_height = 0.7
+let g:floaterm_width = 0.6
+let g:floaterm_height = 0.6
 
-""" Configuration example
-"let g:floaterm_keymap_new    = '<F7>'
-let g:floaterm_position = 'center'
+let g:floaterm_position = 'topright'
 let g:floaterm_keymap_prev   = '<Leader>tp'
 let g:floaterm_keymap_next   = '<Leader>tn'
 let g:floaterm_keymap_toggle = '<Leader>tt'
 
 function s:floatermSettings()
-    "setlocal number
-    " more settings
-    setlocal background=dark
-    "hi FloatermNF guibg=black
-    highlight FloatermNF ctermfg=grey ctermbg=darkblue
+    highlight FloatermNF  ctermbg=darkblue
 endfunction
 
 autocmd FileType floaterm call s:floatermSettings()
