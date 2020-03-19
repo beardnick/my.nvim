@@ -60,7 +60,7 @@ if g:dein_load_state
     call dein#add('Yggdroot/indentLine')
     " 修改树
     "call dein#add('sjl/gundo.vim')
-    call dein#add('thaerkh/vim-workspace')
+    "call dein#add('thaerkh/vim-workspace')
     "call dein#add('bronson/vim-trailing-whitespace')
     call dein#add('tyru/open-browser.vim')
     "call dein#add('airblade/vim-rooter', {'if':0})
@@ -113,6 +113,7 @@ if g:dein_load_state
     "call dein#add('camspiers/animate.vim') 
     "call dein#add('camspiers/lens.vim') 
     call dein#add('dstein64/vim-win')
+    call dein#add('embear/vim-localvimrc')
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -158,7 +159,7 @@ let g:fzf_buffers_jump = 1
 "let g:tagbar_sort = 0
 
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project','.vim']
 
 " 所生成的数据文件的名称
 let g:gutentags_ctags_tagfile = '.tags'
@@ -370,7 +371,7 @@ fun! s:PluginInstall() abort
 endf
 
 
-let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', '.hgignore','.gitignore', '.cquery']
+let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', '.hgignore','.gitignore', '.cquery','.vim/']
 
 " 在使用O换行时不自动添加注释行
 augroup Format-Options  
@@ -436,20 +437,20 @@ let g:startify_custom_header = s:filter_header([
 " 自动显示文档
 "autocmd CursorHold  * if &filetype !=# "vim" | call autocomplete#ShowDocumentation()
 
-let g:Lf_GtagsAutoGenerate = 1
+"let g:Lf_GtagsAutoGenerate = 1
 
-let g:Lf_ShowRelativePath = 0
-let g:Lf_HideHelp = 1
-let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
+"let g:Lf_ShowRelativePath = 0
+"let g:Lf_HideHelp = 1
+"let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
 
-let g:Lf_NormalMap = {
-    \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-    \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-    \ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-    \ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
-    \ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
-    \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
-    \ }
+"let g:Lf_NormalMap = {
+"    \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+"    \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+"    \ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+"    \ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+"    \ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+"    \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+"    \ }
 
 
 if executable('rg') 
@@ -498,6 +499,20 @@ augroup find_root
     autocmd!
     autocmd BufEnter * Rooter
     autocmd User StartifyBufferOpened nested :Rooter
+augroup END
+
+function! LoadLocalConfig() abort
+    let config = FindRootDirectory() . "/.vim"
+    for f in split(glob(config . '/*.vim'), '\n')
+        exe 'source' f
+    endfor
+endfunction
+
+augroup load_local_config
+    autocmd!
+    "autocmd BufEnter * Rooter
+    autocmd BufEnter * call LoadLocalConfig()
+    "autocmd User StartifyBufferOpened nested :Rooter
 augroup END
 
 
@@ -663,10 +678,11 @@ let g:switch_mapping = "-"
 
 let g:table_mode_map_prefix = ''
 
-let g:floaterm_width = 0.6
+let g:floaterm_width = 0.8
 let g:floaterm_height = 0.6
 
-let g:floaterm_position = 'topright'
+"let g:floaterm_position = 'topright'
+let g:floaterm_position = 'center'
 let g:floaterm_keymap_prev   = '<Leader>tp'
 let g:floaterm_keymap_next   = '<Leader>tn'
 let g:floaterm_keymap_toggle = '<Leader>tt'

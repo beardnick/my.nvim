@@ -171,6 +171,7 @@ xmap <silent> <LEADER>lc <Plug>(coc-fix-current)
 nmap <silent><LEADER>lr :<C-U>AsyncTask file-run<CR>
 nmap <silent><LEADER>lp :<C-U>AsyncTask project-run<CR>
 nmap <silent><LEADER>lg :<C-U>TemplateHere<CR>
+nmap <silent><LEADER>lt :<C-U>AsyncTaskFzf<CR>
 
 " file
 nnoremap <silent><LEADER>fs :<C-U>FilesMru --tiebreak=index<CR>
