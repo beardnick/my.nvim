@@ -19,19 +19,17 @@
 
 + fzf: 最重要的组件，提供搜索列表等功能
 + Ag， Rg: 提供模糊搜索功能
-+ node: coc.nvim依赖node来运行
++ node,yarn: coc.nvim依赖node来运行，可能要使用yarn进行构建
 
 ## 安装
 
 ### 手动安装
 
-1. 手动安装fzf、rg、ag
+1. 手动安装rg
 2. 安装4.0以上的neovim
 3. 将本配置文件clone到~/.confg/nvim中
 4. 手动clone dein和dein-ui项目并手动修改配置文件里面的DEIN,PLUGINS路径
-5. 修改fzf的安装路径
-6. 打开neovim，等待自动安装插件完成
-7. 使用CocInstall安装一些你需要的coc.nvim插件
+5. 打开neovim，等待自动安装插件完成。这一步可能会花一些时间
 
 ### 脚本安装
 
