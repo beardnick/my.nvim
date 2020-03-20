@@ -164,8 +164,8 @@ nmap <LEADER>bs :<C-U>Buffers<CR>
 nmap <LEADER>bv :<C-U>call commands#BufferSplitVertical()<CR>
 
 " language
-xmap <LEADER>lf  <Plug>(coc-format-selected)
-nmap <LEADER>lf  <Plug>(coc-format-selected)
+vmap <LEADER>lf  :<C-U>Format<CR>
+nmap <LEADER>lf  :<C-U>Format<CR>
 nmap <silent> <LEADER>lc <Plug>(coc-fix-current)
 xmap <silent> <LEADER>lc <Plug>(coc-fix-current)
 nmap <silent><LEADER>lr :<C-U>AsyncTask file-run<CR>

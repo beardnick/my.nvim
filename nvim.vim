@@ -24,8 +24,8 @@ if g:dein_load_state
     " 注意编译问题，很多时候编译出错了很多插件都会有问题
     " 大部分时候可以通过call coc#util#install()解决问题
     "call dein#add('neoclide/coc.nvim',{'build':'./install.sh'})
-    "call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
-    call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
+    call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+    "call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
     " tagbar用来显示tag
     "call dein#add('majutsushi/tagbar')
     " 自动tag生成与管理
