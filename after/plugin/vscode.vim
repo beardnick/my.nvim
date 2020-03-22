@@ -1,4 +1,6 @@
-if exists('g:vscode')
+if ! exists('g:vscode')
+    finish
+endif
 
 function s:VVSCodeCall(cmd) abort
     let startLine = line("v")
@@ -31,6 +33,4 @@ nnoremap <Leader>sr :<C-U>call VSCodeCall("workbench.action.findInFiles")<CR>
 nnoremap <Leader>sf :<C-U>call VSCodeCall("workbench.action.quickOpen")<CR>
 
 nnoremap K :<C-U>call VSCodeCall("editor.action.showHover")<CR>
-
-endif
 

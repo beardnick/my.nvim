@@ -1,4 +1,6 @@
-if ! exists('g:vscode')
+if exists('g:vscode')
+    finish
+endif
 
 nnoremap <silent><LEADER>/ :<C-U>Lines <C-R><C-W><CR>
 nnoremap <silent><C-F> :<C-U>Rg <C-R><C-W><CR>
@@ -274,7 +276,4 @@ vmap <M-k> <Plug>(coc-translator-pv)
 
 nmap <silent> w <Plug>(coc-ci-w)
 nmap <silent> b <Plug>(coc-ci-b)
-
-endif
-
 

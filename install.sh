@@ -110,4 +110,3 @@ echo "downloading basic plugin manager..."
 
 download_basic_plugins
 
-

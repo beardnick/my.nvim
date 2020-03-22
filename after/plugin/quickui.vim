@@ -1,3 +1,7 @@
+if exists('g:vscode')
+    finish
+endif
+
 function! s:FloatTermType() abort
     if g:floaterm_type ==# 'normal'
         let g:floaterm_type = 'floating'
