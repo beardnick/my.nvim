@@ -14,6 +14,7 @@ nnoremap <silent><LEADER>rl:<C-U>Registers<CR>
 let g:go_doc_keywordprg_enabled = 0
 
 nnoremap <silent>K  :<C-U> call CocAction('doHover')<CR>
+vnoremap <silent>K  :<C-U> call CocAction('doHover')<CR>
 
 " Remap keys for gotos
 " 先禁用vim-go的跳转定义插件
@@ -192,6 +193,14 @@ nnoremap <silent><LEADER>hc :<C-U>Cheats<CR>
 "nnoremap <LEADER>tn :<C-U>FloatermNext<CR>
 "nnoremap <LEADER>tp :<C-U>FloatermPrev<CR>
 
+function! ToggleBackground() abort
+    if &background == 'dark'
+        let &background='light'
+    else
+        let &background='dark'
+    endif
+endfunction
+
 " ui
 nnoremap <LEADER>uc :<C-U>Clock<CR>
 nnoremap <LEADER>uw :<C-U>set wrap!<CR>
@@ -202,6 +211,7 @@ nnoremap <LEADER>uh :<C-U>set concealcursor=c<CR>
 nnoremap <LEADER>us :<C-U>call TerminalToggle()<CR>
 tnoremap <LEADER>us <C-\><C-N>:<C-U>call TerminalToggle()<CR>
 nnoremap <LEADER>ug :<C-U>ChunkInfo<CR>
+nnoremap <LEADER>ub :<C-U>call ToggleBackground()<CR>
 
 "window
 nnoremap <LEADER>w+ :<C-U>5wincmd +<CR>
@@ -277,3 +287,9 @@ vmap <M-k> <Plug>(coc-translator-pv)
 nmap <silent> w <Plug>(coc-ci-w)
 nmap <silent> b <Plug>(coc-ci-b)
 
+"nmap <Leader>e :<C-U>Expand<CR>
+vmap <Leader>e :Expand<CR>
+
+" dbui
+"nmap l <Plug>(DBUI_SelectLine)
+"nmap <CR> <Plug>(DBUI_SelectLineVsplit)

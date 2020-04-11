@@ -61,7 +61,8 @@ if g:dein_load_state
     call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
     call dein#add('tweekmonster/fzf-filemru',{'depends': 'fzf.vim'})
 
-    call dein#add('thinca/vim-quickrun')
+    "使用task代替quickrun了
+    "call dein#add('thinca/vim-quickrun')
     call dein#add('Yggdroot/indentLine')
     " 修改树
     "call dein#add('sjl/gundo.vim')
@@ -91,7 +92,7 @@ if g:dein_load_state
     call dein#add('tpope/vim-dadbod')
     call dein#add('tpope/vim-dispatch')
     call dein#add('andymass/vim-matchup')
-    call dein#add('flazz/vim-colorschemes')
+    "call dein#add('flazz/vim-colorschemes')
     "添加tmux框中文字的补全源
     call dein#add('wellle/tmux-complete.vim')
     "call dein#add('liuchengxu/vim-which-key')
@@ -120,6 +121,13 @@ if g:dein_load_state
     call dein#add('dstein64/vim-win')
     call dein#add('embear/vim-localvimrc')
     call dein#add('skywind3000/vim-dict')
+    call dein#add('kristijanhusak/vim-dadbod-ui')
+    call dein#add('skywind3000/ECDICT')
+    call dein#add('akiyosi/gonvim-fuzzy')
+    call dein#add('glacambre/firenvim', { 'hook_post_update': { _ -> firenvim#install(0) } })
+    call dein#add('joshdick/onedark.vim')
+    call dein#add('challenger-deep-theme/vim',{'name':'challenger-deep-theme'} )
+    call dein#add('sickill/vim-monokai')
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -135,7 +143,7 @@ if dein#check_install() && g:auto_install_missing_plugins
     call SpaceVim#commands#install_plugin()
 endif
 
-colorscheme gruvbox
+colorscheme onedark
 if str2nr(strftime("%H")) >= 17 || str2nr(strftime("%H")) <= 8 
     set background=dark
 else
@@ -179,6 +187,7 @@ let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:quickrun_no_default_key_mappings = 1
+
 let g:sneak#s_next = 1
 
 
@@ -307,23 +316,47 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
- "Use tab for trigger completion with characters ahead and navigate.
- "Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-N>" :
+
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+
+inoremap <silent><expr> <C-n>
+      \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 
 function! s:check_back_space() abort
-  let s:col = col('.') - 1
-  " 判断光标下和前面的一个字符是否为空白字符
-  return !s:col || getline('.')[s:col - 1]  =~# '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+"function! s:check_back_space() abort
+"  let s:col = col('.') - 1
+"  " 判断光标下和前面的一个字符是否为空白字符
+"  return !s:col || getline('.')[s:col - 1]  =~# '\s'
+"endfunction
+
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+"imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+
+
 
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -390,55 +423,29 @@ augroup END
 
 "let g:bookmark_save_per_working_dir = 1
 
-function! s:filter_header(lines) abort
-    let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
-    let centered_lines = map(copy(a:lines),
-        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
-    return centered_lines
-endfunction
+let g:startify_padding_left = 10 
 
-
-let g:startify_custom_header = s:filter_header([
-    \ '      ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁    ░▓▓▒         ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁'     ,
-    \ '     ▕                        ▁  ░░▓▓▒▒▒     ▁▔                        ▔▏'   ,
-    \ '    ▕ ▗▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚  ░░░▓▓▓▓▓▒▒▒  ▕ ▗▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▖▒▒'   ,
-    \ '    ▕ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▓▓▓▓▓▓▓▓▓▒▒ ▕ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒'   ,
-    \ '    ▕ ▝▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚ ▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒ ▝▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▀▘▒'    ,
-    \ '     ▕     ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▏' ,
-    \ '      ▔▔▔▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒  ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒'       ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒'         ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒'           ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒'            ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒'            ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒'                ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒'                ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▒▒▒'              ,
-    \ '        ░▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓   ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▒▒▒'            ,
-    \ '       ░░▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒'          ,
-    \ '     ░░░▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒'       ,
-    \ '   ░░░▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒    ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒'      ,
-    \ ' ░░░▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒  ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒'    ,
-    \ '▒▒▒▓▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒'    ,
-    \ ' ▒▒▒▓▓▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████'     ,
-    \ '   ▒▒▒▓▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███'       ,
-    \ '     ▒▒▓▓▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▖▖▖▖▖▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███'         ,
-    \ '      ▒▒▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▚▚▚▚▚▘▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███'           ,
-    \ '       ▒▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒ ▚▚▚▚▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███'             ,
-    \ '        ▒▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███'              ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▚▚▚▚▚▚▚▚▓▓▓▚▚▚▚▚▚▖▓▓▗▚▚▚▚▚▖██ ▗▚▚▚▚▚'        ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▚▚▚▚▘▓▓▓▓▓▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚'       ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▓▚▚▚▚▚▎▓▓▓▓▓▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚'       ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▒▓▓▓▓▚▚▚▚▚▎▓▓▓▓▓▚▚▚▚▓▓▓▓▞▚▚▚▚▚      ▚▚▚▚▚'        ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▚▚▒▒▓▓▓▓▓▚▚▚▚▚▘▓▓▓▓▓▚▚▚▚▚▓▓██▞▚▚▚▚▚     ▚▚▚▚▚'         ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▚▚▒▒▒▒▓▓▓▓▓▚▚▚▚▚▘▓▓▓▓▚▚▚▚▚▓███  ▚▚▚▚      ▚▚▚▚▚'         ,
-    \ '         ▏ ▚▚▚▚▚▚▚▚▚▒▒▒▒▒▒▒▓▓▓▚▚▚▚▞▞▓▓▓▓▓▚▚▚▚▓██   ▚▚▚▚▚     ▚▚▚▚▚'          ,
-    \ '         ▏ ▚▚▚▚▚▚▒▒▒▒    ▒▒▒▒▚▚▚▚▚▚▓▓▓▓▓▚▚▚▚▚██    ▚▚▚▚     ▚▚▚▚▚▚'          ,
-    \ '         ▔▁▀▒▒▒▒▒▒         ▒▒▚▚▚▚▚▚▚▚▓▓▓▚▚▚▚▚▚    ▚▚▚▚▚▚    ▚▚▚▚▚▚▚'         ,
-    \ '           ▔                  ▒▒▓▓▓▓▓▓▓▓███'                                 ,
-    \ '                               ▒▒▒▓▓▓▓███'                                   ,
-    \ '                                 ▒▒▒▓██▓'                                    ,
-    \ '                                   ▒█▓'                                      ,
-    \ ])
+let g:startify_custom_header = startify#pad([
+            \'                    .                    '
+            \,'    ##############..... ##############   '
+            \,'    ##############......##############   '
+            \,'      ##########..........##########     '
+            \,'      ##########........##########       '
+            \,'      ##########.......##########        '
+            \,'      ##########.....##########..        '
+            \,'      ##########....##########.....      '
+            \,'    ..##########..##########.........    '
+            \,'  ....##########.#########.............  '
+            \,'    ..################JJJ............    '
+            \,'      ################.............      '
+            \,'      ##############.JJJ.JJJJJJJJJJ      '
+            \,'      ############...JJ...JJ..JJ  JJ     '
+            \,'      ##########....JJ...JJ..JJ  JJ      '
+            \,'      ########......JJJ..JJJ JJJ JJJ     '
+            \,'      ######    .........                '
+            \,'                  .....                  '
+            \,'                    .                    '
+            \     ])
 
 " 自动显示文档
 "autocmd CursorHold  * if &filetype !=# "vim" | call autocomplete#ShowDocumentation()
@@ -574,13 +581,11 @@ let g:templates_no_autocmd = 1
 let g:coc_global_extensions =['coc-actions'
                             \,'coc-browser'
                             \,'coc-calc'
-                            \,'coc-ccls'
                             \,'coc-clock'
                             \,'coc-css'
                             \,'coc-dictionary'
                             \,'coc-docker'
                             \,'coc-emmet'
-                            \,'coc-emoji'
                             \,'coc-eslint'
                             \,'coc-explorer'
                             \,'coc-git'
@@ -632,19 +637,19 @@ autocmd WinEnter,InsertLeave * set cursorline
 autocmd WinLeave,InsertEnter * set nocursorline
 
 
-    let g:vim_markdown_fenced_languages = [
-      \ 'c++=cpp',
-      \ 'viml=vim',
-      \ 'bash=sh',
-      \ 'ini=dosini',
-      \ 'js=javascript',
-      \ 'json=javascript',
-      \ 'jsx=javascriptreact',
-      \ 'tsx=typescriptreact',
-      \ 'docker=Dockerfile',
-      \ 'makefile=make',
-      \ 'py=python'
-      \ ]
+let g:vim_markdown_fenced_languages = [
+  \ 'c++=cpp',
+  \ 'viml=vim',
+  \ 'bash=sh',
+  \ 'ini=dosini',
+  \ 'js=javascript',
+  \ 'json=javascript',
+  \ 'jsx=javascriptreact',
+  \ 'tsx=typescriptreact',
+  \ 'docker=Dockerfile',
+  \ 'makefile=make',
+  \ 'py=python'
+  \ ]
 
 
 function! s:fzf_sink(what)
