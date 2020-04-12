@@ -50,8 +50,9 @@ if g:dein_load_state
     "call dein#add('lvht/tagbar-markdown')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('gcmt/wildfire.vim')
-    call dein#add('tpope/vim-fugitive')
+    "call dein#add('tpope/vim-fugitive')
     call dein#add('tpope/vim-surround')
+    call dein#add('tpope/vim-repeat')
     "call dein#add('mattesgroeger/vim-bookmarks')
     "call dein#add('airblade/vim-gitgutter')
     "call dein#add('jiangmiao/auto-pairs')
@@ -128,11 +129,15 @@ if g:dein_load_state
     call dein#add('joshdick/onedark.vim')
     call dein#add('challenger-deep-theme/vim',{'name':'challenger-deep-theme'} )
     call dein#add('sickill/vim-monokai')
+    call dein#add('kurkale6ka/vim-swap')
+    call dein#add('tpope/vim-dotenv')
+    call dein#add('itchyny/lightline.vim')
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
     call dein#save_state()
 endif
+
 
 let g:auto_install_missing_plugins = 1
 if dein#check_install() && g:auto_install_missing_plugins
@@ -144,11 +149,11 @@ if dein#check_install() && g:auto_install_missing_plugins
 endif
 
 colorscheme onedark
-if str2nr(strftime("%H")) >= 17 || str2nr(strftime("%H")) <= 8 
-    set background=dark
-else
-    set background=light
-endif
+"if str2nr(strftime("%H")) >= 17 || str2nr(strftime("%H")) <= 8 
+"    set background=dark
+"else
+"    set background=light
+"endif
 
 " 属性配置
 " 启用彩虹括号颜色
@@ -302,6 +307,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 highlight default link CocHighlightText  MatchParen
 
+highlight default link BufTabLineActive TabLineSel
+highlight default link BufTabLineCurrent PmenuSel
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 
@@ -410,7 +418,7 @@ fun! s:PluginInstall() abort
 endf
 
 
-let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', '.hgignore','.gitignore', '.cquery','.vim/']
+let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', '.hgignore','.gitignore', '.cquery']
 
 " 在使用O换行时不自动添加注释行
 augroup Format-Options  
@@ -701,3 +709,20 @@ function s:floatermSettings()
 endfunction
 
 autocmd FileType floaterm call s:floatermSettings()
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'absolutepath', 'method', 'modified', 'filetype'] ],
+      \ 'right':[['blame']]
+      \ },
+      \ 'component_function':{'blame':'LightlineGitBlame'},
+      \ }
+
+
+function! LightlineGitBlame() abort
+  let blame = get(b:, 'coc_git_blame', '')
+  " return blame
+  return winwidth(0) > 120 ? blame : ''
+endfunction

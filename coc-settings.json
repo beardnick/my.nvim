@@ -41,7 +41,7 @@
   "suggest.noselect": false,
   "codeLens.enable": true,
   "coc.preferences.formatOnType": true,
-  "git.addGBlameToVirtualText": true,
+  "git.addGBlameToVirtualText": false,
   "git.addGBlameToBufferVar": true,
   "suggest.fixInsertedWord": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
