@@ -42,7 +42,7 @@ nnoremap <silent><C-L> :<C-U>nohlsearch<CR>
 "vmap <silent> <Leader>t <Plug>TranslateWV
 
 " 跳转
-noremap <SPACE>w <C-W>
+noremap <Leader>w <C-W>
 inoremap jk <ESC>
 inoremap jj <ESC>
 inoremap kk <ESC>
@@ -182,6 +182,7 @@ nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
 
 " 使用fzfmru来模拟如vscode go to file 那样的文件模糊查找行为
 nnoremap <silent><C-P> :<C-U>FilesMru --tiebreak=index<CR>
+"inoremap <silent><C-P> <ESC>:<C-U>call CocActionAsync('showSignatureHelp')<CR>
 
 " help
 nnoremap <silent><LEADER>hv :<C-U>Helptags<CR>
@@ -284,8 +285,8 @@ nmap <M-o> <Plug>VimspectorStepOut
 nmap <M-k> <Plug>(coc-translator-p)
 vmap <M-k> <Plug>(coc-translator-pv)
 
-nmap <silent> w <Plug>(coc-ci-w)
-nmap <silent> b <Plug>(coc-ci-b)
+"nmap <silent> w <Plug>(coc-ci-w)
+"nmap <silent> b <Plug>(coc-ci-b)
 
 "nmap <Leader>e :<C-U>Expand<CR>
 vmap <Leader>e :Expand<CR>
@@ -293,3 +294,8 @@ vmap <Leader>e :Expand<CR>
 " dbui
 "nmap l <Plug>(DBUI_SelectLine)
 "nmap <CR> <Plug>(DBUI_SelectLineVsplit)
+
+" remote development
+
+nmap <Leader>rp :MirrorPush<CR>
+nmap <Leader>rl :MirrorPull<CR>

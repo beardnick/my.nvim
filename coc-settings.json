@@ -41,7 +41,7 @@
   "suggest.noselect": false,
   "codeLens.enable": true,
   "coc.preferences.formatOnType": true,
-  "git.addGBlameToVirtualText": false,
+  "git.addGBlameToVirtualText": true,
   "git.addGBlameToBufferVar": true,
   "suggest.fixInsertedWord": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
@@ -74,5 +74,12 @@
     "solargraph.autoformat": true,
     "solargraph.symbols": true,
     "solargraph.promptDownload": true,
-    "diagnostic.errorSign": "x"
+    "diagnostic.errorSign": "x",
+    "kite.enableSnippets": false,
+    "suggest.lowPrioritySourceLimit": 5,
+    "suggest.maxCompleteItemCount": 20,
+    "yank.priority": 50,
+    "coc.source.tag.filetypes": ["java","c++","c","go"],
+    "coc.source.dictionary.filetypes": ["java","c++","c","go"],
+    "suggest.timeout": 10000
 }

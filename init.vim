@@ -119,11 +119,11 @@ if g:dein_load_state
     call dein#add('dearrrfish/vim-applescript') 
     "call dein#add('camspiers/animate.vim') 
     "call dein#add('camspiers/lens.vim') 
-    call dein#add('dstein64/vim-win')
+    "call dein#add('dstein64/vim-win')
     call dein#add('embear/vim-localvimrc')
     call dein#add('skywind3000/vim-dict')
     call dein#add('kristijanhusak/vim-dadbod-ui')
-    call dein#add('skywind3000/ECDICT')
+    "call dein#add('skywind3000/ECDICT')
     call dein#add('akiyosi/gonvim-fuzzy')
     call dein#add('glacambre/firenvim', { 'hook_post_update': { _ -> firenvim#install(0) } })
     call dein#add('joshdick/onedark.vim')
@@ -132,12 +132,12 @@ if g:dein_load_state
     call dein#add('kurkale6ka/vim-swap')
     call dein#add('tpope/vim-dotenv')
     call dein#add('itchyny/lightline.vim')
+    call dein#add('rakr/vim-one')
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
     call dein#save_state()
 endif
-
 
 let g:auto_install_missing_plugins = 1
 if dein#check_install() && g:auto_install_missing_plugins
@@ -325,12 +325,6 @@ set shortmess+=c
 set signcolumn=yes
 
 
-"inoremap <silent><expr> <TAB>
-"      \ pumvisible() ? "\<C-n>" :
-"      \ <SID>check_back_space() ? "\<TAB>" :
-"      \ coc#refresh()
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 
 inoremap <silent><expr> <C-n>
       \ pumvisible() ? "\<C-n>" :
@@ -345,25 +339,11 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-
-"function! s:check_back_space() abort
-"  let s:col = col('.') - 1
-"  " 判断光标下和前面的一个字符是否为空白字符
-"  return !s:col || getline('.')[s:col - 1]  =~# '\s'
-"endfunction
-
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-"imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 if exists('*complete_info')
   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
-
-
 
 
 
@@ -508,7 +488,7 @@ let g:livepreview_engine = 'xelatex'
 
 
 
-autocmd BufWrite * if exists(":MirrorPush") | exe ':MirrorPush' | endif
+"autocmd BufWrite * if exists(":MirrorPush") | exe ':MirrorPush' | endif
 
 augroup open_terminal
   autocmd!
@@ -715,7 +695,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'absolutepath', 'method', 'modified', 'filetype'] ],
-      \ 'right':[['blame']]
+      \ 'right':[['line','percent']]
       \ },
       \ 'component_function':{'blame':'LightlineGitBlame'},
       \ }
