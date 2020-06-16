@@ -56,6 +56,7 @@ if g:dein_load_state
     "call dein#add('mattesgroeger/vim-bookmarks')
     "call dein#add('airblade/vim-gitgutter')
     "call dein#add('jiangmiao/auto-pairs')
+    call dein#add('Krasjet/auto.pairs')
     call dein#add('godlygeek/tabular')
     " 三个插件加起来有最好的文件搜索体验
     call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
@@ -133,6 +134,15 @@ if g:dein_load_state
     call dein#add('tpope/vim-dotenv')
     call dein#add('itchyny/lightline.vim')
     call dein#add('rakr/vim-one')
+    call dein#add('tomasiser/vim-code-dark')
+    "call dein#add('wsdjeg/vim-todo')
+    call dein#add('tjdevries/coc-zsh')
+    call dein#add('markonm/traces.vim')
+    call dein#add('t9md/vim-choosewin')
+    call dein#add('szw/vim-maximizer')
+    call dein#add('wellle/targets.vim')
+    call dein#add('rizzatti/dash.vim')
+    call dein#add('drmikehenry/vim-fixkey')
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -149,7 +159,7 @@ if dein#check_install() && g:auto_install_missing_plugins
 endif
 
 colorscheme onedark
-"if str2nr(strftime("%H")) >= 17 || str2nr(strftime("%H")) <= 8 
+"if str2nr(strftime("%H")) >= 18 || str2nr(strftime("%H")) <= 7 
 "    set background=dark
 "else
 "    set background=light
@@ -268,7 +278,8 @@ let g:quickrun#default_config = {
 " 自定义指令
 command! -bang -nargs=? -complete=dir Cheats
   \ call fzf#vim#files("~/.cheat", fzf#vim#with_preview(), <bang>0)
-command! Todo exe "Rg todo"
+command! Todo exe "Rg #TODO"
+command! Note exe "Rg #NOTE"
 command! PluginInstall call <SID>PluginInstall()
 command! Run call commands#CodeRuner()
 command! Refactor call CocActionAsync('refactor')
@@ -324,15 +335,10 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
-
-
 inoremap <silent><expr> <C-n>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-
-inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -344,8 +350,6 @@ if exists('*complete_info')
 else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
-
-
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -590,7 +594,6 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-marketplace'
                             \,'coc-omni'
                             \,'coc-omnisharp'
-                            \,'coc-pairs'
                             \,'coc-post'
                             \,'coc-prettier'
                             \,'coc-python'
@@ -598,7 +601,6 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-sh'
                             \,'coc-solargraph'
                             \,'coc-sql'
-                            \,'coc-stylelint'
                             \,'coc-syntax'
                             \,'coc-tag'
                             \,'coc-template'
@@ -683,15 +685,15 @@ let g:floaterm_position = 'topright'
 let g:floaterm_keymap_prev   = '<Leader>tp'
 let g:floaterm_keymap_next   = '<Leader>tn'
 let g:floaterm_keymap_toggle = '<Leader>tt'
-
-function s:floatermSettings()
+                                
+function s:floatermSettings()   
     highlight FloatermNF  ctermbg=darkblue
-endfunction
-
+endfunction                     
+                                
 autocmd FileType floaterm call s:floatermSettings()
-
+                                
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'absolutepath', 'method', 'modified', 'filetype'] ],
@@ -706,3 +708,12 @@ function! LightlineGitBlame() abort
   " return blame
   return winwidth(0) > 120 ? blame : ''
 endfunction
+
+"set guifont=MenloBoldItalic:h11
+"let g:choosewin_overlay_enable = 1
+
+let g:vista_default_executive = 'coc'
+
+let g:dash_map = {
+            \ 'vue':'javascript'
+            \ }

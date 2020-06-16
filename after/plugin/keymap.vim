@@ -188,7 +188,7 @@ nnoremap <silent><C-P> :<C-U>FilesMru --tiebreak=index<CR>
 nnoremap <silent><LEADER>hv :<C-U>Helptags<CR>
 nnoremap <silent><LEADER>hm :<C-U>Maps<CR>
 nnoremap <silent><LEADER>hc :<C-U>Cheats<CR>
-
+nmap <silent><LEADER>hd <Plug>DashSearch
 " floaterm tool
 "nnoremap <LEADER>tt :<C-U>FloatermToggle<CR>
 "nnoremap <LEADER>tn :<C-U>FloatermNext<CR>
@@ -219,6 +219,10 @@ nnoremap <LEADER>w+ :<C-U>5wincmd +<CR>
 nnoremap <LEADER>w- :<C-U>5wincmd -<CR>
 nnoremap <LEADER>w< :<C-U>5wincmd <<CR>
 nnoremap <LEADER>w> :<C-U>5wincmd ><CR>
+nmap <LEADER>wc <Plug>(choosewin)
+nnoremap <silent><Leader>wm :MaximizerToggle<CR>
+vnoremap <silent><Leader>wm :MaximizerToggle<CR>gv
+inoremap <silent><Leader>wm <C-o>:MaximizerToggle<CR>
 
 " coc
 nmap <Leader>ca <Plug>(coc-calc-result-append)
@@ -234,6 +238,7 @@ nmap <leader>co  :<C-U>call CocAction('runCommand', 'editor.action.organizeImpor
 
 nmap <silent> <M-CR> :<C-U>CocCommand actions.open<CR>
 xmap <silent> <M-CR> :<C-U>CocCommand actions.open<CR>
+
 nmap <silent> gl  <Plug>(coc-openlink)
 
 nnoremap <M-.> :<C-U>5wincmd ><CR>
@@ -299,3 +304,4 @@ vmap <Leader>e :Expand<CR>
 
 nmap <Leader>rp :MirrorPush<CR>
 nmap <Leader>rl :MirrorPull<CR>
+
