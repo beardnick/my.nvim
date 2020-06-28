@@ -255,8 +255,8 @@ nnoremap <Leader>st :<C-U>Tags<CR>
 nnoremap <Leader>sf :<C-U>CocList floaterm<CR>
 nnoremap <Leader>sb :<C-U>Buffers<CR>
 " coc-fzf
-nnoremap <silent> <Leader>se  :<C-u>CocFzfListDiagnostics<CR>
-nnoremap <silent> <Leader>sc  :<C-u>CocFzfListCommands<CR>
+nnoremap <silent> <Leader>se  :<C-u>CocFzfList diagnostics<CR>
+nnoremap <silent> <Leader>sc  :<C-u>CocFzfList commands<CR>
 nnoremap <silent> <Leader>sh  :<C-u>History:<CR>
 "nnoremap <silent> <Leader>sp  :<C-u>CocFzfListExtensions<CR>
 "nnoremap <silent> <Leader>sl  :<C-u>CocFzfListLocation<CR> "=>gd

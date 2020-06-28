@@ -143,6 +143,7 @@ if g:dein_load_state
     call dein#add('wellle/targets.vim')
     call dein#add('rizzatti/dash.vim')
     call dein#add('drmikehenry/vim-fixkey')
+    call dein#add('zhamlin/tiler.vim')
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -542,7 +543,7 @@ let g:asynctasks_rtp_config = "tasks.ini"
 "let g:tagbar_map_showproto = ''
 
 " 启动 Vim 时自动启动
-let g:keysound_enable = 1
+let g:keysound_enable = 0
 
 " 设置默认音效主题，可以选择：default, typewriter, mario, bubble, sword
 let g:keysound_theme = 'typewriter'
@@ -717,3 +718,13 @@ let g:vista_default_executive = 'coc'
 let g:dash_map = {
             \ 'vue':'javascript'
             \ }
+
+
+let g:tiler#layout='bottom'
+
+
+let g:tiler#popup#windows = {
+\    'terminal': { 'position': 'bottom', 'size': 10, 'filetype': 'terminal', 'order': 3 },
+\    'nerdtree': { 'position': 'left', 'size': 10, 'filetype': 'nerdtree', 'order': 2 },
+\    'tagbar': { 'position': 'right', 'size': 10, 'filetype': 'tagbar', 'order': 1 },
+\ }

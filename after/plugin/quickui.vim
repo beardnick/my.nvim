@@ -17,7 +17,7 @@ endfunction
 
 
 function! FloatTool(cmd) abort
-    let bufnr = floaterm#terminal#open(-1, a:cmd, {})
+    let bufnr = floaterm#terminal#open(-1, a:cmd, {},{})
     call floaterm#buflist#add(bufnr)
 endfunction
 
