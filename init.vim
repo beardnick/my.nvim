@@ -144,6 +144,7 @@ if g:dein_load_state
     call dein#add('rizzatti/dash.vim')
     call dein#add('drmikehenry/vim-fixkey')
     call dein#add('zhamlin/tiler.vim')
+    call dein#add('posva/vim-vue')
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -579,7 +580,6 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-dictionary'
                             \,'coc-docker'
                             \,'coc-emmet'
-                            \,'coc-eslint'
                             \,'coc-explorer'
                             \,'coc-git'
                             \,'coc-gitignore'
@@ -604,7 +604,6 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-sql'
                             \,'coc-syntax'
                             \,'coc-tag'
-                            \,'coc-template'
                             \,'coc-terminal'
                             \,'coc-todolist'
                             \,'coc-translator'
