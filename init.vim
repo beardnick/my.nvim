@@ -9,10 +9,13 @@ if &compatible
 endif
 
 let g:DEIN=expand('~/.cache/mynvim/repos/github.com/Shougo/dein.vim')
+let g:TREE_SITTER=expand('~/.cache/mynvim/repos/github.com/nvim-treesitter/nvim-treesitter')
 let g:PLUGINS=expand('~/.cache/mynvim/')
 " dein的路径
 let &runtimepath.="," . g:DEIN
+let &runtimepath.="," . g:TREE_SITTER
 let &runtimepath.=",~/.config/nvim"
+let &runtimepath.="," . g:DEIN
 let g:dein_load_state = dein#load_state(g:PLUGINS)
 if g:dein_load_state
     " 加载dein插件管理器
@@ -21,7 +24,7 @@ if g:dein_load_state
 
     call dein#add('morhetz/gruvbox') " 主题
     call dein#add('wsdjeg/dein-ui.vim') " 插件管理器
-    call dein#add('justinmk/vim-sneak') " 快速跳转插件
+    "call dein#add('justinmk/vim-sneak') " 快速跳转插件
     " vim-visual-multi代替multicursor
     "call dein#add('terryma/vim-multiple-cursors') " 多光标编辑插件
     call dein#add('mg979/vim-visual-multi') 
@@ -121,30 +124,32 @@ if g:dein_load_state
     "call dein#add('camspiers/animate.vim') 
     "call dein#add('camspiers/lens.vim') 
     "call dein#add('dstein64/vim-win')
-    call dein#add('embear/vim-localvimrc')
+    "call dein#add('embear/vim-localvimrc')
     call dein#add('skywind3000/vim-dict')
     call dein#add('kristijanhusak/vim-dadbod-ui')
     "call dein#add('skywind3000/ECDICT')
     call dein#add('akiyosi/gonvim-fuzzy')
-    call dein#add('glacambre/firenvim', { 'hook_post_update': { _ -> firenvim#install(0) } })
+    call dein#add('glacambre/firenvim', { 'hook_post_update': { _ -> firenvim#install(0) } }) " 浏览器中的嵌入式nvim
     call dein#add('joshdick/onedark.vim')
     call dein#add('challenger-deep-theme/vim',{'name':'challenger-deep-theme'} )
-    call dein#add('sickill/vim-monokai')
-    call dein#add('kurkale6ka/vim-swap')
+    call dein#add('sickill/vim-monokai') " monokai theme
+    call dein#add('kurkale6ka/vim-swap') " visualmode <Leader>x交换位置
     call dein#add('tpope/vim-dotenv')
     call dein#add('itchyny/lightline.vim')
     call dein#add('rakr/vim-one')
-    call dein#add('tomasiser/vim-code-dark')
+    call dein#add('tomasiser/vim-code-dark') " vscode主题
     "call dein#add('wsdjeg/vim-todo')
     call dein#add('tjdevries/coc-zsh')
-    call dein#add('markonm/traces.vim')
+    call dein#add('markonm/traces.vim') " 在命令模式中高亮正则表达式
     call dein#add('t9md/vim-choosewin')
     call dein#add('szw/vim-maximizer')
-    call dein#add('wellle/targets.vim')
+    call dein#add('wellle/targets.vim') " 千奇百怪的textobject支持
     call dein#add('rizzatti/dash.vim')
     call dein#add('drmikehenry/vim-fixkey')
-    call dein#add('zhamlin/tiler.vim')
+    "call dein#add('zhamlin/tiler.vim')
     call dein#add('posva/vim-vue')
+    call dein#add('easymotion/vim-easymotion') " 快速跳转
+    "call dein#add('nvim-treesitter/nvim-treesitter') 
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -160,7 +165,9 @@ if dein#check_install() && g:auto_install_missing_plugins
     call SpaceVim#commands#install_plugin()
 endif
 
+"colorscheme gruvbox
 colorscheme onedark
+"colorscheme codedark
 "if str2nr(strftime("%H")) >= 18 || str2nr(strftime("%H")) <= 7 
 "    set background=dark
 "else
@@ -190,7 +197,7 @@ let g:fzf_buffers_jump = 1
 "let g:tagbar_sort = 0
 
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project','.vim']
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project','.vim','go.mod','README',"README.md"]
 
 " 所生成的数据文件的名称
 let g:gutentags_ctags_tagfile = '.tags'
@@ -205,7 +212,7 @@ let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:quickrun_no_default_key_mappings = 1
 
-let g:sneak#s_next = 1
+"let g:sneak#s_next = 1
 
 
 " 检测 ~/.cache/tags 不存在就新建
@@ -508,6 +515,7 @@ augroup find_root
     autocmd User StartifyBufferOpened nested :Rooter
 augroup END
 
+" 自动source .vim中的配置文件
 function! LoadLocalConfig() abort
     let config = FindRootDirectory() . "/.vim"
     for f in split(glob(config . '/*.vim'), '\n')
@@ -584,7 +592,6 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-git'
                             \,'coc-gitignore'
                             \,'coc-go'
-                            \,'coc-highlight'
                             \,'coc-html'
                             \,'coc-java'
                             \,'coc-json'
@@ -616,6 +623,7 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-xml'
                             \,'coc-yaml'
                             \,'coc-yank'
+                            \,'coc-highlight'
                             \]
 
 
@@ -678,9 +686,9 @@ let g:switch_mapping = "-"
 let g:table_mode_map_prefix = ''
 
 let g:floaterm_width = 0.5
-let g:floaterm_height = 0.6
+let g:floaterm_height = 0.4
 
-let g:floaterm_position = 'topright'
+let g:floaterm_position = 'top'
 "let g:floaterm_position = 'center'
 let g:floaterm_keymap_prev   = '<Leader>tp'
 let g:floaterm_keymap_next   = '<Leader>tn'
@@ -727,3 +735,39 @@ let g:tiler#popup#windows = {
 \    'nerdtree': { 'position': 'left', 'size': 10, 'filetype': 'nerdtree', 'order': 2 },
 \    'tagbar': { 'position': 'right', 'size': 10, 'filetype': 'tagbar', 'order': 1 },
 \ }
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+    highlight = {
+        enable = true,                    -- false will disable the whole extension
+        disable = { 'rust','md'},        -- list of language that will be disabled
+    },
+    incremental_selection = {
+        enable = true,
+        disable = { 'cpp', 'lua' },
+        keymaps = {                       -- mappings for incremental selection (visual mappings)
+          init_selection = 'gnn',         -- maps in normal mode to init the node/scope selection
+          node_incremental = "grn",       -- increment to the upper named parent
+          scope_incremental = "grc",      -- increment to the upper scope (as defined in locals.scm)
+          node_decremental = "grm",       -- decrement to the previous node
+        }
+    },
+    refactor = {
+      highlight_defintions = {
+        enable = true
+      },
+      smart_rename = {
+        enable = true,
+        smart_rename = "grr"              -- mapping to rename reference under cursor
+      },
+      navigation = {
+        enable = true,
+        goto_definition = "gnd",          -- mapping to go to definition of symbol under cursor
+        list_definitions = "gnD"          -- mapping to list all definitions in current file
+      }
+    },
+    ensure_installed = 'all' -- one of 'all', 'language', or a list of languages
+}
+EOF
+
+set foldmethod=expr foldexpr=nvim_treesitter#foldexpr()

@@ -305,3 +305,5 @@ vmap <Leader>e :Expand<CR>
 nmap <Leader>rp :MirrorPush<CR>
 nmap <Leader>rl :MirrorPull<CR>
 
+nmap s <Plug>(easymotion-prefix)
+
