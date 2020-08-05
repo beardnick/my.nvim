@@ -32,7 +32,7 @@ if g:dein_load_state
     " 注意编译问题，很多时候编译出错了很多插件都会有问题
     " 大部分时候可以通过call coc#util#install()解决问题
     "call dein#add('neoclide/coc.nvim',{'build':'./install.sh'})
-    call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+    call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release','frozen':1})
     "call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
     " tagbar用来显示tag
     "call dein#add('majutsushi/tagbar')
@@ -139,7 +139,7 @@ if g:dein_load_state
     call dein#add('rakr/vim-one')
     call dein#add('tomasiser/vim-code-dark') " vscode主题
     "call dein#add('wsdjeg/vim-todo')
-    call dein#add('tjdevries/coc-zsh')
+    "call dein#add('tjdevries/coc-zsh')
     call dein#add('markonm/traces.vim') " 在命令模式中高亮正则表达式
     call dein#add('t9md/vim-choosewin')
     call dein#add('szw/vim-maximizer')
@@ -149,7 +149,10 @@ if g:dein_load_state
     "call dein#add('zhamlin/tiler.vim')
     call dein#add('posva/vim-vue')
     call dein#add('easymotion/vim-easymotion') " 快速跳转
-    "call dein#add('nvim-treesitter/nvim-treesitter') 
+    call dein#add('easymotion/vim-easymotion') " 快速跳转
+    "call dein#add('beeender/Comrade') 
+    call dein#add('nvim-treesitter/nvim-treesitter') 
+    call dein#add('yuki-ycino/fzf-preview.vim', { 'rev': 'release' })
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -166,6 +169,7 @@ if dein#check_install() && g:auto_install_missing_plugins
 endif
 
 "colorscheme gruvbox
+"set background=light
 colorscheme onedark
 "colorscheme codedark
 "if str2nr(strftime("%H")) >= 18 || str2nr(strftime("%H")) <= 7 
@@ -173,6 +177,16 @@ colorscheme onedark
 "else
 "    set background=light
 "endif
+
+let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'absolutepath', 'method', 'modified', 'filetype'] ],
+      \ 'right':[['line','percent']]
+      \ },
+      \ 'component_function':{'blame':'LightlineGitBlame'},
+      \ }
 
 " 属性配置
 " 启用彩虹括号颜色
@@ -603,12 +617,9 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-omni'
                             \,'coc-omnisharp'
                             \,'coc-post'
-                            \,'coc-prettier'
                             \,'coc-python'
                             \,'coc-rls'
-                            \,'coc-sh'
                             \,'coc-solargraph'
-                            \,'coc-sql'
                             \,'coc-syntax'
                             \,'coc-tag'
                             \,'coc-terminal'
@@ -700,15 +711,6 @@ endfunction
                                 
 autocmd FileType floaterm call s:floatermSettings()
                                 
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'absolutepath', 'method', 'modified', 'filetype'] ],
-      \ 'right':[['line','percent']]
-      \ },
-      \ 'component_function':{'blame':'LightlineGitBlame'},
-      \ }
 
 
 function! LightlineGitBlame() abort

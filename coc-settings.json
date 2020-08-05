@@ -47,7 +47,7 @@
   "suggest.noselect": false,
   "codeLens.enable": true,
   "coc.preferences.formatOnType": true,
-  "git.addGBlameToVirtualText": false,
+  "git.addGBlameToVirtualText": true,
   "git.addGBlameToBufferVar": true,
   "suggest.fixInsertedWord": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
@@ -87,5 +87,9 @@
   "coc.source.tag.filetypes": ["java", "c++", "c", "go"],
   "coc.source.dictionary.filetypes": ["java", "c++", "c", "go"],
   "suggest.timeout": 10000,
-  "explorer.previewAction.onHover": false
+  "explorer.previewAction.onHover": false,
+  "go.disable": {
+      "workspaceFolders": true
+  },
+  "coc.preferences.extensionUpdateCheck": "daily"
 }

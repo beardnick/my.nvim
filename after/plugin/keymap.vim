@@ -253,7 +253,7 @@ nnoremap <Leader>sr  :<C-U>Rg<CR>
 nnoremap <Leader>st :<C-U>Tags<CR>
 "nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR> "=><C-P>
 nnoremap <Leader>sf :<C-U>CocList floaterm<CR>
-nnoremap <Leader>sb :<C-U>Buffers<CR>
+nnoremap <Leader>sb :<C-U>FzfPreviewBuffers<CR>
 " coc-fzf
 nnoremap <silent> <Leader>se  :<C-u>CocFzfList diagnostics<CR>
 nnoremap <silent> <Leader>sc  :<C-u>CocFzfList commands<CR>
