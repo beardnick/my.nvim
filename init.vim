@@ -8,165 +8,153 @@ if &compatible
     set nocompatible
 endif
 
-let g:DEIN=expand('~/.cache/mynvim/repos/github.com/Shougo/dein.vim')
-let g:TREE_SITTER=expand('~/.cache/mynvim/repos/github.com/nvim-treesitter/nvim-treesitter')
+"let g:DEIN=expand('~/.cache/mynvim/repos/github.com/Shougo/dein.vim')
+"let g:TREE_SITTER=expand('~/.cache/mynvim/repos/github.com/nvim-treesitter/nvim-treesitter')
 let g:PLUGINS=expand('~/.cache/mynvim/')
 " dein的路径
-let &runtimepath.="," . g:DEIN
-let &runtimepath.="," . g:TREE_SITTER
+"let &runtimepath.="," . g:DEIN
+"let &runtimepath.="," . g:TREE_SITTER
 let &runtimepath.=",~/.config/nvim"
-let &runtimepath.="," . g:DEIN
-let g:dein_load_state = dein#load_state(g:PLUGINS)
-if g:dein_load_state
-    " 加载dein插件管理器
-    call dein#begin(g:PLUGINS)
-    call dein#add(g:DEIN)
+"let &runtimepath.="," . g:DEIN
+"
 
-    call dein#add('morhetz/gruvbox') " 主题
-    call dein#add('wsdjeg/dein-ui.vim') " 插件管理器
+call plug#begin(g:PLUGINS)
+
+Plug 'morhetz/gruvbox' " 主题
+Plug 'wsdjeg/dein-ui.vim' " 插件管理器
     "call dein#add('justinmk/vim-sneak') " 快速跳转插件
     " vim-visual-multi代替multicursor
     "call dein#add('terryma/vim-multiple-cursors') " 多光标编辑插件
-    call dein#add('mg979/vim-visual-multi') 
-    call dein#add('luochen1990/rainbow')
+Plug 'mg979/vim-visual-multi' 
+Plug 'luochen1990/rainbow'
     " 注意编译问题，很多时候编译出错了很多插件都会有问题
     " 大部分时候可以通过call coc#util#install()解决问题
     "call dein#add('neoclide/coc.nvim',{'build':'./install.sh'})
-    call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release','frozen':1})
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
     "call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
     " tagbar用来显示tag
     "call dein#add('majutsushi/tagbar')
     " 自动tag生成与管理
-    call dein#add('ludovicchabant/vim-gutentags')
+Plug 'ludovicchabant/vim-gutentags'
     " leaderf用来搜索
     "call dein#add('Yggdroot/LeaderF')
-    call dein#add('mhinz/vim-startify')
-    call dein#add('scrooloose/nerdcommenter')
-    call dein#add('fatih/vim-go')
+Plug 'mhinz/vim-startify'
+Plug 'scrooloose/nerdcommenter'
+Plug 'fatih/vim-go'
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
-    call dein#add('SirVer/ultisnips')
+Plug 'SirVer/ultisnips'
     " 使用自己fork的snippets
-    call dein#add('beardnick/vim-snippets')
-    call dein#add('plasticboy/vim-markdown')
-    call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
-					\ 'build': 'sh -c "cd app & yarn install"' })
+Plug 'beardnick/vim-snippets'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     "call dein#add('lvht/tagbar-markdown')
-    call dein#add('dhruvasagar/vim-table-mode')
-    call dein#add('gcmt/wildfire.vim')
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'gcmt/wildfire.vim'
     "call dein#add('tpope/vim-fugitive')
-    call dein#add('tpope/vim-surround')
-    call dein#add('tpope/vim-repeat')
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
     "call dein#add('mattesgroeger/vim-bookmarks')
     "call dein#add('airblade/vim-gitgutter')
     "call dein#add('jiangmiao/auto-pairs')
-    call dein#add('Krasjet/auto.pairs')
-    call dein#add('godlygeek/tabular')
+Plug 'Krasjet/auto.pairs'
+Plug 'godlygeek/tabular'
     " 三个插件加起来有最好的文件搜索体验
-    call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
-    call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-    call dein#add('tweekmonster/fzf-filemru',{'depends': 'fzf.vim'})
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tweekmonster/fzf-filemru'
 
     "使用task代替quickrun了
     "call dein#add('thinca/vim-quickrun')
-    call dein#add('Yggdroot/indentLine')
+Plug 'Yggdroot/indentLine'
     " 修改树
     "call dein#add('sjl/gundo.vim')
     "call dein#add('thaerkh/vim-workspace')
     "call dein#add('bronson/vim-trailing-whitespace')
-    call dein#add('tyru/open-browser.vim')
+Plug 'tyru/open-browser.vim'
     "call dein#add('airblade/vim-rooter', {'if':0})
-    call dein#add('airblade/vim-rooter')
+Plug 'airblade/vim-rooter'
     " 切换自定义格式的工具
-    call dein#add('AndrewRadev/switch.vim')
+Plug 'AndrewRadev/switch.vim'
     "call dein#add('benmills/vimux')
-    call dein#add('ap/vim-buftabline')
+Plug 'ap/vim-buftabline'
 
     " 自动切换输入法的工具
     " 这个容易出问题，还是不用了
     "call dein#add('xcodebuild/fcitx-vim-osx')
     "call dein#add('xcodebuild/fcitx-remote-for-osx')
     "call dein#add('mivok/vimtodo')
-    call dein#add('junegunn/goyo.vim')
-    call dein#add('freitass/todo.txt-vim')
+Plug 'junegunn/goyo.vim'
+Plug 'freitass/todo.txt-vim'
     "call dein#add('svermeulen/vim-easyclip')
     "call dein#add('vim-vdebug/vdebug')
     "call dein#add('jodosha/vim-godebug')
     " 提供了一些好用的command用于调试vimscript
-    call dein#add('tpope/vim-scriptease')
+Plug 'tpope/vim-scriptease'
     " 在vim中访问各种数据库
-    call dein#add('tpope/vim-dadbod')
-    call dein#add('tpope/vim-dispatch')
-    call dein#add('andymass/vim-matchup')
+Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-dispatch'
+Plug 'andymass/vim-matchup'
     "call dein#add('flazz/vim-colorschemes')
     "添加tmux框中文字的补全源
-    call dein#add('wellle/tmux-complete.vim')
+Plug 'wellle/tmux-complete.vim'
     "call dein#add('liuchengxu/vim-which-key')
     "call dein#add('voldikss/vim-translate-me')
     "记录上一次打开文件的位置
-    call dein#add('farmergreg/vim-lastplace')
+Plug 'farmergreg/vim-lastplace'
     "全局修改插件
-    call dein#add('brooth/far.vim')
+Plug 'brooth/far.vim'
     " vimtex viewer 带了实时预览的功能
-    call dein#add('lervag/vimtex')
-    call dein#add('skywind3000/vim-quickui')
-    call dein#add('skywind3000/asynctasks.vim')
-    call dein#add('skywind3000/asyncrun.vim')
-    call dein#add('skywind3000/vim-terminal-help')
-    call dein#add('skywind3000/vim-keysound')
+Plug 'lervag/vimtex'
+Plug 'skywind3000/vim-quickui'
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/vim-terminal-help'
+Plug 'skywind3000/vim-keysound'
     "call dein#add('brglng/vim-sidebar-manager')
-    call dein#add('aperezdc/vim-template')
-    call dein#add('voldikss/vim-floaterm') 
-    call dein#add('zenbro/mirror.vim') 
-    call dein#add('antoinemadec/coc-fzf') 
-    call dein#add('liuchengxu/vista.vim') 
-    call dein#add('puremourning/vimspector') 
-    call dein#add('dearrrfish/vim-applescript') 
+Plug 'aperezdc/vim-template'
+Plug 'voldikss/vim-floaterm' 
+Plug 'zenbro/mirror.vim' 
+Plug 'antoinemadec/coc-fzf' 
+Plug 'liuchengxu/vista.vim' 
+Plug 'puremourning/vimspector' 
+Plug 'dearrrfish/vim-applescript' 
     "call dein#add('camspiers/animate.vim') 
     "call dein#add('camspiers/lens.vim') 
     "call dein#add('dstein64/vim-win')
     "call dein#add('embear/vim-localvimrc')
-    call dein#add('skywind3000/vim-dict')
-    call dein#add('kristijanhusak/vim-dadbod-ui')
+Plug 'skywind3000/vim-dict'
+Plug 'kristijanhusak/vim-dadbod-ui'
     "call dein#add('skywind3000/ECDICT')
-    call dein#add('akiyosi/gonvim-fuzzy')
-    call dein#add('glacambre/firenvim', { 'hook_post_update': { _ -> firenvim#install(0) } }) " 浏览器中的嵌入式nvim
-    call dein#add('joshdick/onedark.vim')
-    call dein#add('challenger-deep-theme/vim',{'name':'challenger-deep-theme'} )
-    call dein#add('sickill/vim-monokai') " monokai theme
-    call dein#add('kurkale6ka/vim-swap') " visualmode <Leader>x交换位置
-    call dein#add('tpope/vim-dotenv')
-    call dein#add('itchyny/lightline.vim')
-    call dein#add('rakr/vim-one')
-    call dein#add('tomasiser/vim-code-dark') " vscode主题
+Plug 'akiyosi/gonvim-fuzzy'
+Plug 'joshdick/onedark.vim'
+Plug 'challenger-deep-theme/vim',{'name':'challenger-deep-theme'} 
+Plug 'sickill/vim-monokai' " monokai theme
+Plug 'kurkale6ka/vim-swap' " visualmode <Leader>x交换位置
+Plug 'tpope/vim-dotenv'
+Plug 'itchyny/lightline.vim'
+Plug 'rakr/vim-one'
+Plug 'tomasiser/vim-code-dark' " vscode主题
     "call dein#add('wsdjeg/vim-todo')
     "call dein#add('tjdevries/coc-zsh')
-    call dein#add('markonm/traces.vim') " 在命令模式中高亮正则表达式
-    call dein#add('t9md/vim-choosewin')
-    call dein#add('szw/vim-maximizer')
-    call dein#add('wellle/targets.vim') " 千奇百怪的textobject支持
-    call dein#add('rizzatti/dash.vim')
-    call dein#add('drmikehenry/vim-fixkey')
+Plug 'markonm/traces.vim' " 在命令模式中高亮正则表达式
+Plug 't9md/vim-choosewin'
+Plug 'szw/vim-maximizer'
+Plug 'wellle/targets.vim' " 千奇百怪的textobject支持
+Plug 'rizzatti/dash.vim'
+Plug 'drmikehenry/vim-fixkey'
     "call dein#add('zhamlin/tiler.vim')
-    call dein#add('posva/vim-vue')
-    call dein#add('easymotion/vim-easymotion') " 快速跳转
+Plug 'posva/vim-vue'
+Plug 'easymotion/vim-easymotion' " 快速跳转
     "call dein#add('beeender/Comrade') 
-    call dein#add('nvim-treesitter/nvim-treesitter') 
-    call dein#add('yuki-ycino/fzf-preview.vim', { 'rev': 'release' })
-    call dein#add('NLKNguyen/papercolor-theme')
+Plug 'nvim-treesitter/nvim-treesitter' 
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+Plug 'NLKNguyen/papercolor-theme'
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
-   call dein#end()
-    call dein#save_state()
-endif
 
-let g:auto_install_missing_plugins = 1
-if dein#check_install() && g:auto_install_missing_plugins
-    call dein#recache_runtimepath()
-    let g:spacevim_plugin_manager = 'dein'
-    let g:spacevim_plugin_manager_processes = 10 
-    " 自动安装未安装的插件
-    call SpaceVim#commands#install_plugin()
-endif
+call plug#end()
+
+
 
 colorscheme onedark
 set background=dark
@@ -413,17 +401,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}\ >\ 
-
-
-fun! s:PluginInstall() abort
-    if dein#check_install()
-        let g:spacevim_plugin_manager = 'dein'
-        let g:spacevim_plugin_manager_processes = 10 
-        " 自动安装未安装的插件
-        call SpaceVim#commands#install_plugin()
-    endif
-endf
-
 
 let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', '.hgignore','.gitignore', '.cquery']
 
