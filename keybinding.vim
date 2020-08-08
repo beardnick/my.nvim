@@ -1,13 +1,9 @@
-if exists('g:vscode')
-    finish
-endif
+let g:mapleader="\<Space>"
 
 nnoremap <silent><LEADER>/ :<C-U>Lines <C-R><C-W><CR>
 nnoremap <silent><C-F> :<C-U>Rg <C-R><C-W><CR>
 nnoremap <silent><C-H> :<C-U>Helptags<CR>
 nnoremap <silent><LEADER><LEADER> :<C-U>Commands<CR><C-P>
-
-nnoremap <silent><LEADER>rl:<C-U>Registers<CR>
 
 " 语法
 " 先禁用vim-go的文档显示
@@ -78,6 +74,7 @@ vnoremap <Leader>yy "+y
 vnoremap <Leader>ya "ay
 vnoremap <Leader>yb "by
 vnoremap <Leader>yc "cy
+
 
 nnoremap <Leader>pp viw"+p
 nnoremap <Leader>pa viw"ap

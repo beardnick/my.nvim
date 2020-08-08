@@ -3,127 +3,7 @@ if exists('g:vscode')
     finish
 endif
 
-"nvim总是不兼容vi的
-if &compatible
-    set nocompatible
-endif
-
-let g:PLUGINS=expand('~/.cache/mynvim/')
-let &runtimepath.=",~/.config/nvim"
-
-call plug#begin(g:PLUGINS)
-
-    Plug 'morhetz/gruvbox' " 主题
-    Plug 'wsdjeg/dein-ui.vim' " 插件管理器
-    Plug 'mg979/vim-visual-multi' 
-    Plug 'luochen1990/rainbow'
-    " 注意编译问题，很多时候编译出错了很多插件都会有问题
-    " 大部分时候可以通过call coc#util#install()解决问题
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " 自动tag生成与管理
-    Plug 'ludovicchabant/vim-gutentags'
-    " leaderf用来搜索
-    "call dein#add('Yggdroot/LeaderF')
-    Plug 'mhinz/vim-startify'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'fatih/vim-go'
-    " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
-    Plug 'SirVer/ultisnips'
-    " 使用自己fork的snippets
-    Plug 'beardnick/vim-snippets'
-    Plug 'plasticboy/vim-markdown'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-    Plug 'dhruvasagar/vim-table-mode'
-    Plug 'gcmt/wildfire.vim'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-repeat'
-    Plug 'Krasjet/auto.pairs'
-    Plug 'godlygeek/tabular'
-    " 三个插件加起来有最好的文件搜索体验
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    Plug 'tweekmonster/fzf-filemru'
-    Plug 'Yggdroot/indentLine'
-    Plug 'tyru/open-browser.vim'
-    Plug 'airblade/vim-rooter'
-    " 切换自定义格式的工具
-    Plug 'AndrewRadev/switch.vim'
-    Plug 'ap/vim-buftabline'
-
-    Plug 'junegunn/goyo.vim'
-    Plug 'freitass/todo.txt-vim'
-    " 提供了一些好用的command用于调试vimscript
-    Plug 'tpope/vim-scriptease'
-    " 在vim中访问各种数据库
-    Plug 'tpope/vim-dadbod'
-    Plug 'tpope/vim-dispatch'
-    Plug 'andymass/vim-matchup'
-    "添加tmux框中文字的补全源
-    Plug 'wellle/tmux-complete.vim'
-    "记录上一次打开文件的位置
-    Plug 'farmergreg/vim-lastplace'
-    "全局修改插件
-    Plug 'brooth/far.vim'
-    " vimtex viewer 带了实时预览的功能
-    Plug 'lervag/vimtex'
-    Plug 'skywind3000/vim-quickui'
-    Plug 'skywind3000/asynctasks.vim'
-    Plug 'skywind3000/asyncrun.vim'
-    Plug 'skywind3000/vim-terminal-help'
-    Plug 'skywind3000/vim-keysound'
-    Plug 'aperezdc/vim-template'
-    Plug 'voldikss/vim-floaterm' 
-    Plug 'zenbro/mirror.vim' 
-    Plug 'antoinemadec/coc-fzf' 
-    Plug 'liuchengxu/vista.vim' 
-    Plug 'puremourning/vimspector' 
-    Plug 'dearrrfish/vim-applescript' 
-    Plug 'skywind3000/vim-dict'
-    Plug 'kristijanhusak/vim-dadbod-ui'
-    Plug 'akiyosi/gonvim-fuzzy'
-    Plug 'joshdick/onedark.vim'
-    Plug 'challenger-deep-theme/vim',{'name':'challenger-deep-theme'} 
-    Plug 'sickill/vim-monokai' " monokai theme
-    Plug 'kurkale6ka/vim-swap' " visualmode <Leader>x交换位置
-    Plug 'tpope/vim-dotenv'
-    Plug 'itchyny/lightline.vim'
-    Plug 'rakr/vim-one'
-    Plug 'tomasiser/vim-code-dark' " vscode主题
-    Plug 'markonm/traces.vim' " 在命令模式中高亮正则表达式
-    Plug 't9md/vim-choosewin'
-    Plug 'szw/vim-maximizer'
-    Plug 'wellle/targets.vim' " 千奇百怪的textobject支持
-    Plug 'rizzatti/dash.vim'
-    Plug 'drmikehenry/vim-fixkey'
-    Plug 'posva/vim-vue'
-    Plug 'easymotion/vim-easymotion' " 快速跳转
-    Plug 'nvim-treesitter/nvim-treesitter' 
-    Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-    Plug 'NLKNguyen/papercolor-theme'
-
-call plug#end()
-
-
-
-colorscheme onedark
-set background=dark
-"colorscheme onedark
-"colorscheme codedark
-"if str2nr(strftime("%H")) >= 18 || str2nr(strftime("%H")) <= 7 
-"    set background=dark
-"else
-"    set background=light
-"endif
-
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'absolutepath', 'method', 'modified', 'filetype'] ],
-      \ 'right':[['line','percent']]
-      \ },
-      \ 'component_function':{'blame':'LightlineGitBlame'},
-      \ }
+execute 'source' fnamemodify(expand('<sfile>'), ':h').'/core.vim'
 
 " 属性配置
 " 启用彩虹括号颜色
@@ -364,29 +244,6 @@ augroup END
 
 "let g:bookmark_save_per_working_dir = 1
 
-let g:startify_padding_left = 10 
-
-let g:startify_custom_header = startify#pad([
-            \'                    .                    '
-            \,'    ##############..... ##############   '
-            \,'    ##############......##############   '
-            \,'      ##########..........##########     '
-            \,'      ##########........##########       '
-            \,'      ##########.......##########        '
-            \,'      ##########.....##########..        '
-            \,'      ##########....##########.....      '
-            \,'    ..##########..##########.........    '
-            \,'  ....##########.#########.............  '
-            \,'    ..################JJJ............    '
-            \,'      ################.............      '
-            \,'      ##############.JJJ.JJJJJJJJJJ      '
-            \,'      ############...JJ...JJ..JJ  JJ     '
-            \,'      ##########....JJ...JJ..JJ  JJ      '
-            \,'      ########......JJJ..JJJ JJJ JJJ     '
-            \,'      ######    .........                '
-            \,'                  .....                  '
-            \,'                    .                    '
-            \     ])
 
 " 自动显示文档
 "autocmd CursorHold  * if &filetype !=# "vim" | call autocomplete#ShowDocumentation()
@@ -491,16 +348,6 @@ let g:asynctasks_rtp_config = "tasks.ini"
 " tagbar
 "let g:tagbar_map_showproto = ''
 
-" pip3 install pysdl2-dll 
-" pip3 install pysdl2 
-" 启动 Vim 时自动启动
-let g:keysound_enable = 1
-
-" 设置默认音效主题，可以选择：default, typewriter, mario, bubble, sword
-let g:keysound_theme = 'typewriter'
-
-" 设置音量：0-1000
-let g:keysound_volume = 1000
 
 let g:go_template_autocreate = 0
 
@@ -521,49 +368,6 @@ autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeIm
 
 let g:templates_no_autocmd = 1
 
-"
-let g:coc_global_extensions =['coc-actions'
-                            \,'coc-browser'
-                            \,'coc-calc'
-                            \,'coc-clock'
-                            \,'coc-css'
-                            \,'coc-dictionary'
-                            \,'coc-docker'
-                            \,'coc-emmet'
-                            \,'coc-explorer'
-                            \,'coc-git'
-                            \,'coc-gitignore'
-                            \,'coc-go'
-                            \,'coc-html'
-                            \,'coc-java'
-                            \,'coc-json'
-                            \,'coc-kite'
-                            \,'coc-lines'
-                            \,'coc-lists'
-                            \,'coc-lua'
-                            \,'coc-marketplace'
-                            \,'coc-omni'
-                            \,'coc-omnisharp'
-                            \,'coc-post'
-                            \,'coc-python'
-                            \,'coc-rls'
-                            \,'coc-solargraph'
-                            \,'coc-syntax'
-                            \,'coc-tag'
-                            \,'coc-terminal'
-                            \,'coc-todolist'
-                            \,'coc-translator'
-                            \,'coc-tsserver'
-                            \,'coc-ultisnips'
-                            \,'coc-utils'
-                            \,'coc-vetur'
-                            \,'coc-vimlsp'
-                            \,'coc-vimtex'
-                            \,'coc-xml'
-                            \,'coc-yaml'
-                            \,'coc-yank'
-                            \,'coc-highlight'
-                            \]
 
 
 let g:indentLine_fileTypeExclude = ['defx','json', 'denite','startify','tagbar','vista_kind','vista','markdown']
@@ -620,32 +424,12 @@ endfunction
 command! -nargs=0 AsyncTaskFzf call s:fzf_task()
 
 let g:vimspector_enable_mappings = 'HUMAN'
+
 let g:switch_mapping = "-"
 
 let g:table_mode_map_prefix = ''
 
-let g:floaterm_width = 0.5
-let g:floaterm_height = 0.4
-
-let g:floaterm_position = 'top'
-"let g:floaterm_position = 'center'
-let g:floaterm_keymap_prev   = '<Leader>tp'
-let g:floaterm_keymap_next   = '<Leader>tn'
-let g:floaterm_keymap_toggle = '<Leader>tt'
                                 
-function s:floatermSettings()   
-    highlight FloatermNF  ctermbg=darkblue
-endfunction                     
-                                
-autocmd FileType floaterm call s:floatermSettings()
-                                
-
-
-function! LightlineGitBlame() abort
-  let blame = get(b:, 'coc_git_blame', '')
-  " return blame
-  return winwidth(0) > 120 ? blame : ''
-endfunction
 
 "set guifont=MenloBoldItalic:h11
 "let g:choosewin_overlay_enable = 1
