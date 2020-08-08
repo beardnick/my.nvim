@@ -1,95 +1,120 @@
 {
-  "languageserver": {
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    },
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "compile_commands.json"],
-      "initializationOptions": {
-        "cache": {
-          "directory": ".ccls-cache"
+    "languageserver": {
+        "bash": {
+            "command": "bash-language-server",
+            "args": [
+                "start"
+            ],
+            "filetypes": [
+                "sh"
+            ],
+            "ignoredRootPaths": [
+                "~"
+            ]
         },
-        // see https://github.com/MaskRay/ccls/issues/191
-        "clang": {
-          // from clang -v -fsyntax-only -x c++ /dev/null
-          "extraArgs": [
-            "-isystem/Applications/Xcode.app/Contents/Developer/usr",
-            "-isystem/usr/local/include",
-            "-isystem/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1",
-            "-isystem/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include",
-            "-isystem/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
-            "-isystem/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
-            "-isystem/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
-          ],
-          //From clang -print-resource-dir
-          "resourceDir": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0"
-        },
-        "client": {
-          "snippetSupport": true
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "cuda",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls-root",
+                "compile_commands.json"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": ".ccls-cache"
+                },
+                // see https://github.com/MaskRay/ccls/issues/191
+                "clang": {
+                    // from clang -v -fsyntax-only -x c++ /dev/null
+                    "extraArgs": [
+                        "-isystem/usr/local/opt/llvm/bin/../include/c++/v1",
+                        "-isystem/usr/local/Cellar/llvm/10.0.0_3/lib/clang/10.0.0/include",
+                        "-isystem/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include",
+                        "-isystem/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks"
+                    ],
+                    //From clang -print-resource-dir
+                    "resourceDir": "/usr/local/Cellar/llvm/10.0.0_3/lib/clang/10.0.0"
+                },
+                "client": {
+                    "snippetSupport": true
+                }
+            }
         }
-      }
-    }
-  },
-  "java.import.maven.enabled": true,
-  "java.errors.incompleteClasspath.severity": "ignore",
-  "python.jediEnabled": false,
-  "python.linting.flake8Enabled": false,
-  "python.linting.pylintEnabled": false,
-  "python.linting.flake8Args": [
-    "--ignore=E303,E501,E305,E302,E226,E231,E265,E202,E128,E126,E201,E111,E701,E114,E261,E225"
-  ],
-  "diagnostic.virtualText": true,
-  "suggest.noselect": false,
-  "codeLens.enable": true,
-  "coc.preferences.formatOnType": true,
-  "git.addGBlameToVirtualText": true,
-  "git.addGBlameToBufferVar": true,
-  "suggest.fixInsertedWord": false,
-  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-  "calc.highlight": true,
-  "tabnine.disable_filetypes": ["java"],
-  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok-1.18.4.jar -Xbootclasspath/a:/usr/local/share/lombok/lombok-1.18.4.jar",
-  "go.goplsOptions": {
-    "completeUnimported": true
-  },
-  "go.enable": true,
-  "git.virtualTextPrefix": ">>>  ",
-  "cSpell.enabledLanguageIds": [
-    "csharp",
-    "go",
-    "c",
-    "c++",
-    "markdown",
-    "java",
-    "javascript",
-    "javascriptreact",
-    "markdown",
-    "php",
-    "plaintext",
-    "typescript",
-    "typescriptreact",
-    "yml"
-  ],
-  "solargraph.completion": true,
-  "solargraph.hover": true,
-  "solargraph.autoformat": true,
-  "solargraph.symbols": true,
-  "solargraph.promptDownload": true,
-  "diagnostic.errorSign": "x",
-  "kite.enableSnippets": true,
-  "suggest.lowPrioritySourceLimit": 5,
-  "yank.priority": 50,
-  "coc.source.tag.filetypes": ["java", "c++", "c", "go"],
-  "coc.source.dictionary.filetypes": ["java", "c++", "c", "go"],
-  "suggest.timeout": 10000,
-  "explorer.previewAction.onHover": false,
-  "go.disable": {
-      "workspaceFolders": true
-  },
-  "coc.preferences.extensionUpdateCheck": "daily"
+    },
+    "java.import.maven.enabled": true,
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "python.jediEnabled": false,
+    "python.linting.flake8Enabled": false,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Args": [
+        "--ignore=E303,E501,E305,E302,E226,E231,E265,E202,E128,E126,E201,E111,E701,E114,E261,E225"
+    ],
+    "diagnostic.virtualText": false,
+    "diagnostic.enable": true,
+    "suggest.noselect": false,
+    "codeLens.enable": true,
+    "coc.preferences.formatOnType": true,
+    "git.addGBlameToVirtualText": true,
+    "git.addGBlameToBufferVar": true,
+    "suggest.fixInsertedWord": false,
+    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+    "calc.highlight": true,
+    "tabnine.disable_filetypes": [
+        "java"
+    ],
+    "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok-1.18.4.jar -Xbootclasspath/a:/usr/local/share/lombok/lombok-1.18.4.jar",
+    "go.goplsOptions": {
+        "completeUnimported": true
+    },
+    "go.enable": true,
+    "git.virtualTextPrefix": ">>>  ",
+    "cSpell.enabledLanguageIds": [
+        "csharp",
+        "go",
+        "c",
+        "c++",
+        "markdown",
+        "java",
+        "javascript",
+        "javascriptreact",
+        "markdown",
+        "php",
+        "plaintext",
+        "typescript",
+        "typescriptreact",
+        "yml"
+    ],
+    "solargraph.completion": true,
+    "solargraph.hover": true,
+    "solargraph.autoformat": true,
+    "solargraph.symbols": true,
+    "solargraph.promptDownload": true,
+    "diagnostic.errorSign": "x",
+    "kite.enableSnippets": true,
+    "suggest.lowPrioritySourceLimit": 5,
+    "yank.priority": 50,
+    "coc.source.tag.filetypes": [
+        "java",
+        "c++",
+        "c",
+        "go"
+    ],
+    "coc.source.dictionary.filetypes": [
+        "java",
+        "c++",
+        "c",
+        "go"
+    ],
+    "suggest.timeout": 10000,
+    "explorer.previewAction.onHover": false,
+    "go.disable": {
+        "workspaceFolders": true
+    },
+    "coc.preferences.extensionUpdateCheck": "daily"
 }

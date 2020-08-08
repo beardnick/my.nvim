@@ -149,10 +149,10 @@ if g:dein_load_state
     "call dein#add('zhamlin/tiler.vim')
     call dein#add('posva/vim-vue')
     call dein#add('easymotion/vim-easymotion') " 快速跳转
-    call dein#add('easymotion/vim-easymotion') " 快速跳转
     "call dein#add('beeender/Comrade') 
     call dein#add('nvim-treesitter/nvim-treesitter') 
     call dein#add('yuki-ycino/fzf-preview.vim', { 'rev': 'release' })
+    call dein#add('NLKNguyen/papercolor-theme')
     "call dein#add('vim-pandoc/vim-pandoc') 
     "call dein#add('vim-pandoc/vim-pandoc-syntax') 
    call dein#end()
@@ -168,9 +168,9 @@ if dein#check_install() && g:auto_install_missing_plugins
     call SpaceVim#commands#install_plugin()
 endif
 
-"colorscheme gruvbox
-"set background=light
 colorscheme onedark
+set background=dark
+"colorscheme onedark
 "colorscheme codedark
 "if str2nr(strftime("%H")) >= 18 || str2nr(strftime("%H")) <= 7 
 "    set background=dark
@@ -408,7 +408,7 @@ command! -nargs=0 Format :call CocAction('format')
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-" use `:OR` for organize import of current buffer
+ "use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
@@ -565,8 +565,10 @@ let g:asynctasks_rtp_config = "tasks.ini"
 " tagbar
 "let g:tagbar_map_showproto = ''
 
+" pip3 install pysdl2-dll 
+" pip3 install pysdl2 
 " 启动 Vim 时自动启动
-let g:keysound_enable = 0
+let g:keysound_enable = 1
 
 " 设置默认音效主题，可以选择：default, typewriter, mario, bubble, sword
 let g:keysound_theme = 'typewriter'
@@ -773,3 +775,14 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 set foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
+
+
+"let g:ale_echo_cursor = 0
+"let g:ale_virtualtext_cursor = 1
+
+"hi CocWarningSign  ctermfg=Brown guifg=#ff922b
+"hi CocErrorSign  ctermfg=Red guifg=#ff0000
+
+"highlight link ALEVirtualTextError CocErrorSign
+
+"highlight link ALEVirtualTextWarning CocWarningSign
