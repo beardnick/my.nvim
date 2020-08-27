@@ -1,6 +1,6 @@
 let g:mapleader="\<Space>"
 
-nnoremap <silent><LEADER>/ :<C-U>Lines <C-R><C-W><CR>
+nnoremap <silent><LEADER>/ :<C-U>BLines <C-R><C-W><CR>
 nnoremap <silent><C-F> :<C-U>Rg <C-R><C-W><CR>
 nnoremap <silent><C-H> :<C-U>Helptags<CR>
 nnoremap <silent><LEADER><LEADER> :<C-U>Commands<CR><C-P>
@@ -206,8 +206,12 @@ nnoremap <LEADER>ut :<C-U>Vista!!<CR>
 nnoremap <LEADER>un :<C-U>set number!<CR>
 nnoremap <LEADER>up :<C-U>Goyo<CR>
 nnoremap <LEADER>uh :<C-U>set concealcursor=c<CR>
-nnoremap <LEADER>us :<C-U>call TerminalToggle()<CR>
-tnoremap <LEADER>us <C-\><C-N>:<C-U>call TerminalToggle()<CR>
+"nnoremap <LEADER>us :<C-U>call TerminalToggle()<CR>
+"tnoremap <LEADER>us <C-\><C-N>:<C-U>call TerminalToggle()<CR>
+nnoremap <LEADER>us :<C-U>Ttoggle<CR>
+tnoremap <LEADER>us <C-\><C-N>:<C-U>Ttoggle<CR>
+nnoremap <LEADER>tc :<C-U>vertical Tnew<CR>
+tnoremap <LEADER>tc <C-\><C-N>:<C-U>vertical Tnew<CR>
 nnoremap <LEADER>ug :<C-U>ChunkInfo<CR>
 nnoremap <LEADER>ub :<C-U>call ToggleBackground()<CR>
 
@@ -247,10 +251,12 @@ nnoremap <M--> :<C-U>5wincmd -<CR>
 " search
 "nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR> "=><C-F>
 nnoremap <Leader>sr  :<C-U>Rg<CR>
+nnoremap <Leader>sl  :<C-U>BLines<CR>
 nnoremap <Leader>st :<C-U>Tags<CR>
 "nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR> "=><C-P>
 nnoremap <Leader>sf :<C-U>CocList floaterm<CR>
 nnoremap <Leader>sb :<C-U>FzfPreviewBuffers<CR>
+tnoremap <Leader>sb <C-\><C-n>:<C-U>FzfPreviewBuffers<CR>
 " coc-fzf
 nnoremap <silent> <Leader>se  :<C-u>CocFzfList diagnostics<CR>
 nnoremap <silent> <Leader>sc  :<C-u>CocFzfList commands<CR>
@@ -303,4 +309,3 @@ nmap <Leader>rp :MirrorPush<CR>
 nmap <Leader>rl :MirrorPull<CR>
 
 nmap s <Plug>(easymotion-prefix)
-

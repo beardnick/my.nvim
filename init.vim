@@ -90,7 +90,7 @@ endif
 " 为了markdown插件而设置的
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:UltiSnipsEditSplit="vertical"
-let g:table_mode_always_active = 1
+let g:table_mode_always_active = 0
 let g:vmt_auto_update_on_save = 1
 
 let g:Lf_ShortcutB = '<LEADER>bs'                               
@@ -120,8 +120,6 @@ command! -bang -nargs=? -complete=dir Cheats
   \ call fzf#vim#files("~/.cheat", fzf#vim#with_preview(), <bang>0)
 command! Todo exe "Rg #TODO"
 command! Note exe "Rg #NOTE"
-command! PluginInstall call <SID>PluginInstall()
-command! Run call commands#CodeRuner()
 command! Refactor call CocActionAsync('refactor')
 command! HomePage call startify#insane_in_the_membrane(0)
 command! SourceCurrentFile exe "source %"
@@ -156,10 +154,6 @@ autocmd BufNew,BufEnter *.pdc setfiletype markdown
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-highlight default link CocHighlightText  MatchParen
-
-highlight default link BufTabLineActive TabLineSel
-highlight default link BufTabLineCurrent PmenuSel
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -226,7 +220,7 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
  "use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+"command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}\ >\ 
@@ -335,13 +329,13 @@ augroup END
 
 
 " terminal_help
-let g:terminal_height = 15 
+let g:terminal_height = 20 
 let g:terminal_pos = 'botright'
 
 " asynctasks
 let g:asynctasks_term_pos = 'bottom'
 let g:asyncrun_open = 15
-"let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
+"let g:asynctasks_term_rows = 50    " 设置纵向切割时，高度为 10
 "let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
 let g:asynctasks_rtp_config = "tasks.ini"
 
@@ -364,7 +358,7 @@ let g:go_rename_command = 'gopls'
 let g:go_fmt_fail_silently = 1
 let g:go_def_mapping_enabled = 0
 
-autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+"autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 let g:templates_no_autocmd = 1
 
@@ -450,6 +444,17 @@ let g:tiler#popup#windows = {
 \    'tagbar': { 'position': 'right', 'size': 10, 'filetype': 'tagbar', 'order': 1 },
 \ }
 
+
+let g:table_mode_disable_tableize_mappings = 1
+
+let g:table_mode_disable_mappings = 1
+
+
+let g:terminal_key = ''
+
+let g:neoterm_default_mod='rightbelow'
+
+
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
     highlight = {
@@ -484,9 +489,6 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-set foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
-
-
 "let g:ale_echo_cursor = 0
 "let g:ale_virtualtext_cursor = 1
 
@@ -496,3 +498,5 @@ set foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
 "highlight link ALEVirtualTextError CocErrorSign
 
 "highlight link ALEVirtualTextWarning CocWarningSign
+
+"let g:table_mode_disable_mappings = 1

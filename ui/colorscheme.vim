@@ -27,3 +27,7 @@ function! LightlineGitBlame() abort
   " return blame
   return winwidth(0) > 120 ? blame : ''
 endfunction
+
+highlight default link CocHighlightText  MatchParen
+"highlight default link BufTabLineActive TabLineSel
+"highlight default link BufTabLineCurrent PmenuSel

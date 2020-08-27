@@ -11,11 +11,12 @@ let g:mynvim_config_default=g:mynvim_root_path . '/default.vim'
 let g:mynvim_config_before=expand('~/.mynvim_config_before.vim')
 let g:mynvim_config_after=expand('~/.mynvim_config_after.vim')
 
+set wildignore+=*.o,*.obj,*/.ccls-cache/*,*/vendor/*
+set wildignore+=*/node_modules/*,_site,*/__pycache__/,*/venv/*,*/target/*,*/.vim$,\~$,*/.log,*/.aux,*/.cls,*/.aux,*/.bbl,*/.blg,*/.fls,*/.fdb*/,*/.toc,*/.out,*/.glo,*/.log,*/.ist,*/.fdb_latexmk
 
 call plug#begin(g:plugin_dir)
 
     Plug 'morhetz/gruvbox' " 主题
-    Plug 'wsdjeg/dein-ui.vim' " 插件管理器
     Plug 'mg979/vim-visual-multi' 
     Plug 'luochen1990/rainbow'
     " 注意编译问题，很多时候编译出错了很多插件都会有问题
@@ -23,6 +24,7 @@ call plug#begin(g:plugin_dir)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " 自动tag生成与管理
     Plug 'ludovicchabant/vim-gutentags'
+    Plug 'skywind3000/gutentags_plus'
     " leaderf用来搜索
     "call dein#add('Yggdroot/LeaderF')
     Plug 'mhinz/vim-startify'
@@ -33,7 +35,7 @@ call plug#begin(g:plugin_dir)
     " 使用自己fork的snippets
     Plug 'beardnick/vim-snippets'
     Plug 'plasticboy/vim-markdown'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
     Plug 'dhruvasagar/vim-table-mode'
     Plug 'gcmt/wildfire.vim'
     Plug 'tpope/vim-surround'
@@ -62,7 +64,8 @@ call plug#begin(g:plugin_dir)
     "添加tmux框中文字的补全源
     Plug 'wellle/tmux-complete.vim'
     "记录上一次打开文件的位置
-    Plug 'farmergreg/vim-lastplace'
+    "它会使jumplist出问题
+    "Plug 'farmergreg/vim-lastplace'
     "全局修改插件
     Plug 'brooth/far.vim'
     " vimtex viewer 带了实时预览的功能
@@ -101,6 +104,7 @@ call plug#begin(g:plugin_dir)
     Plug 'nvim-treesitter/nvim-treesitter' 
     Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
     Plug 'NLKNguyen/papercolor-theme'
+    Plug 'kassio/neoterm'
 
 call plug#end()
 
@@ -146,6 +150,7 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-yaml'
                             \,'coc-yank'
                             \,'coc-highlight'
+                            \,'coc-lua'
                             \]
 
 silent! execute 'source ' . g:mynvim_config_default
@@ -157,3 +162,4 @@ call utils#source_path(g:mynvim_root_path,"lang")
 
 silent! execute 'source ' . g:mynvim_config_after
 call utils#source_file(g:mynvim_root_path, 'keybinding.vim')
+
