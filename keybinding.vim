@@ -1,7 +1,7 @@
 let g:mapleader="\<Space>"
 
-nnoremap <silent><LEADER>/ :<C-U>BLines <C-R><C-W><CR>
-nnoremap <silent><C-F> :<C-U>Rg <C-R><C-W><CR>
+nnoremap <silent><LEADER>/ :<C-U>FzfPreviewLines <C-R><C-W><CR>
+nnoremap <silent><C-F> :<C-U>FzfPreviewProjectGrep <C-R><C-W><CR>
 nnoremap <silent><C-H> :<C-U>Helptags<CR>
 nnoremap <silent><LEADER><LEADER> :<C-U>Commands<CR><C-P>
 
@@ -250,8 +250,9 @@ nnoremap <M--> :<C-U>5wincmd -<CR>
 
 " search
 "nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR> "=><C-F>
-nnoremap <Leader>sr  :<C-U>Rg<CR>
-nnoremap <Leader>sl  :<C-U>BLines<CR>
+"nnoremap <Leader>sr  :<C-U>Rg<CR>
+nnoremap <Leader>sr  :<C-U>FzfPreviewProjectGrep ""<CR>
+nnoremap <Leader>sl  :<C-U>FzfPreviewLines<CR>
 nnoremap <Leader>st :<C-U>Tags<CR>
 "nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR> "=><C-P>
 nnoremap <Leader>sf :<C-U>CocList floaterm<CR>
