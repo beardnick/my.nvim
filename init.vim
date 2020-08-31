@@ -28,7 +28,7 @@ let g:fzf_buffers_jump = 1
 "let g:tagbar_sort = 0
 
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project','.vim','go.mod','README',"README.md"]
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project','go.mod','README',"README.md",".gitignore"]
 
 " 所生成的数据文件的名称
 let g:gutentags_ctags_tagfile = '.tags'
@@ -421,7 +421,6 @@ let g:vimspector_enable_mappings = 'HUMAN'
 
 let g:switch_mapping = "-"
 
-let g:table_mode_map_prefix = ''
 
                                 
 
@@ -445,15 +444,18 @@ let g:tiler#popup#windows = {
 \ }
 
 
-let g:table_mode_disable_tableize_mappings = 1
+"let g:table_mode_disable_tableize_mappings = 1
 
-let g:table_mode_disable_mappings = 1
+"let g:table_mode_disable_mappings = 1
 
+let g:table_mode_map_prefix = '_'
 
 let g:terminal_key = ''
 
 let g:neoterm_default_mod='rightbelow'
 
+
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
