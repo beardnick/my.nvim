@@ -425,6 +425,7 @@ let g:switch_mapping = "-"
                                 
 
 "set guifont=MenloBoldItalic:h11
+"set guifont=menlo:h11
 "let g:choosewin_overlay_enable = 1
 
 let g:vista_default_executive = 'coc'

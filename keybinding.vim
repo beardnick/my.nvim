@@ -251,7 +251,8 @@ nnoremap <M--> :<C-U>5wincmd -<CR>
 " search
 "nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR> "=><C-F>
 "nnoremap <Leader>sr  :<C-U>Rg<CR>
-nnoremap <Leader>sr  :<C-U>FzfPreviewProjectGrep ""<CR>
+nnoremap <Leader>sr  :<C-U>Rg<CR>
+nnoremap <Leader>sg  :<C-U>FzfPreviewProjectGrep ""<CR>
 nnoremap <Leader>sl  :<C-U>FzfPreviewLines<CR>
 nnoremap <Leader>st :<C-U>Tags<CR>
 "nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR> "=><C-P>
