@@ -45,11 +45,6 @@ noremap <Leader>w <C-W>
 inoremap jk <ESC>
 inoremap jj <ESC>
 inoremap kk <ESC>
- "编辑配置文件
-"nnoremap <LEADER>ev :vsplit ~/my.nvim/init.vim<CR>
- "加载配置文件
-"nnoremap <LEADER>sv :source ~/my.nvim/init.vim<CR>
-"nmap gs <Plug>Sneak_S
 
 " 编辑
 vmap <LEADER>s <Plug>VSurround

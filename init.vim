@@ -48,7 +48,6 @@ if has("termguicolors")
 endif
 
 let g:UltiSnipsEditSplit="vertical"
-let g:table_mode_always_active = 0
 let g:vmt_auto_update_on_save = 1
 
 let g:Lf_ShortcutB = '<LEADER>bs'                               
@@ -138,8 +137,6 @@ let g:vim_json_syntax_conceal = 0
 
  
 let g:vimtex_view_method= 'skim'
-let g:vim_markdown_math = 1
-let g:vim_markdown_toc_autofit = 1
 let g:livepreview_engine = 'xelatex'
 "let g:floaterm_position = 'topleft'
 "let g:floaterm_width = 0.99 
@@ -180,10 +177,6 @@ augroup load_local_config
     "autocmd User StartifyBufferOpened nested :Rooter
 augroup END
 
-augroup conceal_filetype
-    autocmd!
-    autocmd FileType markdown,json setlocal concealcursor=c
-augroup END
 
 " terminal_help
 let g:terminal_height = 20 
@@ -191,7 +184,6 @@ let g:terminal_pos = 'botright'
 
 let g:go_template_autocreate = 0
 
-let g:templates_directory = '~/my.nvim/templates'
 
 "let g:UltiSnipsSnippetDir=[$HOME . '/.config/nvim/UltiSnips']
 
@@ -205,25 +197,11 @@ let g:go_def_mapping_enabled = 0
 
 let g:templates_no_autocmd = 1
 
-
 autocmd WinEnter,InsertLeave * set cursorline
 
 autocmd WinLeave,InsertEnter * set nocursorline
 
 
-let g:vim_markdown_fenced_languages = [
-  \ 'c++=cpp',
-  \ 'viml=vim',
-  \ 'bash=sh',
-  \ 'ini=dosini',
-  \ 'js=javascript',
-  \ 'json=javascript',
-  \ 'jsx=javascriptreact',
-  \ 'tsx=typescriptreact',
-  \ 'docker=Dockerfile',
-  \ 'makefile=make',
-  \ 'py=python'
-  \ ]
 
 
 
@@ -236,7 +214,6 @@ let g:switch_mapping = "-"
 "set guifont=menlo:h11
 "let g:choosewin_overlay_enable = 1
 
-let g:vista_default_executive = 'coc'
 
 let g:dash_map = {
             \ 'vue':'javascript'
@@ -253,11 +230,6 @@ let g:tiler#popup#windows = {
 \ }
 
 
-"let g:table_mode_disable_tableize_mappings = 1
-
-"let g:table_mode_disable_mappings = 1
-
-let g:table_mode_map_prefix = '_'
 
 let g:terminal_key = ''
 
