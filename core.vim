@@ -153,6 +153,7 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-lua'
                             \]
 
+
 silent! execute 'source ' . g:mynvim_config_default
 silent! execute 'source ' . g:mynvim_config_before
 
@@ -162,4 +163,3 @@ call utils#source_path(g:mynvim_root_path,"lang")
 
 silent! execute 'source ' . g:mynvim_config_after
 call utils#source_file(g:mynvim_root_path, 'keybinding.vim')
-

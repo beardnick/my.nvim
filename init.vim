@@ -17,6 +17,8 @@ let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 " leaderf使用悬浮窗来显示
 let g:Lf_WindowPosition = 'popup' 
 
+set backspace=indent,eol,start
+
 " 设置leader为空格
 let mapleader = " "
 set number
