@@ -1,1 +1,2 @@
-let g:templates_directory = mynvim_root_path . '/' . 'templates'
+let g:templates_directory = [mynvim_root_path . '/' . 'templates']
+

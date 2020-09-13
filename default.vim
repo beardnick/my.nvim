@@ -1,7 +1,7 @@
  "one gruvbox
-"let g:mynvim_colorscheme='one'
+let g:mynvim_colorscheme='one'
 "let g:mynvim_colorscheme='gruvbox'
-let g:mynvim_colorscheme='challenger_deep'
+"let g:mynvim_colorscheme='challenger_deep'
 
 "let g:mynvim_colorscheme={
 "            \'color':'vim-monokai-tasty',
