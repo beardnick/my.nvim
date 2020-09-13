@@ -105,6 +105,10 @@ call plug#begin(g:plugin_dir)
     Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'kassio/neoterm'
+    Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+    Plug 'liuchengxu/space-vim-dark'
+    Plug 'hzchirs/vim-material'
+    Plug 'patstockwell/vim-monokai-tasty'
 
 call plug#end()
 
