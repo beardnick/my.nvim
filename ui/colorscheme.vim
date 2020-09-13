@@ -31,3 +31,9 @@ endfunction
 highlight default link CocHighlightText  MatchParen
 "highlight default link BufTabLineActive TabLineSel
 "highlight default link BufTabLineCurrent PmenuSel
+
+" 属性配置
+" 启用彩虹括号颜色
+let g:rainbow_active = 1
+" 启用git符号栏 
+let g:gitgutter_enabled = 1
