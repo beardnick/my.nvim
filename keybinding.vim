@@ -19,7 +19,10 @@ let g:go_def_mapping_enabled = 0
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gr <Plug>(coc-references)
+
+"nnoremap <silent> gd :<C-U>CocCommand fzf-preview.LocationList<CR>
+nnoremap <silent> gr :<C-U>CocCommand fzf-preview.CocReferences<CR>
 
 nmap <silent> ]c <Plug>(coc-git-nextchunk)
 nmap <silent> [c <Plug>(coc-git-prevchunk)
@@ -260,8 +263,9 @@ nnoremap <Leader>sf :<C-U>CocList floaterm<CR>
 nnoremap <Leader>sb :<C-U>FzfPreviewBuffers<CR>
 tnoremap <Leader>sb <C-\><C-n>:<C-U>FzfPreviewBuffers<CR>
 " coc-fzf
-nnoremap <silent> <Leader>se  :<C-u>CocFzfList diagnostics<CR>
+nnoremap <silent> <Leader>se  :<C-u>CocCommand fzf-preview.CocDiagnostics<CR>
 nnoremap <silent> <Leader>sc  :<C-u>CocFzfList commands<CR>
+
 nnoremap <silent> <Leader>sh  :<C-u>History:<CR>
 "nnoremap <silent> <Leader>sp  :<C-u>CocFzfListExtensions<CR>
 "nnoremap <silent> <Leader>sl  :<C-u>CocFzfListLocation<CR> "=>gd

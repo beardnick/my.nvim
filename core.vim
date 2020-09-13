@@ -33,7 +33,7 @@ call plug#begin(g:plugin_dir)
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     Plug 'SirVer/ultisnips'
     " 使用自己fork的snippets
-    Plug 'beardnick/vim-snippets'
+    Plug 'honza/vim-snippets'
     Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
     Plug 'dhruvasagar/vim-table-mode'
