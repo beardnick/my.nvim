@@ -503,3 +503,5 @@ EOF
 "highlight link ALEVirtualTextWarning CocWarningSign
 
 "let g:table_mode_disable_mappings = 1
+
+set mouse=nvi
