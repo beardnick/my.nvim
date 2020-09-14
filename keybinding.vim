@@ -19,7 +19,10 @@ let g:go_def_mapping_enabled = 0
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gr <Plug>(coc-references)
+
+"nnoremap <silent> gd :<C-U>CocCommand fzf-preview.LocationList<CR>
+nnoremap <silent> gr :<C-U>CocCommand fzf-preview.CocReferences<CR>
 
 nmap <silent> ]c <Plug>(coc-git-nextchunk)
 nmap <silent> [c <Plug>(coc-git-prevchunk)
@@ -42,11 +45,6 @@ noremap <Leader>w <C-W>
 inoremap jk <ESC>
 inoremap jj <ESC>
 inoremap kk <ESC>
- "编辑配置文件
-"nnoremap <LEADER>ev :vsplit ~/my.nvim/init.vim<CR>
- "加载配置文件
-"nnoremap <LEADER>sv :source ~/my.nvim/init.vim<CR>
-"nmap gs <Plug>Sneak_S
 
 " 编辑
 vmap <LEADER>s <Plug>VSurround
@@ -260,8 +258,9 @@ nnoremap <Leader>sf :<C-U>CocList floaterm<CR>
 nnoremap <Leader>sb :<C-U>FzfPreviewBuffers<CR>
 tnoremap <Leader>sb <C-\><C-n>:<C-U>FzfPreviewBuffers<CR>
 " coc-fzf
-nnoremap <silent> <Leader>se  :<C-u>CocFzfList diagnostics<CR>
+nnoremap <silent> <Leader>se  :<C-u>CocCommand fzf-preview.CocDiagnostics<CR>
 nnoremap <silent> <Leader>sc  :<C-u>CocFzfList commands<CR>
+
 nnoremap <silent> <Leader>sh  :<C-u>History:<CR>
 "nnoremap <silent> <Leader>sp  :<C-u>CocFzfListExtensions<CR>
 "nnoremap <silent> <Leader>sl  :<C-u>CocFzfListLocation<CR> "=>gd
@@ -311,3 +310,32 @@ nmap <Leader>rp :MirrorPush<CR>
 nmap <Leader>rl :MirrorPull<CR>
 
 nmap s <Plug>(easymotion-prefix)
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+nnoremap H ^
+nnoremap L $
+
+map Y y$
+
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+

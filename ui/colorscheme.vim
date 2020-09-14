@@ -1,4 +1,8 @@
-execute 'colorscheme' g:mynvim_colorscheme
+if type(g:mynvim_colorscheme) == type({})
+    execute 'colorscheme' g:mynvim_colorscheme['color']
+else
+    execute 'colorscheme' g:mynvim_colorscheme
+endif
 
 if g:mynvim_colorscheme_backgroud ==# 'auto'
     if str2nr(strftime("%H")) >= 18 || str2nr(strftime("%H")) <= 7 
@@ -20,7 +24,11 @@ let g:lightline = {
       \ 'component_function':{'blame':'LightlineGitBlame'},
       \ }
 
-let g:lightline['colorscheme'] = g:mynvim_colorscheme
+if type(g:mynvim_colorscheme) == type({})
+    let g:lightline['colorscheme'] = g:mynvim_colorscheme['status']
+else
+    let g:lightline['colorscheme'] = g:mynvim_colorscheme
+endif
 
 function! LightlineGitBlame() abort
   let blame = get(b:, 'coc_git_blame', '')
@@ -31,3 +39,9 @@ endfunction
 highlight default link CocHighlightText  MatchParen
 "highlight default link BufTabLineActive TabLineSel
 "highlight default link BufTabLineCurrent PmenuSel
+
+" 属性配置
+" 启用彩虹括号颜色
+let g:rainbow_active = 1
+" 启用git符号栏 
+let g:gitgutter_enabled = 1

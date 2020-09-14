@@ -33,7 +33,7 @@ call plug#begin(g:plugin_dir)
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     Plug 'SirVer/ultisnips'
     " 使用自己fork的snippets
-    Plug 'beardnick/vim-snippets'
+    Plug 'honza/vim-snippets'
     Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
     Plug 'dhruvasagar/vim-table-mode'
@@ -105,6 +105,10 @@ call plug#begin(g:plugin_dir)
     Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'kassio/neoterm'
+    Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+    Plug 'liuchengxu/space-vim-dark'
+    Plug 'hzchirs/vim-material'
+    Plug 'patstockwell/vim-monokai-tasty'
 
 call plug#end()
 
@@ -153,6 +157,7 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-lua'
                             \]
 
+
 silent! execute 'source ' . g:mynvim_config_default
 silent! execute 'source ' . g:mynvim_config_before
 
@@ -162,4 +167,3 @@ call utils#source_path(g:mynvim_root_path,"lang")
 
 silent! execute 'source ' . g:mynvim_config_after
 call utils#source_file(g:mynvim_root_path, 'keybinding.vim')
-
