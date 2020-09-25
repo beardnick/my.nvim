@@ -19,17 +19,15 @@ let g:go_def_mapping_enabled = 0
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-"nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gr <Plug>(coc-references)
 
 "nnoremap <silent> gd :<C-U>CocCommand fzf-preview.LocationList<CR>
-nnoremap <silent> gr :<C-U>CocCommand fzf-preview.CocReferences<CR>
+"nnoremap <silent> gr :<C-U>CocCommand fzf-preview.CocReferences<CR>
 
 nmap <silent> ]c <Plug>(coc-git-nextchunk)
 nmap <silent> [c <Plug>(coc-git-prevchunk)
 nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
 nmap <silent> [e <Plug>(coc-diagnostic-previous-error)
-
-
 
 
 " 界面
@@ -208,8 +206,14 @@ nnoremap <LEADER>uh :<C-U>set concealcursor=c<CR>
 "tnoremap <LEADER>us <C-\><C-N>:<C-U>call TerminalToggle()<CR>
 nnoremap <LEADER>us :<C-U>Ttoggle<CR>
 tnoremap <LEADER>us <C-\><C-N>:<C-U>Ttoggle<CR>
+
 nnoremap <LEADER>tc :<C-U>vertical Tnew<CR>
 tnoremap <LEADER>tc <C-\><C-N>:<C-U>vertical Tnew<CR>
+nnoremap <LEADER>tn :<C-U>Tnext<CR>
+tnoremap <LEADER>tn <C-\><C-N>:<C-U>Tnext<CR>
+nnoremap <LEADER>tp :<C-U>Tprevious<CR>
+tnoremap <LEADER>tp <C-\><C-N>:<C-U>Tprevious<CR>
+
 nnoremap <LEADER>ug :<C-U>ChunkInfo<CR>
 nnoremap <LEADER>ub :<C-U>call ToggleBackground()<CR>
 

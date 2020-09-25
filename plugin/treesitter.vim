@@ -1,4 +1,3 @@
-
 if g:mynvim_treesitter_enable == 0
     finish
 endif

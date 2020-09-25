@@ -109,6 +109,7 @@ call plug#begin(g:plugin_dir)
     Plug 'liuchengxu/space-vim-dark'
     Plug 'hzchirs/vim-material'
     Plug 'patstockwell/vim-monokai-tasty'
+    Plug 'unblevable/quick-scope'
 
 call plug#end()
 
@@ -155,6 +156,7 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-yank'
                             \,'coc-highlight'
                             \,'coc-lua'
+                            \,'coc-fzf-preview'
                             \]
 
 

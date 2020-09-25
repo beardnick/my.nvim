@@ -253,3 +253,5 @@ let g:neoterm_default_mod='rightbelow'
 "let g:table_mode_disable_mappings = 1
 
 set mouse=nvi
+
+let g:asynctasks_config_name = '.vim/tasks.ini'
