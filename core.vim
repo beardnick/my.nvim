@@ -110,6 +110,7 @@ call plug#begin(g:plugin_dir)
     Plug 'hzchirs/vim-material'
     Plug 'patstockwell/vim-monokai-tasty'
     Plug 'unblevable/quick-scope'
+    Plug 'MattesGroeger/vim-bookmarks'
 
 call plug#end()
 
@@ -156,7 +157,6 @@ let g:coc_global_extensions =['coc-actions'
                             \,'coc-yank'
                             \,'coc-highlight'
                             \,'coc-lua'
-                            \,'coc-fzf-preview'
                             \]
 
 

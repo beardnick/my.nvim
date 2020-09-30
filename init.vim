@@ -235,7 +235,7 @@ let g:tiler#popup#windows = {
 
 let g:terminal_key = ''
 
-let g:neoterm_default_mod='rightbelow'
+let g:neoterm_default_mod='botright'
 
 
 
@@ -255,3 +255,5 @@ let g:neoterm_default_mod='rightbelow'
 set mouse=nvi
 
 let g:asynctasks_config_name = '.vim/tasks.ini'
+
+let g:bookmark_save_per_working_dir = 1
