@@ -101,7 +101,7 @@ call plug#begin(g:plugin_dir)
     Plug 'drmikehenry/vim-fixkey'
     Plug 'posva/vim-vue'
     Plug 'easymotion/vim-easymotion' " 快速跳转
-    Plug 'nvim-treesitter/nvim-treesitter' 
+    " Plug 'nvim-treesitter/nvim-treesitter' 
     Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'kassio/neoterm'
@@ -112,7 +112,6 @@ call plug#begin(g:plugin_dir)
     Plug 'unblevable/quick-scope'
 
 call plug#end()
-
 
 let g:coc_global_extensions =['coc-actions'
                             \,'coc-browser'
