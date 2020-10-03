@@ -169,6 +169,8 @@ nmap <silent><LEADER>lp :<C-U>AsyncTask project-run<CR>
 nmap <silent><LEADER>lg :<C-U>TemplateHere<CR>
 nmap <silent><LEADER>lt :<C-U>AsyncTaskFzf<CR>
 
+vmap <silent><LEADER>ls :TREPLSendSelection<CR>
+
 " file
 nnoremap <silent><LEADER>fs :<C-U>FilesMru --tiebreak=index<CR>
 nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
@@ -271,11 +273,11 @@ nnoremap <silent> <Leader>sh  :<C-u>History:<CR>
 
 
 "coc-bookmark
-nmap mn <Plug>(coc-bookmark-next)
-nmap mp <Plug>(coc-bookmark-prev)
-nmap mm <Plug>(coc-bookmark-toggle)
-nmap mi <Plug>(coc-bookmark-annotate)
-nnoremap ma :<C-U>CocList bookmark<CR>
+"nmap mn <Plug>(coc-bookmark-next)
+"nmap mp <Plug>(coc-bookmark-prev)
+"nmap mm <Plug>(coc-bookmark-toggle)
+"nmap mi <Plug>(coc-bookmark-annotate)
+"nnoremap ma :<C-U>CocList bookmark<CR>
 
 "debug
 nmap <Leader>db <Plug>VimspectorContinue
@@ -342,4 +344,3 @@ map Y y$
 
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-
