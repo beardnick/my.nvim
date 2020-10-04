@@ -16,8 +16,10 @@ let g:mynvim_colorscheme='one'
 " dark light auto
 let g:mynvim_colorscheme_backgroud='dark'
 
+" pip3 install pysdl2-dll 
+" pip3 install pysdl2 
 " play typewriter sound when typing [0,1]
-let g:mynvim_keysound_enable=1
+let g:mynvim_keysound_enable=0
 
 " startify banner
 let g:mynvim_banner = [
