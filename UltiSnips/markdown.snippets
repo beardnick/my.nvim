@@ -1,0 +1,30 @@
+snippet code "Codeblock" b
+\`\`\`${1:language}
+${2:${VISUAL:code}}
+\`\`\`
+$0
+endsnippet
+
+snippet refl "Reference Link"
+[${1:${VISUAL:Text}}][${2:id}]$0
+
+[$2]:${4:http://${3:www.url.com}} "${5:$4}"
+endsnippet
+
+snippet fnt "Footnote"
+[^${1:${VISUAL:Footnote}}]$0
+
+[^$1]:${2:Text}
+endsnippet
+
+snippet front "front matter" b
+---
+title: ${1:title}
+date: "`date +%Y-%m-%d`"
+categories: 
+- ${2:categories}
+tags:
+- ${3:tags}
+---
+endsnippet
+

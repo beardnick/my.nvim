@@ -1,0 +1,10 @@
+snippet /sh>(.*)/ "expand shell commands directly" r
+`!p import subprocess
+snip.rv = str(subprocess.check_output(match.group(1),shell=True),encoding="utf-8").strip()
+`
+endsnippet
+
+snippet /#(.*)/ "add a taged note" br
+`!p snip.rv=get_comment_format()[0]` `!p snip.rv="#" + match.group(1).upper() + ":"` `!v strftime('%y-%m-%d')` ${1:note} `!p snip.rv=get_comment_format()[2]`
+endsnippet
+
