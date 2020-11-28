@@ -101,7 +101,7 @@ call plug#begin(g:plugin_dir)
     Plug 'drmikehenry/vim-fixkey'
     Plug 'posva/vim-vue'
     Plug 'easymotion/vim-easymotion' " 快速跳转
-    " Plug 'nvim-treesitter/nvim-treesitter' 
+    Plug 'nvim-treesitter/nvim-treesitter' 
     Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'kassio/neoterm'
@@ -111,6 +111,7 @@ call plug#begin(g:plugin_dir)
     Plug 'patstockwell/vim-monokai-tasty'
     Plug 'unblevable/quick-scope'
     Plug 'MattesGroeger/vim-bookmarks'
+    Plug 'beardnick/mynvim', {'do':'make'}
 
 call plug#end()
 
