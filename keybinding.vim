@@ -61,11 +61,13 @@ nnoremap <silent><C-_> :<C-U>call NERDComment("n", "Toggle")<CR>
 vnoremap <silent><C-_> :call NERDComment("n", "Toggle")<CR>gv
 
 " 复制粘贴
-nnoremap <Leader>yy viw"+y
-nnoremap <Leader>ya viw"ay
-nnoremap <Leader>yb viw"by
-nnoremap <Leader>yc viw"cy
+"nnoremap <Leader>yy viw"+y
+"nnoremap <Leader>ya viw"ay
+"nnoremap <Leader>yb viw"by
+"nnoremap <Leader>yc viw"cy
 
+vnoremap <C-c> "+y
+vnoremap <C-v> "+p
 vnoremap <Leader>yy "+y
 vnoremap <Leader>ya "ay
 vnoremap <Leader>yb "by

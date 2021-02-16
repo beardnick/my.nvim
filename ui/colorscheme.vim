@@ -45,3 +45,9 @@ highlight default link CocHighlightText  MatchParen
 let g:rainbow_active = 1
 " 启用git符号栏 
 let g:gitgutter_enabled = 1
+
+
+" transparent bg
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+" For Vim<8, replace EndOfBuffer by NonText
+autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
