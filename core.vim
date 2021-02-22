@@ -102,7 +102,7 @@ call plug#begin(g:plugin_dir)
     Plug 'posva/vim-vue'
     Plug 'easymotion/vim-easymotion' " 快速跳转
     Plug 'nvim-treesitter/nvim-treesitter' 
-    Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+    Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'kassio/neoterm'
     Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
