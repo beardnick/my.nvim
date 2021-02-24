@@ -19,15 +19,21 @@ require'nvim-treesitter.configs'.setup {
         }
     },
     refactor = {
-      highlight_defintions = {
-        enable = true
-      },
+      highlight_defintions = { enable = true },
+     -- highlight_current_scope = { enable = true },
       smart_rename = {
         enable = true,
         smart_rename = "grr"              -- mapping to rename reference under cursor
       },
       navigation = {
         enable = true,
+        keymaps = {
+        goto_definition = "gnd",
+        list_definitions = "gnD",
+        list_definitions_toc = "gO",
+        goto_next_usage = "<a-*>",
+        goto_previous_usage = "<a-#>",
+      },
       }
     },
     ensure_installed = 'all' -- one of 'all', 'language', or a list of languages
