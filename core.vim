@@ -24,7 +24,7 @@ call plug#begin(g:plugin_dir)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " 自动tag生成与管理
     Plug 'ludovicchabant/vim-gutentags'
-    Plug 'skywind3000/gutentags_plus'
+    "Plug 'skywind3000/gutentags_plus'
     " leaderf用来搜索
     "call dein#add('Yggdroot/LeaderF')
     Plug 'mhinz/vim-startify'
@@ -67,7 +67,7 @@ call plug#begin(g:plugin_dir)
     "它会使jumplist出问题
     "Plug 'farmergreg/vim-lastplace'
     "全局修改插件
-    Plug 'brooth/far.vim'
+    "Plug 'brooth/far.vim'
     " vimtex viewer 带了实时预览的功能
     Plug 'lervag/vimtex'
     Plug 'skywind3000/vim-quickui'
