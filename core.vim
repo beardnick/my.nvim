@@ -115,6 +115,8 @@ call plug#begin(g:plugin_dir)
     Plug 'nvim-treesitter/nvim-treesitter' 
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'romgrk/nvim-treesitter-context'
+    Plug 'ZSaberLv0/ZFVimIM'
+    Plug 'ZSaberLv0/ZFVimJob' " 用于提升词库加载性能
 
 call plug#end()
 
