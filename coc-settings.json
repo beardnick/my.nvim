@@ -115,5 +115,10 @@
     "go.disable": {
         "workspaceFolders": true
     },
-    "coc.preferences.extensionUpdateCheck": "daily"
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "coc.preferences.rootPatterns": [
+        ".git",
+        ".hg",
+        ".projections.json"
+    ]
 }

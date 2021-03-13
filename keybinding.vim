@@ -314,8 +314,18 @@ vmap <Leader>e :Expand<CR>
 
 " remote development
 
-nmap <Leader>rp :MirrorPush<CR>
-nmap <Leader>rl :MirrorPull<CR>
+nnoremap <Leader>rp :MirrorPush<CR>
+nnoremap <Leader>rl :MirrorPull<CR>
+vnoremap <C-E> :normal @q<CR>
+nnoremap <C-Q> :call ToggleRecording()<CR>
+
+function ToggleRecording() abort
+    if reg_recording()
+        execute "normal q"
+    else
+        execute "normal qq"
+    endif
+endfunction
 
 nmap s <Plug>(easymotion-prefix)
 
@@ -346,3 +356,4 @@ map Y y$
 
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+
