@@ -51,7 +51,9 @@ call plug#begin(g:plugin_dir)
     Plug 'airblade/vim-rooter'
     " 切换自定义格式的工具
     Plug 'AndrewRadev/switch.vim'
-    Plug 'ap/vim-buftabline'
+    "Plug 'ap/vim-buftabline'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'romgrk/barbar.nvim'
 
     Plug 'junegunn/goyo.vim'
     Plug 'freitass/todo.txt-vim'

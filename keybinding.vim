@@ -140,16 +140,24 @@ endfunction
 
 "buffer
 
-nmap <LEADER>b1 <Plug>BufTabLine.Go(1)
-nmap <LEADER>b2 <Plug>BufTabLine.Go(2)
-nmap <LEADER>b3 <Plug>BufTabLine.Go(3)
-nmap <LEADER>b4 <Plug>BufTabLine.Go(4)
-nmap <LEADER>b5 <Plug>BufTabLine.Go(5)
-nmap <LEADER>b6 <Plug>BufTabLine.Go(6)
-nmap <LEADER>b7 <Plug>BufTabLine.Go(7)
-nmap <LEADER>b8 <Plug>BufTabLine.Go(8)
-nmap <LEADER>b9 <Plug>BufTabLine.Go(9)
-nmap <LEADER>b0 <Plug>BufTabLine.Go(10)
+nnoremap <silent>    <A-1> :BufferGoto 1<CR>
+nnoremap <silent>    <A-2> :BufferGoto 2<CR>
+nnoremap <silent>    <A-3> :BufferGoto 3<CR>
+nnoremap <silent>    <A-4> :BufferGoto 4<CR>
+nnoremap <silent>    <A-5> :BufferGoto 5<CR>
+nnoremap <silent>    <A-6> :BufferGoto 6<CR>
+nnoremap <silent>    <A-7> :BufferGoto 7<CR>
+nnoremap <silent>    <A-8> :BufferGoto 8<CR>
+
+nmap <LEADER>b1 :BufferGoto 1<CR>
+nmap <LEADER>b2 :BufferGoto 2<CR>
+nmap <LEADER>b3 :BufferGoto 3<CR>
+nmap <LEADER>b4 :BufferGoto 4<CR>
+nmap <LEADER>b5 :BufferGoto 5<CR>
+nmap <LEADER>b6 :BufferGoto 6<CR>
+nmap <LEADER>b7 :BufferGoto 7<CR>
+nmap <LEADER>b8 :BufferGoto 8<CR>
+nmap <LEADER>b9 :BufferGoto 9<CR>
 nmap <LEADER>bh :<C-U>call startify#insane_in_the_membrane(0)<CR>
 nmap <LEADER>bn :<C-U>bnext<CR>
 nmap <LEADER>bp :<C-U>bprevious<CR>
@@ -317,6 +325,7 @@ vmap <Leader>e :Expand<CR>
 nnoremap <Leader>rp :MirrorPush<CR>
 nnoremap <Leader>rl :MirrorPull<CR>
 vnoremap <C-E> :normal @q<CR>
+nnoremap <C-E> :normal @q<CR>
 nnoremap <C-Q> :call ToggleRecording()<CR>
 
 function ToggleRecording() abort
