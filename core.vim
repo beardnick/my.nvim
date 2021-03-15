@@ -51,7 +51,9 @@ call plug#begin(g:plugin_dir)
     Plug 'airblade/vim-rooter'
     " 切换自定义格式的工具
     Plug 'AndrewRadev/switch.vim'
-    Plug 'ap/vim-buftabline'
+    "Plug 'ap/vim-buftabline'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'romgrk/barbar.nvim'
 
     Plug 'junegunn/goyo.vim'
     Plug 'freitass/todo.txt-vim'
@@ -115,8 +117,9 @@ call plug#begin(g:plugin_dir)
     Plug 'nvim-treesitter/nvim-treesitter' 
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'romgrk/nvim-treesitter-context'
-    Plug 'ZSaberLv0/ZFVimIM'
-    Plug 'ZSaberLv0/ZFVimJob' " 用于提升词库加载性能
+    " 有点慢
+    "Plug 'ZSaberLv0/ZFVimIM'
+    "Plug 'ZSaberLv0/ZFVimJob' " 用于提升词库加载性能
 
 call plug#end()
 
