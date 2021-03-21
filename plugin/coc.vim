@@ -47,3 +47,6 @@ augroup end
 
 
 nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
+
+nnoremap <silent>K  :<C-U> call CocAction('doHover')<CR>
+vnoremap <silent>K  :<C-U> call CocAction('doHover')<CR>

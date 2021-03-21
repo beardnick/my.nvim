@@ -10,8 +10,6 @@ nnoremap <silent><C-G> :<C-U>Note<CR>
 " 先禁用vim-go的文档显示
 let g:go_doc_keywordprg_enabled = 0
 
-nnoremap <silent>K  :<C-U> call CocAction('doHover')<CR>
-vnoremap <silent>K  :<C-U> call CocAction('doHover')<CR>
 
 " Remap keys for gotos
 " 先禁用vim-go的跳转定义插件
