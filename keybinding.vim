@@ -101,9 +101,9 @@ nnoremap <C-Y> :<C-U>FZFYank<CR>
 
 
 
-nnoremap <silent><Leader>gi :<C-U>ChunkInfo<CR>
-nnoremap <silent><Leader>gu :<C-U>ChunkUndo<CR>
-nnoremap <silent><Leader>gb :<C-U>Gblame<CR>
+"nnoremap <silent><Leader>gi :<C-U>ChunkInfo<CR>
+"nnoremap <silent><Leader>gu :<C-U>ChunkUndo<CR>
+"nnoremap <silent><Leader>gb :<C-U>Gblame<CR>
 
 function! NextUncommentedBlock(direction) abort
     let s:next_match = line('.')
@@ -184,7 +184,6 @@ vmap <silent><LEADER>ls :TREPLSendSelection<CR>
 
 " file
 nnoremap <silent><LEADER>fs :<C-U>FilesMru --tiebreak=index<CR>
-nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
 
 " 使用fzfmru来模拟如vscode go to file 那样的文件模糊查找行为
 nnoremap <silent><C-P> :<C-U>FilesMru --tiebreak=index<CR>

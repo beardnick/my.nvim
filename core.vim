@@ -21,9 +21,10 @@ call plug#begin(g:plugin_dir)
     Plug 'luochen1990/rainbow'
     " 注意编译问题，很多时候编译出错了很多插件都会有问题
     " 大部分时候可以通过call coc#util#install()解决问题
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    "Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
     " 自动tag生成与管理
-    Plug 'ludovicchabant/vim-gutentags'
+    "Plug 'ludovicchabant/vim-gutentags'
     "Plug 'skywind3000/gutentags_plus'
     " leaderf用来搜索
     "call dein#add('Yggdroot/LeaderF')
@@ -32,7 +33,6 @@ call plug#begin(g:plugin_dir)
     Plug 'fatih/vim-go'
     " 两个代码模版的插件要一起装，只复制代码模版文件可能会造成找不到vimsnippets模块
     Plug 'SirVer/ultisnips'
-    " 使用自己fork的snippets
     Plug 'honza/vim-snippets'
     Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -120,8 +120,15 @@ call plug#begin(g:plugin_dir)
     " 有点慢
     "Plug 'ZSaberLv0/ZFVimIM'
     "Plug 'ZSaberLv0/ZFVimJob' " 用于提升词库加载性能
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'kabouzeid/nvim-lspinstall'
+    Plug 'nvim-lua/completion-nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'lewis6991/gitsigns.nvim'
 
 call plug#end()
+
 
 let g:coc_global_extensions =['coc-actions'
                             \,'coc-browser'
@@ -170,6 +177,8 @@ let g:coc_global_extensions =['coc-actions'
 
 silent! execute 'source ' . g:mynvim_config_default
 silent! execute 'source ' . g:mynvim_config_before
+
+let g:mapleader="\<Space>"
 
 call utils#source_path(g:mynvim_root_path,"ui")
 call utils#source_path(g:mynvim_root_path,"plugin")

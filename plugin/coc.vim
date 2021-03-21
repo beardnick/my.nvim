@@ -1,3 +1,6 @@
+if ! exists("g:did_coc_loaded")
+    finish
+endif
 
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
@@ -41,3 +44,6 @@ augroup mygroup
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+
+nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
