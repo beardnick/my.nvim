@@ -15,10 +15,6 @@ let g:go_doc_keywordprg_enabled = 0
 " 先禁用vim-go的跳转定义插件
 let g:go_def_mapping_enabled = 0
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gu <Plug>(coc-references)
 
 "nnoremap <silent> gd :<C-U>CocCommand fzf-preview.LocationList<CR>
 "nnoremap <silent> gr :<C-U>CocCommand fzf-preview.CocReferences<CR>
@@ -38,7 +34,7 @@ nnoremap <silent><C-L> :<C-U>nohlsearch<CR>
 "vmap <silent> <Leader>t <Plug>TranslateWV
 
 " 跳转
-noremap <Leader>w <C-W>
+nnoremap <Leader>w <C-W>
 inoremap jk <ESC>
 inoremap jj <ESC>
 inoremap kk <ESC>

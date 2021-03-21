@@ -50,3 +50,8 @@ nnoremap <silent><LEADER>ft :<C-U>CocCommand explorer<CR>
 
 nnoremap <silent>K  :<C-U> call CocAction('doHover')<CR>
 vnoremap <silent>K  :<C-U> call CocAction('doHover')<CR>
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gu <Plug>(coc-references)

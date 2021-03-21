@@ -126,6 +126,8 @@ call plug#begin(g:plugin_dir)
     Plug 'nvim-lua/completion-nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'lewis6991/gitsigns.nvim'
+    Plug 'RishabhRD/popfix'
+    Plug 'RishabhRD/nvim-lsputils'
 
 call plug#end()
 
