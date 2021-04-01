@@ -128,6 +128,7 @@ call plug#begin(g:plugin_dir)
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'RishabhRD/popfix'
     Plug 'RishabhRD/nvim-lsputils'
+    Plug 'f-person/git-blame.nvim'
 
 call plug#end()
 
