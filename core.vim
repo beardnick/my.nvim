@@ -129,6 +129,7 @@ call plug#begin(g:plugin_dir)
     Plug 'RishabhRD/popfix'
     Plug 'RishabhRD/nvim-lsputils'
     Plug 'f-person/git-blame.nvim'
+    Plug 'monaqa/dial.nvim'
 
 call plug#end()
 
