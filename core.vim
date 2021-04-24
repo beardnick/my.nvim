@@ -112,7 +112,8 @@ call plug#begin(g:plugin_dir)
     Plug 'patstockwell/vim-monokai-tasty'
     Plug 'unblevable/quick-scope'
     Plug 'MattesGroeger/vim-bookmarks'
-    Plug 'beardnick/mynvim', {'do':'make'}
+    "Plug 'beardnick/mynvim', {'do':'make'}
+    Plug '~/study/go/mynvim', {'do':'make'}
     Plug 'nvim-treesitter/playground'
     Plug 'nvim-treesitter/nvim-treesitter' 
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
