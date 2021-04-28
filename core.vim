@@ -123,10 +123,10 @@ call plug#begin(g:plugin_dir)
     "Plug 'ZSaberLv0/ZFVimJob' " 用于提升词库加载性能
     Plug 'neovim/nvim-lspconfig'
     Plug 'kyazdani42/nvim-tree.lua'
-    Plug 'kabouzeid/nvim-lspinstall'
+    Plug 'kabouzeid/nvim-lspinstall',{'branch':'main'}
     Plug 'nvim-lua/completion-nvim'
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'lewis6991/gitsigns.nvim'
+    Plug 'lewis6991/gitsigns.nvim',{'branch':'main'}
     Plug 'RishabhRD/popfix'
     Plug 'RishabhRD/nvim-lsputils'
     Plug 'f-person/git-blame.nvim'
