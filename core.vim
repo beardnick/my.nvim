@@ -24,8 +24,8 @@ call plug#begin(g:plugin_dir)
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
     "Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
     " 自动tag生成与管理
-    "Plug 'ludovicchabant/vim-gutentags'
-    "Plug 'skywind3000/gutentags_plus'
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'skywind3000/gutentags_plus'
     " leaderf用来搜索
     "call dein#add('Yggdroot/LeaderF')
     Plug 'mhinz/vim-startify'
