@@ -114,10 +114,10 @@ call plug#begin(g:plugin_dir)
     Plug 'MattesGroeger/vim-bookmarks'
     Plug 'beardnick/mynvim', {'do':'make'}
     "Plug '~/study/go/mynvim', {'do':'make'}
-    Plug 'nvim-treesitter/playground'
-    Plug 'nvim-treesitter/nvim-treesitter' 
-    Plug 'nvim-treesitter/nvim-treesitter-refactor'
-    Plug 'romgrk/nvim-treesitter-context'
+    "Plug 'nvim-treesitter/playground'
+    "Plug 'nvim-treesitter/nvim-treesitter' 
+    "Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    "Plug 'romgrk/nvim-treesitter-context'
     " 有点慢
     "Plug 'ZSaberLv0/ZFVimIM'
     "Plug 'ZSaberLv0/ZFVimJob' " 用于提升词库加载性能
@@ -125,8 +125,6 @@ call plug#begin(g:plugin_dir)
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'kabouzeid/nvim-lspinstall',{'branch':'main'}
     Plug 'nvim-lua/completion-nvim'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'lewis6991/gitsigns.nvim',{'branch':'main'}
     Plug 'RishabhRD/popfix'
     Plug 'RishabhRD/nvim-lsputils'
     Plug 'f-person/git-blame.nvim'
