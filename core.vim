@@ -113,10 +113,10 @@ call plug#begin(g:plugin_dir)
     Plug 'unblevable/quick-scope'
     Plug 'MattesGroeger/vim-bookmarks'
     Plug 'beardnick/mynvim', {'do':'make'}
-    Plug 'nvim-treesitter/playground'
-    Plug 'nvim-treesitter/nvim-treesitter' 
-    Plug 'nvim-treesitter/nvim-treesitter-refactor'
-    Plug 'romgrk/nvim-treesitter-context'
+    "Plug 'nvim-treesitter/playground'
+    "Plug 'nvim-treesitter/nvim-treesitter' 
+    "Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    "Plug 'romgrk/nvim-treesitter-context'
     " 有点慢
     "Plug 'ZSaberLv0/ZFVimIM'
     "Plug 'ZSaberLv0/ZFVimJob' " 用于提升词库加载性能
