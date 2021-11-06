@@ -176,3 +176,11 @@ call utils#source_path(g:mynvim_root_path,"lang")
 
 silent! execute 'source ' . g:mynvim_config_after
 call utils#source_file(g:mynvim_root_path, 'keybinding.vim')
+
+command! Update call UpdateWithSnapshot()
+command! RollBack exe "source " . g:mynvim_root_path . "/snapshot.vim"
+
+function! UpdateWithSnapshot() abort
+    exe "PlugSnapshot! " . g:mynvim_root_path . "/snapshot.vim"
+    exe "PlugUpdate"
+endfunction

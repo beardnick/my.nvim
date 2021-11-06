@@ -75,6 +75,8 @@ command! ChunkInfo exe "CocCommand git.chunkInfo"
 command! ChuckStage exe "CocCommand git.chunkStage" 
 command! ChunkUndo exe "CocCommand git.chunkUndo" 
 
+command! Update exe "PlugSnapshot!"
+
 
 " 自动命令
 "autocmd FileType python call autocomplete#UseKite()
