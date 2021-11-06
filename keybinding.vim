@@ -245,15 +245,15 @@ nmap <Leader>ca <Plug>(coc-calc-result-append)
 " replace result on current expression
 nmap <Leader>cr <Plug>(coc-calc-result-replace)
 nmap <Leader>cq <Plug>(coc-fix-current)
-"nmap <leader>ca  <Plug>(coc-codeaction-selected)
-"xmap <leader>ca  <Plug>(coc-codeaction-selected)
+nmap <M-CR>  <Plug>(coc-codeaction-selected)w
+xmap <M-CR>  <Plug>(coc-codeaction-selected)
 nmap <leader>ca  :<C-U>CocCommand actions.open<CR>
 xmap <leader>ca  :<C-U>CocCommand actions.open<CR>
 nmap <leader>co  :<C-U>call CocAction('runCommand', 'editor.action.organizeImport')<CR>
 
 
-nmap <silent> <M-CR> :<C-U>CocCommand actions.open<CR>
-xmap <silent> <M-CR> :<C-U>CocCommand actions.open<CR>
+"nmap <silent> <M-CR> :<C-U>CocCommand actions.open<CR>
+"xmap <silent> <M-CR> :<C-U>CocCommand actions.open<CR>
 
 nmap <silent> gl  <Plug>(coc-openlink)
 

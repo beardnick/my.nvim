@@ -184,3 +184,5 @@ function! UpdateWithSnapshot() abort
     exe "PlugSnapshot! " . g:mynvim_root_path . "/snapshot.vim"
     exe "PlugUpdate"
 endfunction
+
+
