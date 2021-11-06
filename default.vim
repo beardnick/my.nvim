@@ -44,4 +44,4 @@ let g:mynvim_banner = [
             \,'                    .                    '
             \     ]
 
-let g:mynvim_treesitter_enable = 1
+let g:mynvim_treesitter_enable = 0
