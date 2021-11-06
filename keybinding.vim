@@ -23,7 +23,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gu <Plug>(coc-references)
 
 "nnoremap <silent> gd :<C-U>CocCommand fzf-preview.LocationList<CR>
-"nnoremap <silent> gr :<C-U>CocCommand fzf-preview.CocReferences<CR>
+nnoremap <silent> gr :<C-U>CocCommand fzf-preview.CocReferences<CR>
 
 nmap <silent> ]c <Plug>(coc-git-nextchunk)
 nmap <silent> [c <Plug>(coc-git-prevchunk)
