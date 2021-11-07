@@ -56,10 +56,10 @@ vnoremap > >gv
 
 
  "快速注释
-nnoremap <silent><LEADER>; :<C-U>call NERDComment("n", "Toggle")<CR>
-vnoremap <silent><LEADER>; :call NERDComment("n", "Toggle")<CR>gv
-nnoremap <silent><C-_> :<C-U>call NERDComment("n", "Toggle")<CR>
-vnoremap <silent><C-_> :call NERDComment("n", "Toggle")<CR>gv
+nnoremap <silent><LEADER>; :<C-U>call nerdcommenter#Comment("n", "Toggle")<CR>
+vnoremap <silent><LEADER>; :call nerdcommenter#Comment("n", "Toggle")<CR>gv
+nnoremap <silent><C-_> :<C-U>call nerdcommenter#Comment("n", "Toggle")<CR>
+vnoremap <silent><C-_> :call nerdcommenter#Comment("n", "Toggle")<CR>gv
 
 " 复制粘贴
 "nnoremap <Leader>yy viw"+y

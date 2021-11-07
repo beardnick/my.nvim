@@ -13,10 +13,10 @@ endfunction
 "endfunction
 
 "function! commands#Registers(...) abort
-  "let l:opts = {
-        "\ 'source': commands#GetRegisters(),
-        "\ 'sink': {x -> feedkeys(matchstr(x, '\v^\S+\ze.*') . (a:1 ? 'P' : 'p'), 'x')},
-        "\ 'options': '--prompt="Reg> "'
+  opts = {:"let l
+        commands#GetRegisters(),: "\ 'source'
+        {x -> feedkeys(matchstr(x, '\v^\S+\ze.*') . (a:1 ? 'P' : 'p'), 'x')},: "\ 'sink'
+        '--prompt="Reg> "': "\ 'options'
         "\ }
   "call fzf#run(fzf#wrap(l:opts))
 "endfunction
