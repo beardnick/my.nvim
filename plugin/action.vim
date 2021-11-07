@@ -4,7 +4,7 @@
             "\],
 
             "\"text":[
-            "\ ["flip arguments","call FlipArgs()"],
+            "\ ["flip arguments","call text#FlipArgs()"],
             "\],
 
 let g:action_map = { 
@@ -14,16 +14,5 @@ let g:action_map = {
             \}
 
 
-function! OpenActions() abort
-    let keys = [&filetype,'lsp','text']
-    let content =  []
-    for k in keys
-        if has_key(g:action_map, k)
-            let content =  g:action_map[k]
-        endif
-    endfor
-    let opts = {'index':g:quickui#context#cursor}
-    call quickui#context#open(content, opts)
-endfunction
 
-inoremap <silent> <M-CR> <ESC>:<C-U>call OpenActions()<CR>
+inoremap <silent> <M-CR> <ESC>:<C-U>call action#OpenActions()<CR>
