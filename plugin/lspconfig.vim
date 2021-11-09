@@ -1,3 +1,4 @@
+finish
 lua <<EOF
 require'lspinstall'.setup() -- important
 

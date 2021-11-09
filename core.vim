@@ -121,14 +121,20 @@ call plug#begin(g:plugin_dir)
     " 有点慢
     "Plug 'ZSaberLv0/ZFVimIM'
     "Plug 'ZSaberLv0/ZFVimJob' " 用于提升词库加载性能
-    Plug 'neovim/nvim-lspconfig'
+    "Plug 'neovim/nvim-lspconfig'
     Plug 'kyazdani42/nvim-tree.lua'
-    Plug 'kabouzeid/nvim-lspinstall',{'branch':'main'}
+    "Plug 'kabouzeid/nvim-lspinstall',{'branch':'main'}
     Plug 'nvim-lua/completion-nvim'
     Plug 'RishabhRD/popfix'
-    Plug 'RishabhRD/nvim-lsputils'
+    "Plug 'RishabhRD/nvim-lsputils'
     Plug 'f-person/git-blame.nvim'
     Plug 'monaqa/dial.nvim'
+    Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+    Plug 'ncm2/ncm2'
+    Plug 'roxma/nvim-yarp'
 
 call plug#end()
 
@@ -189,3 +195,17 @@ call utils#source_path(g:mynvim_root_path,"lang")
 
 silent! execute 'source ' . g:mynvim_config_after
 call utils#source_file(g:mynvim_root_path, 'keybinding.vim')
+
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_autoStop = 1
+let g:LanguageClient_hasSnippetSupport = 1
+let g:LanguageClient_loadSettings = 1
+"let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
+"let g:LanguageClient_serverCommands = {}
+"let g:LanguageClient_serverCommands.go = ['~/.local/bin/gopls', '-logfile', '/tmp/gopls.log', '-rpc.trace']
+"let g:LanguageClient_loggingLevel = 'DEBUG'
+"let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log')
+"let g:LanguageClient_serverStderr = expand('~/.local/share/nvim/LanguageServer.log')
