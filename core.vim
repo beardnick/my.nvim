@@ -103,7 +103,7 @@ call plug#begin(g:plugin_dir)
     Plug 'drmikehenry/vim-fixkey'
     Plug 'posva/vim-vue'
     Plug 'easymotion/vim-easymotion' " 快速跳转
-    Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
+    "Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'kassio/neoterm'
     Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
@@ -136,6 +136,7 @@ call plug#begin(g:plugin_dir)
     \ }
     Plug 'ncm2/ncm2'
     Plug 'roxma/nvim-yarp'
+    Plug 'ncm2/ncm2-ultisnips'
 
 call plug#end()
 

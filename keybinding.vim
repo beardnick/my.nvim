@@ -174,13 +174,13 @@ vmap <silent><LEADER>ls :TREPLSendSelection<CR>
 nnoremap <silent><LEADER>fs :<C-U>FilesMru --tiebreak=index<CR>
 
 " 使用fzfmru来模拟如vscode go to file 那样的文件模糊查找行为
-nnoremap <silent><C-P> :<C-U>FilesMru --tiebreak=index<CR>
+"nnoremap <silent><C-P> :<C-U>FilesMru --tiebreak=index<CR>
 "inoremap <silent><C-P> <ESC>:<C-U>call CocActionAsync('showSignatureHelp')<CR>
 
 " help
-nnoremap <silent><LEADER>hv :<C-U>Helptags<CR>
-nnoremap <silent><LEADER>hm :<C-U>Maps<CR>
-nnoremap <silent><LEADER>hc :<C-U>Cheats<CR>
+"nnoremap <silent><LEADER>hv :<C-U>Helptags<CR>
+"nnoremap <silent><LEADER>hm :<C-U>Maps<CR>
+"nnoremap <silent><LEADER>hc :<C-U>Cheats<CR>
 nmap <silent><LEADER>hd <Plug>DashSearch
 " floaterm tool
 "nnoremap <LEADER>tt :<C-U>FloatermToggle<CR>
@@ -237,16 +237,16 @@ nnoremap <M--> :<C-U>5wincmd -<CR>
 " search
 "nnoremap <Leader>sw :<C-U>Rg <C-R><C-W><CR> "=><C-F>
 "nnoremap <Leader>sr  :<C-U>Rg<CR>
-nnoremap <Leader>sr  :<C-U>Rg<CR>
-nnoremap <Leader>sg  :<C-U>FzfPreviewProjectGrep ""<CR>
-nnoremap <Leader>sl  :<C-U>FzfPreviewLines<CR>
-nnoremap <Leader>st :<C-U>Tags<CR>
+"nnoremap <Leader>sr  :<C-U>Rg<CR>
+"nnoremap <Leader>sg  :<C-U>FzfPreviewProjectGrep ""<CR>
+"nnoremap <Leader>sl  :<C-U>FzfPreviewLines<CR>
+"nnoremap <Leader>st :<C-U>Tags<CR>
 "nnoremap <Leader>sf :<C-U>FilesMru --tiebreak=index<CR> "=><C-P>
-nnoremap <Leader>sb :<C-U>FzfPreviewBuffers<CR>
-tnoremap <Leader>sb <C-\><C-n>:<C-U>FzfPreviewBuffers<CR>
+"nnoremap <Leader>sb :<C-U>FzfPreviewBuffers<CR>
+"tnoremap <Leader>sb <C-\><C-n>:<C-U>FzfPreviewBuffers<CR>
 " coc-fzf
 
-nnoremap <silent> <Leader>sh  :<C-u>History:<CR>
+"nnoremap <silent> <Leader>sh  :<C-u>History:<CR>
 "nnoremap <silent> <Leader>sp  :<C-u>CocFzfListExtensions<CR>
 "nnoremap <silent> <Leader>sl  :<C-u>CocFzfListLocation<CR> "=>gd
 
@@ -339,12 +339,4 @@ EOF
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
-    \ 'go': ['~/go/bin/gopls'],
-    \ }
 

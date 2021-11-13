@@ -56,3 +56,16 @@ function! s:fzf_task()
 endfunction
 
 command! -nargs=0 AsyncTaskFzf call s:fzf_task()
+
+
+nnoremap <silent><C-P> :<C-U>Files<CR>
+nnoremap <silent><LEADER>hv :<C-U>Helptags<CR>
+nnoremap <silent><LEADER>hm :<C-U>Maps<CR>
+nnoremap <silent><LEADER>hc :<C-U>Cheats<CR>
+nnoremap <Leader>sr  :<C-U>Rg<CR>
+nnoremap <Leader>st :<C-U>Tags<CR>
+
+nnoremap <silent> <Leader>sh  :<C-u>History:<CR>
+
+nnoremap <Leader>sl  :<C-U>Lines<CR>
+nnoremap <Leader>sb :<C-U>Buffers<CR>
