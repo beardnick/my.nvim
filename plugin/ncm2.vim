@@ -6,10 +6,11 @@ set shortmess+=c
 
 inoremap <c-c> <ESC>
 
+
 if myplug#Loaded('ncm2-ultisnips')
-    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+    inoremap <expr> <CR> (pumvisible() ? ncm2_ultisnips#expand_or("", 'n'): "\<CR>")
 else
-    inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+    inoremap <expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>")
 end
 
 " c-j c-k for moving in snippet
