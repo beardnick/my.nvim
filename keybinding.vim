@@ -348,10 +348,3 @@ let g:LanguageClient_serverCommands = {
     \ 'go': ['~/go/bin/gopls'],
     \ }
 
-" note that if you are using Plug mapping you should not use `noremap` mappings.
-nmap <C-m> <Plug>(lcn-menu)
-" Or map each action separately
-nmap <silent>K <Plug>(lcn-hover)
-nmap <silent> gd <Plug>(lcn-definition)
-nmap <silent> <C->> <Plug>(lcn-rename)
-

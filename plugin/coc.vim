@@ -1,4 +1,4 @@
-if ! exists("g:did_coc_loaded")
+if !myplug#Loaded('coc.nvim')
     finish
 endif
 
