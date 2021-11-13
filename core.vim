@@ -35,7 +35,7 @@ call plug#begin(g:plugin_dir)
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'plasticboy/vim-markdown'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+    "Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
     Plug 'dhruvasagar/vim-table-mode'
     Plug 'gcmt/wildfire.vim'
     Plug 'tpope/vim-surround'
